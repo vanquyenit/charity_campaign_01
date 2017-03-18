@@ -1,0 +1,13 @@
+.img-user {
+    width: 30px;
+    height: 30px;
+}
+
+.file {
+    display: none !important;
+}
+
+.preview-image {
+    display: none;
+    height: 200px;
+}

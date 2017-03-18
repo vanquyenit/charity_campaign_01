@@ -19,9 +19,10 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'avatar' => 'default.jpg',
         'password' => $password ?: $password = bcrypt('123456'),
-        'is_active' => 1,
         'star' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 5),
         'remember_token' => str_random(10),
+        'role' => config('settings.role.user'),
+        'phone_number' => $faker->phoneNumber,
     ];
 });
 

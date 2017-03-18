@@ -158,5 +158,4 @@ abstract class BaseRepository
 
         return $imageName;
     }
-
 }
