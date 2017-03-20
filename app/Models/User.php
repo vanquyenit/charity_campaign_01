@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
+use App\QueryFilter;
 
 class User extends Authenticatable
 {
@@ -24,7 +25,9 @@ class User extends Authenticatable
         'password',
         'is_active',
         'star',
-        'token_verification'
+        'token_verification',
+        'phone_number',
+        'role',
     ];
 
     /**
@@ -64,8 +67,8 @@ class User extends Authenticatable
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'avatar' => ['mimes:jpg,jpeg,JPEG,png,gif', 'max:2024'],
-            'password' => 'required|min:6|max:30|confirmed',
-            'password_confirmation' => 'required'
+            'password' => 'min:6|max:30|confirmed',
+            'password_confirmation' => 'min:6'
         ];
     }
 
@@ -127,5 +130,20 @@ class User extends Authenticatable
             ->where('target_id', $targetId)
             ->where('status', config('constants.ACTIVATED'))
             ->first();
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == config('settings.role.admin');
+    }
+
+    public function showRole()
+    {
+        return trans('user.role')[$this->role];
+    }
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }

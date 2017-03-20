@@ -94,8 +94,10 @@ Route::post('request-join', 'CampaignController@joinOrLeaveCampaign');
 
 Route::get('campaign/search', 'CampaignController@searchCampaign');
 
-/*Route::get('/event', function () {
-    return view('event.index');
-});*/
-
 Route::resource('event', 'EventController');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.','middleware' => 'admin'], function () {
+    Route::resource('user', 'UserController', [
+        'except' => 'show',
+    ]);
+});

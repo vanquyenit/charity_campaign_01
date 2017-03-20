@@ -32,28 +32,31 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
-    public function register($data = [])
+    public function register($data = [], $isRoleAdmin = 0)
     {
-        $email = $data['email'];
+        $params = array_only($data, $this->model->getFillable());
+        $params['password'] = bcrypt($data['password']);
 
-        $params = [
-            'name' => $data['name'],
-            'email' => $email,
-            'password' => bcrypt($data['password']),
-        ];
+        if (isset($params['avatar'])) {
+            $params['avatar'] = $this->uploadImage($params['avatar'], config('path.to_avatar'));
+        }
 
         $user = $this->model->create($params);
 
-        if (empty($user)) {
+        if (!$user) {
             return false;
         }
 
-        Mail::queue('email.register', [
+        if (!$isRoleAdmin) {
+            $email = $data['email'];
+
+            Mail::queue('email.register', [
             'name' => $data['name'],
             'link' => route('verification', [$user->id, $user->token_verification]),
-        ], function ($message) use ($email) {
-            $message->to($email)->subject(trans('email.subject'));
-        });
+            ], function ($message) use ($email) {
+                $message->to($email)->subject(trans('email.subject'));
+            });
+        }
 
         return $user;
     }
