@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('js')
     @parent
@@ -26,9 +26,10 @@
     <div id="page-content">
         <div class="row">
         <div class="hide" data-token="{{ csrf_token() }}"></div>
+            <div id="sidebar" class="widget-area col-sm-3" role="complementary">
             @include('user.profile')
 
-            <div class="col-md-9 center-panel">
+            <div class="col-md-9 center-panel" id="main">
                 <div class="block">
                     <div class="content-header content-header-media">
                         <div class="header-section">
@@ -51,57 +52,58 @@
                     <div class="block-title themed-background-dark">
                         <h2 class="block-title-light campaign-title"><strong>{{ trans('campaign.members') }}</strong></h2>
                     </div>
-
-                    <table class="table table-hover table-responsive table-custome">
-                        <tr>
-                            <th>{{ trans('campaign.index') }}</th>
-                            <th>{{ trans('user.avatar') }}</th>
-                            <th>{{ trans('user.name') }}</th>
-                            <th>{{ trans('user.email') }}</th>
-                            <th>{{ trans('user.status') }}</th>
-                            <th>{{ trans('campaign.action') }}</th>
-                        </tr>
-                        <tbody>
-                        @foreach ($campaignUsers as $key => $user)
+                    <div class="table-responsive">
+                        <table class="table table-hover table-responsive table-custome">
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>
-                                    <div class="profile_thumb">
-                                        <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
-                                            <img src="{{ $user->avatar }}" alt="avatar" class="img-responsive img-circle">
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="profile_thumb">
-                                        <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
-                                            <p>{{ $user->name }}</p>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    @if ($user->userCampaign->status)
+                                <th>{{ trans('campaign.index') }}</th>
+                                <th>{{ trans('user.avatar') }}</th>
+                                <th>{{ trans('user.name') }}</th>
+                                <th>{{ trans('user.email') }}</th>
+                                <th>{{ trans('user.status') }}</th>
+                                <th>{{ trans('campaign.action') }}</th>
+                            </tr>
+                            <tbody>
+                                @foreach ($campaignUsers as $key => $user)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <div class="profile_thumb">
+                                            <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
+                                                <img src="{{ $user->avatar }}" alt="avatar" class="img-responsive img-circle">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="profile_thumb">
+                                            <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
+                                                <p>{{ $user->name }}</p>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @if ($user->userCampaign->status)
                                         <span class="badge label-primary">{{ trans('user.request_status.joined') }}</span>
-                                    @else
+                                        @else
                                         <span class="badge label-warning-custom">{{ trans('user.request_status.waiting') }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                    @if (!$user->userCampaign->status)
+                                        @if (!$user->userCampaign->status)
                                         <div data-campaign-id="{{ $campaign->id }}" data-user-id="{{ $user->id }}">
                                             {!! Form::submit(trans('campaign.approve'), ['class' => 'btn active btn-default approve']) !!}
                                         </div>
-                                    @else
+                                        @else
                                         <div data-campaign-id="{{ $campaign->id }}" data-user-id="{{ $user->id }}">
                                             {!! Form::submit(trans('campaign.remove'), ['class' => 'btn active btn-default approve']) !!}
                                         </div>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     {{ $campaignUsers->links() }}
                 </div>
                 @endif

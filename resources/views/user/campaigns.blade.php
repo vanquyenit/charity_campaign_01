@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('js')
     @parent
@@ -19,8 +19,9 @@
 @section('content')
     <div id="page-content">
         <div class="row">
+        <div id="sidebar" class="widget-area col-sm-3" role="complementary">
             @include('user.profile')
-            <div class="col-md-9 center-panel">
+            <div class="col-md-9 center-panel" id="main">
                 @if ($campaigns->count())
                 <div class="block">
                     <div class="block-title themed-background-dark">
