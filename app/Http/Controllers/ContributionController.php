@@ -6,7 +6,6 @@ use LRedis;
 use Illuminate\Http\Request;
 use App\Models\Contribution;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
-use App\Http\Requests\ContributionRequest;
 
 class ContributionController extends Controller
 {
