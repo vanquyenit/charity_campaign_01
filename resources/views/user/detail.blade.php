@@ -1,12 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 
     <div id="page-content">
         <div class="hide" data-token="{{ csrf_token() }}"></div>
         <div class="row">
+            <div id="sidebar" class="widget-area col-sm-3" role="complementary">
             @include('user.profile')
-            <div class="col-md-9 center-panel">
+            <div class="col-md-9 center-panel" id="main">
                 <div class="block">
                     @if ($errors->any())
                         <ul class="alert alert-danger">
@@ -18,7 +19,7 @@
 
                     {{ Form::model($user, ['route' => ['user.update', $user->id] , 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered ui-formwizard',
                      'enctype' => 'multipart/form-data']) }}
-                        <div id="advanced-first" class="step ui-formwizard-content" style="display: block;">
+                        <div id="advanced-first" class="step ui-formwizard-content col-xs-12">
                             <div class="wizard-steps">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-offset-3">
@@ -82,13 +83,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group form-actions">
-                            <div class="col-md-8 col-md-offset-4">
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2 thimpress_donate_button">
                                 {{ Form::submit( trans('message.save_changes'), ['class' => 'btn btn-raised btn-primary']) }}
+                                {{ Form::reset( trans('message.cancel'), ['class' => 'btn btn-raised btn-primary donate_button_title']) }}
                                 {{ Form::hidden('_token', csrf_token()) }}
-                                <span></span>
-                                <input type="reset" class="btn btn-raised btn-default"
-                                       value="{{ trans('message.cancel') }}">
                             </div>
                         </div>
                     {{ Form::close() }}

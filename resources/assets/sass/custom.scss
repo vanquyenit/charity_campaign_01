@@ -319,3 +319,54 @@ body {
         }
     }
 }
+#main {
+    .block {
+        .themed-background-dark {
+            background-color: #f8b864;
+            h2 {
+                color : #fff
+            }
+        }
+    }
+    .archive-content {
+        .content-inner {
+            .thumbnail {
+                height:220px;
+            }
+            .user {
+                margin-top: 10px;
+                div span, div i {
+                    color: #fbc364;
+                }
+                a {
+                    color: #999;
+                }
+            }
+            .date-time {
+                padding-left: 0;
+                .entry-meta {
+                    .date {
+                        color:#999;
+                        border-right: 0px;
+                        margin-right: 3px
+                    }
+                    .comment-total {
+
+                    }
+                }
+            }
+            .entry-content {
+                .readmore {
+                    margin-right: 30%
+                }
+            }
+        }
+    }
+}
+.widget_categories ul {
+  padding: 0;
+}
+.color {
+    color: #fbc364;
+    background-color: #fff;
+}
