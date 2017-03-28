@@ -1,3 +1,4 @@
+<div class="notify"></div>
 <div class="thim-menu not-line mobile-not-line">
     <span class="close-menu"><i class="fa fa-times"></i></span>
     <div class="main-menu">
@@ -175,4 +176,5 @@
             </div>
         </div>
     </header>
-    <div id="main-content">
+</div>
+<div id="main-content">

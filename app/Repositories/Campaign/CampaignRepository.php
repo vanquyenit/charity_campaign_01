@@ -38,6 +38,13 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
             ->orderBy('id', 'desc');
     }
 
+    public function lastCampaign()
+    {
+        return Campaign::where('start_time', '<', Carbon::now())
+            ->orderBy('start_time', 'DESC')
+            ->first();
+    }
+
     public function createCampaign($params = [])
     {
         if (empty($params)) {
@@ -46,7 +53,6 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
 
         DB::beginTransaction();
         try {
-
             $image = $this->uploadImage($params['image'], config('path.images'));
 
             $campaign = $this->model->create([

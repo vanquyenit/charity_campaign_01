@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Request;
 
 class ContributionRequest extends FormRequest
 {
@@ -29,7 +29,6 @@ class ContributionRequest extends FormRequest
         if (isset($email)) {
             $rulesGuest = [
                 'name' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
             ];
         }
 

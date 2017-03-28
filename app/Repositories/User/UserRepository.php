@@ -3,17 +3,14 @@
 namespace App\Repositories\User;
 
 use App\Models\Campaign;
-use App\Models\UserCampaign;
-use Auth;
+use App\Models\SocialAccount;
 use App\Models\User;
-use Input;
 use App\Repositories\BaseRepository;
 use App\Repositories\User\UserRepositoryInterface;
-use Mail;
-use Laravel\Socialite\Contracts\User as ProviderUser;
-use App\Models\SocialAccount;
 use DB;
 use Illuminate\Container\Container;
+use Laravel\Socialite\Contracts\User as ProviderUser;
+use Mail;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -27,7 +24,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $this->socialAccount = $socialAccount;
     }
 
-    function model()
+    public function model()
     {
         return User::class;
     }
@@ -53,8 +50,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $email = $data['email'];
 
             Mail::queue('email.register', [
-            'name' => $data['name'],
-            'link' => route('verification', [$user->id, $user->token_verification]),
+                'name' => $data['name'],
+                'link' => route('verification', [$user->id, $user->token_verification]),
             ], function ($message) use ($email) {
                 $message->to($email)->subject(trans('email.subject'));
             });
@@ -159,8 +156,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $userIds = [];
         foreach ($campaign->userCampaigns as $userCampaign) {
-            if ($userCampaign->is_owner == config('constants.NOT_OWNER')) {
-                $userIds [] = $userCampaign->user_id;
+            if (config('constants.NOT_OWNER') == $userCampaign->is_owner) {
+                $userIds[] = $userCampaign->user_id;
             }
         }
 

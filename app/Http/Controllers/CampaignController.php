@@ -108,8 +108,19 @@ class CampaignController extends BaseController
                 ->withMessage(trans('campaign.create_error'));
         }
 
-        return redirect(action('UserController@listUserCampaign', ['id' => auth()->id()]))
-            ->with(['alert-success' => trans('campaign.create_success')]);
+        return redirect(
+            action('UserController@listUserCampaign', ['id' => auth()->id()])
+        )->with(['alert-success' => trans('campaign.create_success')]);
+    }
+
+    public function showCampaigns()
+    {
+        $this->dataView['campaigns'] = $this->campaignRepository
+            ->getAll()
+            ->paginate(config('constants.PAGINATE_CAMPAIGN'));
+        $this->dataView['campaign'] = $this->campaignRepository->lastCampaign();
+
+        return view('campaign.campaigns', $this->dataView);
     }
 
     /**
@@ -151,22 +162,22 @@ class CampaignController extends BaseController
 
         $this->dataView['groupName'] = $this->groupRepository->getGroupNameByCampaignId($id);
 
-        return view('campaign.show', $this->dataView);
+        return view('campaign.detail', $this->dataView);
     }
 
     public function review(Request $request)
     {
         if ($request->ajax()) {
             $campaignId = $request->only('id');
+            $this->dataView['results'] = $this->contributionRepository->getValueContribution($campaignId['id']);
+            $this->dataView['campaign'] = $this->campaignRepository->getDetail($campaignId['id']);
+
+            if (!$this->dataView['campaign']) {
+                return abort(404);
+            }
+
+            return view('campaign.review', $this->dataView);
         }
-
-        $this->dataView['campaign'] = $this->campaignRepository->getDetail($campaignId['id']);
-
-        if (!$this->dataView['campaign']) {
-            return abort(404);
-        }
-
-        return view('campaign.review', $this->dataView);
     }
 
     public function joinOrLeaveCampaign(Request $request)

@@ -14,12 +14,11 @@ Contribute.prototype = {
 
         $("#btn-contribute").click(function (e) {
             e.preventDefault();
-            var campaignId = $('.campaign-id').data('campaignId');
 
             $.ajax({
                 type: "POST",
                 url: _self.contributeUrl,
-                data: $("#form-contribute").serialize() + '&campaign_id=' + campaignId,
+                data: $("#form-contribute").serialize(),
                 success: function (data) {
                     if (data.success) {
                         var html = '';
@@ -27,7 +26,9 @@ Contribute.prototype = {
                         $('.notify').html(html);
 
                         $('.notify').fadeIn(1000).delay(500).fadeOut(2000);
+
                         setTimeout(function () {
+                            $('#modal-donate').modal('hide');
                             $('#close-modal').click();
                             $('.notify').html('');
                             $('input').val('');
