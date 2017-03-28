@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use LRedis;
-use Illuminate\Http\Request;
+use App\Http\Requests\ContributionRequest;
 use App\Models\Contribution;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
+use Illuminate\Http\Request;
 
 class ContributionController extends Controller
 {
@@ -54,14 +54,15 @@ class ContributionController extends Controller
             ]);
 
             $result = $this->contributionRepository->createContribution($input);
+
             $contributionUnConfirmed = $this->contributionRepository->getUserContributionUnConfirmed($input['campaign_id']);
 
             $dataContributions = [
                 'html' => view('layouts.contributions_unconfirm', [
-                    'contributionUnConfirmed' => $contributionUnConfirmed
+                    'contributionUnConfirmed' => $contributionUnConfirmed,
                 ])->render(),
                 'html_model' => view('campaign.list_contribution_unconfirmed', [
-                    'contributionUnConfirmed' => $contributionUnConfirmed
+                    'contributionUnConfirmed' => $contributionUnConfirmed,
                 ])->render(),
                 'campaign_id' => $input['campaign_id'],
                 'success' => true,

@@ -5,6 +5,8 @@ interface CampaignRepositoryInterface
 {
     public function getAll();
 
+    public function lastCampaign();
+
     public function createCampaign($params = []);
 
     public function getDetail($id);

@@ -107,7 +107,7 @@ Route::get('campaign/search', 'CampaignController@searchCampaign');
 
 Route::resource('event', 'EventController');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.','middleware' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     Route::resource('user', 'UserController', [
         'except' => 'show',
     ]);

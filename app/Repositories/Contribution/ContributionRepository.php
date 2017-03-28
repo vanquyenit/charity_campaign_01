@@ -81,6 +81,7 @@ class ContributionRepository extends BaseRepository implements ContributionRepos
         if (!count($categoryContributions)) {
             foreach ($categories as $category) {
                 $data[] = [
+                    'id' => $category->id,
                     'name' => $category->name,
                     'value' => config('constants.EMPTY_DATA'),
                     'progress' => config('constants.EMPTY_DATA'),

@@ -108,12 +108,10 @@ body {
 }
 
 #page-container,
-#sidebar,
 #sidebar-alt {
     background-color: #394263;
 }
 
-#sidebar,
 #sidebar-alt {
     width: 0;
     position: absolute;
@@ -3857,9 +3855,7 @@ p, .table, .alert, .carousel {
     }
 
     /* Both Sidebars */
-    #sidebar,
     #sidebar-alt,
-    .sidebar-partial #sidebar,
     .sidebar-alt-partial #sidebar-alt {
         width: 0;
         opacity: 0.2;
