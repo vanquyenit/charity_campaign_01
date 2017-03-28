@@ -11,13 +11,13 @@
                     <div class="archive-content">
                         @foreach ($actions as $action)
                             @if ($action->action_type == config('constants.ACTION.ACTIVE_CAMPAIGN'))
-                                @if ($action->action_type == config('constants.ACTION.ACTIVE_CAMPAIGN'))
-                                    @php ($message = trans('campaign.action_active_campaign'))
-                                    @php ($campaign = $action->actionable->campaign($action->actionable->id))
-                                @elseif ($action->action_type == config('constants.ACTION.CONTRIBUTE'))
-                                    @php ($message = trans('campaign.action_contribute_campaign'))
-                                    @php ($campaign = $action->actionable->campaign($action->actionable->campaign_id))
-                                @endif
+                                @php ($message = trans('campaign.action_active_campaign'))
+                                @php ($campaign = $action->actionable->campaign($action->actionable->id))
+                            @elseif ($action->action_type == config('constants.ACTION.CONTRIBUTE'))
+                                @php ($message = trans('campaign.action_contribute_campaign'))
+                                @php ($campaign = $action->actionable->campaign($action->actionable->campaign_id))
+                            @endif
+                            @if ($action->action_type == config('constants.ACTION.ACTIVE_CAMPAIGN'))
                                 <article class="col-xs-12 col-md-6">
                                     <div class="content-inner">
                                         <div class="thumbnail">
@@ -60,7 +60,8 @@
                                                     <span class="color">{{  Carbon\Carbon::now()->subSeconds(time() - $action->time)->diffForHumans() }}</span>
                                                 </li>
                                             </ul>
-                                            <span>{{ trans('campaign.message_end_campaign', ['time' => Carbon\Carbon::now()->addSeconds(strtotime($campaign->end_time) - time())->diffForHumans()]) }}</span>
+                                            <i class="fa fa-plus-square-o color"></i>
+                                            <span class="describe">{{ trans('campaign.message_end_campaign', ['time' => Carbon\Carbon::now()->addSeconds(strtotime($campaign->end_time) - time())->diffForHumans()]) }}</span>
                                         </header>
                                         <div class="entry-content col-xs-12">
                                             <div class="entry-summary">
@@ -107,6 +108,15 @@
                                                     <span>{{ $campaign->address }}</span>
                                                 </li>
                                             </ul>
+                                            <ul class="entry-meta">
+                                                <li class="date">
+                                                    <i class="fa fa-calendar color"></i>
+                                                    <span>{{ date('H:i', strtotime($campaign->start_time)) }} - {{ date('H:i', strtotime($campaign->end_time)) . '  (' . date('d/m/Y', strtotime($campaign->end_time)) . ')' }}</span>
+                                                </li>
+                                                <li class="comment-total">
+                                                    <span class="color">{{  Carbon\Carbon::now()->subSeconds(time() - $action->time)->diffForHumans() }}</span>
+                                                </li>
+                                            </ul>
                                             @php($contributions = $action->actionable->contribution($action->actionable->id))
                                             @foreach ($contributions as $contribution)
                                             <ul class="entry-meta">
@@ -119,9 +129,10 @@
                                                 </li>
                                             </ul>
                                             @endforeach
-                                            <span>{!! str_limit($contribution->contribution->description, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</span>
+                                            <i class="fa fa-plus-square-o color"></i>
+                                            <span class="describe">{!! str_limit($contribution->contribution->description, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</span>
                                         </header>
-                                        <div class="entry-content col-xs-12">
+                                        <div class="entry-content col-xs-12 text-center">
                                             <i class="color fa fa-comments"></i>
                                             <a href="javascript:void(0)">{{ $campaign->countComment($campaign->id) }}</a>
                                         </div>

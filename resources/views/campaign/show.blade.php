@@ -74,7 +74,7 @@
         </div>
         <div class="hide" data-token="{{ csrf_token() }}"></div>
         <div class="row">
-            <div class="col-md-8 center-panel">
+            <div class="col-md-8 center-panel padding__top">
                 <div class="block">
                     <div class="block-title themed-background-dark">
                         <h2 class="block-title-light campaign-title"><strong>{{{ $campaign->name }}}</strong></h2>
@@ -209,7 +209,7 @@
             @include('layouts.members')
             @include('layouts.user_rating')
 
-            <div class="col-md-4 right-panel">
+            <div class="col-md-4 right-panel padding__top">
                 @if ($campaign->events->count())
                     <div class="block">
                         <div class="block-title themed-background-dark">

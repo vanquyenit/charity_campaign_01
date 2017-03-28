@@ -1,8 +1,33 @@
 body {
     margin: 0;
-
+    .list-group-item {
+        background-color: #f5f5f5;
+    }
+    .searchAll {
+        border: 2px solid #f8b864;
+    }
+    .padding__top{
+        padding-top: 75px;
+        padding-bottom: 80px;
+    }
+    article .event-content .entry-meta .date {
+        color: #f8b864 !important;
+    }
     #donate_hidden {
         background: #f1f4f8;
+        .thimpress_donate_form {
+            h2 {
+                font-size: 20px;
+            }
+            .well {
+                .date {
+                    color: #f8b864 !important;
+                }
+                .metas {
+                    padding-top:10px;
+                }
+            }
+        }
     }
     .donate_field input {
         margin-bottom: 30px;
@@ -104,6 +129,9 @@ body {
 #sidebar{
 }
 #main-content {
+    #image-label {
+        z-index: 0;
+    }
     padding:0;
     transform: none;
     #myCarousel {
@@ -333,15 +361,15 @@ body {
         }
     }
 }
-#main {
-    .block {
-        .themed-background-dark {
-            background-color: #f8b864;
-            h2 {
-                color : #fff
-            }
+.block {
+    .themed-background-dark {
+        background-color: #f8b864;
+        h2 {
+            color : #fff
         }
     }
+}
+#main {
     .archive-content {
         .content-inner {
             .thumbnail {
