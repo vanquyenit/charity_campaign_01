@@ -65,7 +65,7 @@
                     <div class="user-info-social">
                         <ul class="list-group">
                             @if (auth()->id() != $user->id)
-                                <li  class="list-group-item btn-follow">
+                                <li  class="btn-follow">
                                     <div class="profile-userbuttons">
                                         <div data-user-id="{{ $user->id }}">
                                             @if ($follow && $follow->status)

@@ -8,20 +8,21 @@
                 <h4 class="modal-title" id="myLargeModalLabel">{{ trans('campaign.contribute') }}</h4>
             </div>
             <div class="modal-body">
-                <table id="contribution-unconfirmed" class="mdl-data-table table table-hover table-responsive table-custome" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>{{ trans('campaign.contribution.index') }}</th>
-                        <th>{{ trans('campaign.contribution.avatar') }}</th>
-                        <th>{{ trans('campaign.contribution.name') }}</th>
-                        <th>{{ trans('campaign.contribution.email') }}</th>
-                        <th>{{ trans('campaign.contribute') }}</th>
-                        <th>{{ trans('campaign.contribution.description') }}</th>
-                        <th>{{ trans('campaign.contribution.time') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($contributionUnConfirmed as $key => $contribution)
+                <div class="table-responsive">
+                    <table id="contribution-unconfirmed">
+                        <thead>
+                            <tr>
+                                <th>{{ trans('campaign.contribution.index') }}</th>
+                                <th>{{ trans('campaign.contribution.avatar') }}</th>
+                                <th>{{ trans('campaign.contribution.name') }}</th>
+                                <th>{{ trans('campaign.contribution.email') }}</th>
+                                <th>{{ trans('campaign.contribute') }}</th>
+                                <th>{{ trans('campaign.contribution.description') }}</th>
+                                <th>{{ trans('campaign.contribution.time') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($contributionUnConfirmed as $key => $contribution)
                             <tr>
                                 <td scope="row"><p>{{ $key + 1 }}</p></td>
                                 @if ($contribution->user)
@@ -57,9 +58,10 @@
                                 <td><p>{{ $contribution->description }}</p></td>
                                 <td><p>{{ $contribution->created_at }}</p></td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

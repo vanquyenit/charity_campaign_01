@@ -162,7 +162,7 @@ class CampaignController extends BaseController
 
         $this->dataView['groupName'] = $this->groupRepository->getGroupNameByCampaignId($id);
 
-        return view('campaign.detail', $this->dataView);
+        return view('campaign.show', $this->dataView);
     }
 
     public function review(Request $request)
