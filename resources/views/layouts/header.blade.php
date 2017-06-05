@@ -1,179 +1,160 @@
-<div class="notify"></div>
-<div class="thim-menu not-line mobile-not-line">
-    <span class="close-menu"><i class="fa fa-times"></i></span>
-    <div class="main-menu">
-        <ul class="nav navbar-nav">
-            <li class="menu-item">
-                <a href="{{ action('CampaignController@index') }}"><span>{{ trans('index.home') }}</span></a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ action('CampaignController@showCampaigns') }}"><span>{{ trans('index.campaigns') }}</span></a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ action('BlogController@index') }}"><span>{{ trans('index.blog') }}</span></a>
-                <span class="icon-toggle"></span>
-            </li>
-            <li class="menu-item menu-item-has-children">
-                <a href="{{ action('OrtherController@aboutUs') }}"><span>{{ trans('index.about') }}</span></a>
-                <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
-                <ul class="sub-menu">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                        <a href="{{ action('OrtherController@aboutUs') }}">{{ trans('index.introduce') }}</a>
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                        <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                        <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <div class="thim-loading">
+        <img src="{{ asset('img/loading.gif') }}" alt="{{ trans('message.project') }}" />
     </div>
-    <div class="menu-sidebar thim-hidden-768px">
-        <div class="widget_siteorigin-panels-builder">
-            <div id="pl-w570233562915f">
-                <div class="panel-grid" id="pg-w570233562915f-0">
-                    <div class="panel-grid-cell" id="pgc-w570233562915f-0-0">
-                        <div class="so-panel widget_social panel-first-child panel-last-child" id="panel-w570233562915f-0-0-0" data-index="0">
-                            <div class="thim-widget-social thim-widget-social-base">
-                                <div class="thim-social text-right style-color">
-                                    <ul class="social_link">
-                                        <li>
-                                            <a class="facebook" href="" target="_self"><i class="fa fa-facebook"></i></a>
-                                        </li>
-                                        <li>
-                                            <a class="twitter" href="" target="_self"><i class="fa fa-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a class="linkedin" href="" target="_self"><i class="fa fa-linkedin"></i></a>
-                                        </li>
-                                        <li>
-                                            <a class="instagram" href="" target="_self"><i class="fa fa-instagram"></i></a>
-                                        </li>
-                                    </ul>
+    <div class="thim-menu line mobile-not-line">
+        <span class="close-menu"><i class="fa fa-times"></i></span>
+        <div class="main-menu">
+            <ul class="nav navbar-nav">
+                <li class="menu-item menu-item-has-children drop_to_right standard current-menu-item ">
+                    <a href="{{ action('CampaignController@index') }}">
+                        <span data-hover="{{ trans('index.home') }}">{{ trans('index.home') }}</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-item-has-children drop_to_right standard">
+                    <a href="">
+                        <span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.member') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.faq') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.contact') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.blog') }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item menu-item-has-children drop_to_right standard">
+                    <a href="">
+                        <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-item-has-children drop_to_right standard">
+                    <a href="">
+                        <span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-sidebar thim-hidden-768px"></div>
+    </div>
+    <div id="wrapper-container" class="wrapper-container">
+        <div class="content-pusher ">
+            <header id="masthead" class="site-header line">
+                <div class="top-header">
+                    <div class="container">
+                        <div class="thim-toggle-mobile-menu"><span class="inner"></span></div>
+                        <div class="thim-logo">
+                            <a href="{{ action('CampaignController@index') }}" title="{{ trans('message.page_titles.welcome') }}">
+                                <img class="logo" src="{{ asset('img/icon.png') }}" alt="{{ trans('index.home') }}" />
+                                <img class="sticky-logo" src="{{ asset('img/icon.png') }}" alt="{{ trans('index.home') }}" />
+                                <img class="mobile-logo" src="{{ asset('img/icon.png') }}" alt="{{ trans('index.home') }}" />
+                            </a>
+                        </div>
+                        <div class="thim-menu">
+                            <div class="main-menu">
+                                <ul class="nav navbar-nav">
+                                    <li class="menu-item menu-item-has-children drop_to_right standard">
+                                        <a href="{{ action('CampaignController@index') }}">
+                                            <span data-hover="{{ trans('index.home') }}">{{ trans('index.home') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children drop_to_right standard">
+                                        <a href="">
+                                            <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children drop_to_right standard">
+                                        <a href=""><span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span></a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children drop_to_right standard">
+                                        <a href=""><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                <a href="">{{ trans('index.member') }}</a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                <a href="">{{ trans('index.faq') }}</a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                <a href="">{{ trans('index.contact') }}</a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                <a href="">{{ trans('index.blog') }}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="top-sidebar">
+                                <div class="widget widget_siteorigin-panels-builder">
+                                    <div id="pl-w581a9b3585a4f">
+                                        <div class="panel-grid" id="pg-w581a9b3585a4f-0">
+                                            <div class="panel-grid-cell" id="pgc-w581a9b3585a4f-0-0">
+                                                <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
+                                                    <div class="thimpress_donate_button">
+                                                        <div class="dropdown">
+                                                            <a href="javascript:void(0)" title="" data-toggle="dropdown">
+                                                                <i class="fa fa-user-circle-o user_profile fa-3x"></i>
+                                                            </a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                @if (Auth::check())
+                                                                <li><a href="">{{ trans('user.profile') }}</a></li>
+                                                                <li><a href="">{{ trans('message.logout') }}</a></li>
+                                                                @else
+                                                                <li><a href="">{{ trans('message.login') }}</a></li>
+                                                                <li><a href="">{{ trans('message.register') }}</a></li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
+                                                    <div class="thimpress_donate_button">
+                                                    <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
+                                                        <select name="lang" id="countries" class="btn-multiple-language">
+                                                            <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} ">
+                                                                {{ config('settings.language.en') }}
+                                                            </option>
+                                                            <option value='{{ config('settings.vi') }}' {{ Session::get('locale') == config('settings.vi') ? 'selected' : '' }} >
+                                                                {{ config('settings.language.vi') }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
+                                                    <div class="thimpress_donate_button">
+                                                        <div class="donate_button_title thim-button style3">
+                                                            <a href="">{{ trans('campaign.create') }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="so-panel widget widget_search-box panel-last-child" id="panel-w581a9b3585a4f-0-0-1" data-index="1">
+                                                    <div class="thim-widget-search-box thim-widget-search-box-base">
+                                                        <div class="thim-search-box">
+                                                            <div class="toggle-form"><i class="fa fa-search"></i> </div>
+                                                            <div class="form-search-wrapper">
+                                                                <div class="background-toggle"></div>
+                                                                {!! Form::open(['class' => 'search-form navbar-form-custom form-group typeahead', 'role' => 'search']) !!}
+                                                                {!! Form::text('search', '', ['class'=>'searchAll typeahead-search search-field', 'placeholder'=> trans('campaign.search_campaign'), 'id' => 'typeahead-search']) !!}
+                                                                <button type="submit"><i class="fa fa-search"></i> </button>
+                                                                {!! Form::close() !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="wrapper-container" class="wrapper-container" >
-    <div class="content-pusher " >
-        <nav class="navbar navbar-inverse ">
-            <div class="container-fluid">
-                <div class="navbar-header hidden-xs">
-                    <p class="navbar-branda" href="#">
-                        <i class="fa fa-map-marker"></i>{{ trans('index.address') }}
-                        <i class="fa fa-phone"></i>{{ config('constants.PHONE') }}
-                    </p>
-                </div>
-                <div class=" navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-nav-custom navbar-right ">
-                        <li>
-                            <ul class="nav navbar-nav hidden-xs">
-                                <li>
-                                    <a class="facebook" href="" target="_self"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a class="twitter" href="" target="_self"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a class="linkedin" href="" target="_self"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
-                            <div class="multiple-lang">
-                                <select name="lang" id="countries" class="form-control btn-multiple-language">
-                                    <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} data-image="{{ asset('bower_components/ms-Dropdown/images/msdropdown/icons/blank.gif') }}" data-imagecss="flag england" data-title="{{ config('settings.language.en') }}">
-                                        {{ config('settings.language.en') }}
-                                    </option>
-                                    <option value='{{ config('settings.vi') }}' {{ Session::get('locale') == config('settings.vi') ? 'selected' : '' }} data-image="{{ asset('bower_components/ms-Dropdown/images/msdropdown/icons/blank.gif') }}" data-imagecss="flag vn" data-title="{{ config('settings.language.vi') }}">
-                                        {{ config('settings.language.vi') }}
-                                    </option>
-                                </select>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <header id="masthead" class="site-header line">
-        <div class="top-header col-xs-12">
-            <div class="row">
-                <div class="thim-toggle-mobile-menu">
-                    <span class="inner">{{ trans('index.menu') }}</span>
-                </div>
-                <div class="thim-logo col-xs-2">
-                    <a href="{{ action('CampaignController@index') }}" rel="home">
-                        <img class="logo" src="{{ asset('logo.png') }}" alt="{{ trans('message.project') }}">
-                    </a>
-                </div>
-                <div class="thim-menu col-xs-10">
-                    <div class="main-menu col-xs-9">
-                        <ul class="nav navbar-nav">
-                            <li class="menu-item">
-                                <a href="{{ action('CampaignController@index') }}"><span data-hover="Home">{{ trans('index.home') }}</span></a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="{{ action('CampaignController@showCampaigns') }}"><span>{{ trans('index.campaigns') }}</span></a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ action('BlogController@index') }}"><span>{{ trans('index.blog') }}</span></a>
-                            </li>
-                            <li class="menu-item menu-item-has-children"><a href="{{ action('OrtherController@aboutUs') }}"><span>{{ trans('index.about') }}</span></a>
-                                <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
-                                <ul class="sub-menu">
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="{{ action('OrtherController@aboutUs') }}">{{ trans('index.introduce') }}</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                        <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                {!! Form::open(['class' => 'navbar-form-custom form-group typeahead', 'role' => 'search']) !!}
-                                {!! Form::text('search', '', ['class'=>'searchAll typeahead-search', 'placeholder'=> trans('campaign.search_campaign'), 'id' => 'typeahead-search']) !!}
-                                {!! Form::close() !!}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="top-sidebar col-xs-3">
-                        <ul class="nav navbar-nav-custom pull-right">
-                            @if (Auth::guest())
-                                <li><a href="{{ url('/login') }}">{{ trans('message.login') }}</a></li>
-                                <li><a href="{{ url('/register') }}">{{ trans('message.register') }}</a></li>
-                            @else
-                                <li class="thimpress_donate_button">
-                                    <a class="donate_button_title" href="{{ action('CampaignController@create') }}">
-                                        <span>{{ trans('campaign.create_campaign') }}</span>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropdown-toggle img-circle" data-toggle="dropdown">
-                                        <img src="{{ Auth()->user()->avatar }}" alt="avatar">
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                        <li><a href="{{ action('UserController@show', ['id' => Auth::user()->id]) }}" ><span class="glyphicon glyphicon-user"></span> {{ trans('user.home') }}</a></li>
-                                        <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> {{ trans('message.logout') }}</a></li>
-                                    </ul>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-</div>
-<div id="main-content">
+            </header>
+            <div id="main-content">
