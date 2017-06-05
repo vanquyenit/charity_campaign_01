@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
     /* multiple language */
-    $("#countries").msDropdown();
 
     $('.btn-multiple-language').change(function(e) {
         e.preventDefault();
         divChangeAmount = $(this).parent();
         var route = $('.hide_language').data('route');
-        var lang = $('.btn-multiple-language').val();
+        var lang = $('.btn-multiple-language option:selected').val();
         var token = $('.hide_language').data('token');
 
         $.ajax({
