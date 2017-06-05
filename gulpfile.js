@@ -7,7 +7,9 @@ elixir(function (mix) {
         'resources/assets/sass/common.scss',
         'resources/assets/sass/custom.scss'
     ], 'public/css/');
-
+    mix.sass([
+        'resources/assets/sass/master.scss',
+    ], 'public/css/master.css');
     mix.copy('resources/assets/css', 'public/css');
     mix.copy('resources/assets/img', 'public/img');
     mix.copy('resources/assets/js', 'public/js');
