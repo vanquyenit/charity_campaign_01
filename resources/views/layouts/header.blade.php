@@ -72,7 +72,7 @@
                     </p>
                 </div>
                 <div class=" navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-nav-custom navbar-right ">
+                    <ul class="nav navbar-nav navbar-nav-custom navbar-right">
                         <li>
                             <ul class="nav navbar-nav hidden-xs">
                                 <li>

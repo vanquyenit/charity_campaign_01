@@ -89,39 +89,39 @@
                         <div class="thim-campaign template-default">
                             <div class="campaigns archive-content row">
                                 @foreach ($campaigns as $value)
-                                <article class="col-xs-6 col-md-4 post-315 dn_campaign type-dn_campaign status-publish has-post-thumbnail hentry dn_campaign_cat-community-charities dn_campaign_cat-environmental-charities dn_campaign_cat-international-charities dn_campaign_tag-events dn_campaign_tag-winter">
-                                    <div class="content-inner">
-                                        <div class="entry-thumbnail">
-                                            <div class="thumbnail">
-                                                <a href="{{ action('CampaignController@show', $value->id) }}">
-                                                    <img src="{{ $value->image->image }}" alt="{{ $value->name }}" title="{{ $value->name }}">
-                                                </a>
-                                            </div>
-                                            <a data-toggle="modal" href='#modal-donate' class="donate_load_form thim-button style3" data-campaign-id="{{ $value->id }}">{{ trans('index.join-now') }}</a>
-                                        </div>
-                                        <div class="event-content">
-                                            <div class="entry-header">
-                                                <h2 class="blog_title">
-                                                <a href="{{ action('CampaignController@show', $value->id) }}">{!! str_limit($value->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a>
-                                                </h2>
-                                            </div>
-                                            <div class="entry-content">
-                                                <p>{!! str_limit($value->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
-                                            </div>
-                                            <div class="entry-meta">
-                                                <div class="date col-xs-2">
-                                                    <div class="day">{{ date('d', strtotime($value->start_time)) }}</div>
-                                                    <div class="month">{{ date('M', strtotime($value->start_time)) }}</div>
-                                                    <div class="year">{{ date('Y', strtotime($value->start_time)) }}</div>
+                                    <article class="col-xs-6 col-md-4 post-315 dn_campaign type-dn_campaign status-publish has-post-thumbnail hentry dn_campaign_cat-community-charities dn_campaign_cat-environmental-charities dn_campaign_cat-international-charities dn_campaign_tag-events dn_campaign_tag-winter">
+                                        <div class="content-inner">
+                                            <div class="entry-thumbnail">
+                                                <div class="thumbnail">
+                                                    <a href="{{ action('CampaignController@show', $value->id) }}">
+                                                        <img src="{{ $value->image->image }}" alt="{{ $value->name }}" title="{{ $value->name }}">
+                                                    </a>
                                                 </div>
-                                                <div class="metas col-xs-10">
-                                                    <div class="time"><i class="fa fa-clock-o"></i> {{ date('H:i', strtotime($value->start_time)) }} - {{ date('H:i', strtotime($value->end_time)) . '  (' . date('d/m/Y', strtotime($value->end_time)) . ')' }}</div>
-                                                    <div class="location"><i class="fa fa-map-marker"></i>{{ $value->address }}</div>
+                                                <a data-toggle="modal" href='#modal-donate' class="donate_load_form thim-button style3" data-campaign-id="{{ $value->id }}">{{ trans('index.join-now') }}</a>
+                                            </div>
+                                            <div class="event-content">
+                                                <div class="entry-header">
+                                                    <h2 class="blog_title">
+                                                    <a href="{{ action('CampaignController@show', $value->id) }}">{!! str_limit($value->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a>
+                                                    </h2>
+                                                </div>
+                                                <div class="entry-content">
+                                                    <p>{!! str_limit($value->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
+                                                </div>
+                                                <div class="entry-meta">
+                                                    <div class="date col-xs-2">
+                                                        <div class="day">{{ date('d', strtotime($value->start_time)) }}</div>
+                                                        <div class="month">{{ date('M', strtotime($value->start_time)) }}</div>
+                                                        <div class="year">{{ date('Y', strtotime($value->start_time)) }}</div>
+                                                    </div>
+                                                    <div class="metas col-xs-10">
+                                                        <div class="time"><i class="fa fa-clock-o"></i> {{ date('H:i', strtotime($value->start_time)) }} - {{ date('H:i', strtotime($value->end_time)) . '  (' . date('d/m/Y', strtotime($value->end_time)) . ')' }}</div>
+                                                        <div class="location"><i class="fa fa-map-marker"></i>{{ $value->address }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </article>
+                                    </article>
                                 @endforeach
                             </div>
                         </div>
@@ -331,26 +331,26 @@
                             <div class="inner-list">
                                 <div class="list-posts col-xs-12">
                                     @for ($i = 0; $i < 3; $i++)
-                                    <div class="item-post col-xs-6 col-md-4 post-364 post type-post status-publish format-standard has-post-thumbnail hentry category-our-projects">
-                                        <div class="article-title-wrapper">
-                                            <div class="article-inner">
-                                                <div class="media">
-                                                    <a href="">
-                                                        <img src="{{ asset('public/img/about_1.jpg') }}" alt="" >
-                                                    </a>
-                                                </div>
-                                                <div class="post-content">
-                                                    <a href="" class="article-title">
-                                                        <h3 class="title">{{ trans('index.title') }}</h3>
-                                                    </a>
-                                                    <div class="thim-post-content">
-                                                        <p>{{ trans('index.content') }}</p>
+                                        <div class="item-post col-xs-6 col-md-4 post-364 post type-post status-publish format-standard has-post-thumbnail hentry category-our-projects">
+                                            <div class="article-title-wrapper">
+                                                <div class="article-inner">
+                                                    <div class="media">
+                                                        <a href="">
+                                                            <img src="{{ asset('public/img/about_1.jpg') }}" alt="" >
+                                                        </a>
                                                     </div>
+                                                    <div class="post-content">
+                                                        <a href="" class="article-title">
+                                                            <h3 class="title">{{ trans('index.title') }}</h3>
+                                                        </a>
+                                                        <div class="thim-post-content">
+                                                            <p>{{ trans('index.content') }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <a href="" class="thim-button read-more style7">{{ trans('index.read-more') }}</a>
                                                 </div>
-                                                <a href="" class="thim-button read-more style7">{{ trans('index.read-more') }}</a>
                                             </div>
                                         </div>
-                                    </div>
                                     @endfor
                                 </div>
                             </div>
