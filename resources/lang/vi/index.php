@@ -69,4 +69,7 @@ return [
     'news' => 'Tin tức',
     'OutReach' => 'Tiếp cận',
     'projects' => 'Dự án',
+    'subscribe' => 'Đăng ký ngay bây giờ và nhận được bản tin hàng tuần với các sự kiện mới, các hoạt động từ thiện thú vị.',
+    'contact_error' => 'Rất tiếc chúng tôi chưa xử lý được thông tin phản hồi của bạn, Chúng tôi sẽ sớm khắc phục',
+    'contact_success' => 'Cảm ơn bạn đã phản hồi cho chúng tôi, chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất',
 ];

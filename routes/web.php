@@ -91,6 +91,8 @@ Route::get('faq', 'OrtherController@faq');
 
 Route::get('contact', 'OrtherController@contact');
 
+Route::post('contact', 'OrtherController@store');
+
 Route::post('review', 'CampaignController@review');
 
 Route::post('blog', 'BlogController@index');
