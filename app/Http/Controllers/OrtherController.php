@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\Event;
+use App\Repositories\Blog\BlogRepositoryInterface;
 use App\Repositories\Contact\ContactRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
@@ -22,13 +24,15 @@ class OrtherController extends Controller
         Event $event,
         ContributionRepositoryInterface $contributionRepository,
         UserRepositoryInterface $userRepository,
-        ContactRepositoryInterface $contactRepository
+        ContactRepositoryInterface $contactRepository,
+        BlogRepositoryInterface $blogRepository
     ) {
         $this->campaign = $campaign;
         $this->event = $event;
         $this->contributionRepository = $contributionRepository;
         $this->userRepository = $userRepository;
         $this->contactRepository = $contactRepository;
+        $this->blogRepository = $blogRepository;
     }
 
     public function aboutUs()
@@ -45,6 +49,20 @@ class OrtherController extends Controller
     public function faq()
     {
         return view('orther.faq');
+    }
+
+    public function member()
+    {
+        $this->dataView['arUser'] = $this->userRepository->paginate(config('constants.ALL_USER_LIMIT'));
+
+        return view('orther.member', $this->dataView);
+    }
+
+    public function blog()
+    {
+        $this->dataView['arBlog'] = $this->blogRepository->all();
+
+        return view('orther.blog', $this->dataView);
     }
 
     public function contact()

@@ -5,6 +5,8 @@ namespace App\Providers;
 use App;
 use App\Repositories\Action\ActionRepository;
 use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\Blog\BlogRepository;
+use App\Repositories\Blog\BlogRepositoryInterface;
 use App\Repositories\Campaign\CampaignRepository;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
@@ -65,5 +67,6 @@ class AppServiceProvider extends ServiceProvider
         App::bind(GroupRepositoryInterface::class, GroupRepository::class);
         App::bind(EventRepositoryInterface::class, EventRepository::class);
         App::bind(ContactRepositoryInterface::class, ContactRepository::class);
+        App::bind(BlogRepositoryInterface::class, BlogRepository::class);
     }
 }

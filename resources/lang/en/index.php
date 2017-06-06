@@ -90,5 +90,12 @@ return [
     'activities' => '1-3% guaranteed pricing and fastest access to your funds. We only need it for other necessary activities.',
     'maximize' => 'Maximize tax advantages for your gift',
     'adviser' => 'We will work with your professional advisor to put in place highly effective approaches to charitable giving.',
-
+    'contact_error' => 'Sorry, we have not processed your feedback yet, we will fix it soon',
+    'contact_success' => 'Thank you for responding to us, we will contact you shortly',
+    'meet-team' => 'MEET THE OUR TEAM',
+    'meet-team-content' => 'Plugins your themes with even more features',
+    'all' => 'All',
+    'slider' => 'Slider',
+    'image' => 'Images',
+    'video' => 'Videos',
 ];

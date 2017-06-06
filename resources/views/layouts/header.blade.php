@@ -26,7 +26,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.member') }}</a>
+                            <a href="{{ action('OrtherController@member') }}">{{ trans('index.member') }}</a>
                         </li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page">
                             <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
@@ -35,7 +35,7 @@
                             <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
                         </li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.blog') }}</a>
+                            <a href="{{ action('OrtherController@blog') }}">{{ trans('index.blog') }}</a>
                         </li>
                     </ul>
                 </li>
@@ -76,7 +76,7 @@
                                         <a href="{{ action('OrtherController@aboutUs') }}"><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
                                         <ul class="sub-menu">
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                <a href="">{{ trans('index.member') }}</a>
+                                                <a href="{{ action('OrtherController@member') }}">{{ trans('index.member') }}</a>
                                             </li>
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
                                                 <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
@@ -85,7 +85,7 @@
                                                 <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
                                             </li>
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                <a href="">{{ trans('index.blog') }}</a>
+                                                <a href="{{ action('OrtherController@blog') }}">{{ trans('index.blog') }}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -104,11 +104,11 @@
                                                             </a>
                                                             <ul class="dropdown-menu dropdown-menu-right">
                                                                 @if (Auth::check())
-                                                                    <li><a href="">{{ trans('user.profile') }}</a></li>
-                                                                    <li><a href="">{{ trans('message.logout') }}</a></li>
+                                                                <li><a href="">{{ trans('user.profile') }}</a></li>
+                                                                <li><a href="">{{ trans('message.logout') }}</a></li>
                                                                 @else
-                                                                    <li><a href="">{{ trans('message.login') }}</a></li>
-                                                                    <li><a href="">{{ trans('message.register') }}</a></li>
+                                                                <li><a href="">{{ trans('message.login') }}</a></li>
+                                                                <li><a href="">{{ trans('message.register') }}</a></li>
                                                                 @endif
                                                             </ul>
                                                         </div>
@@ -157,4 +157,6 @@
                     </div>
                 </div>
             </header>
-            <div id="main-content">
+        </div>
+    </div>
+    <div id="main-content">
