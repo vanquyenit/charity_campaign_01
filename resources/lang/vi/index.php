@@ -23,6 +23,7 @@ return [
     'link' => 'Liên kết',
     'ways-to-give' => 'Các cách để cho',
     'design' => 'Thiết kế bởi Famgia',
+    'what-you-donate' => 'Những gì bạn quyên góp được chia sẽ cho người nghèo',
     'contact' => 'Liên hệ',
     'there-are-many' => 'Có rất nhiều nguyên nhân cần được giúp đỡ, bạn có thể huy động vốn cho một nguyên nhân mà bạn quan tâm hoặc hiến tặng bằng cách tham gia trực tiếp vào các sự kiện từ thiện của chúng tôi ...',
     'about' => 'Chúng tôi',

@@ -13,12 +13,18 @@
 {{ Html::script('js/version1/revolution.min.js') }}
 {{ Html::script('js/version1/slider.js') }}
 {{ Html::script('bower_components/bootstrap-star-rating/js/star-rating.js') }}
+{{ Html::script('js/contribute.js') }}
 
-<script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var contribute = new Contribute('{{ action('ContributionController@store') }}');
+        contribute.init();
+    });
     $(document).on('ready', function(){
         $('.rating').rating({displayOnly: true});
     });
 </script>
+
 @endsection
 
 @section('content')
@@ -57,18 +63,18 @@
                                 <div class="thim-box-simple  image-at-top">
                                     <div class="inner">
                                         <div class="media hidenOverflow" >
-                                            <a href="/aboutUs/">
+                                            <a href="{{ action('OrtherController@aboutUs') }}">
                                                 <img src="{{ asset('img/01_home_04.jpg') }}" alt="">
                                             </a>
                                         </div>
                                         <div class="box-content">
-                                            <a href="/aboutUs">
+                                            <a href="{{ action('OrtherController@aboutUs') }}">
                                                 <h3 class="title weight-700" >{{ trans('index.who-we-are') }}</h3>
                                             </a>
                                             <div class="description" >
-                                                <a href="/aboutUs">{{ trans('index.content') }}</a>
+                                                <a href="{{ action('OrtherController@aboutUs') }}">{{ trans('index.content') }}</a>
                                             </div>
-                                            <a class="thim-button readmore style7" href="/aboutUs">{{ trans('index.read-more') }}</a>
+                                            <a class="thim-button readmore style7" href="{{ action('OrtherController@aboutUs') }}">{{ trans('index.read-more') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -83,18 +89,18 @@
                                 <div class="thim-box-simple  image-at-top" >
                                     <div class="inner">
                                         <div class="media hidenOverflow" >
-                                            <a href="/contact/">
+                                            <a href="{{ action('OrtherController@contact') }}">
                                                 <img src="{{ asset('img/01_home_04_4.jpg') }}" alt="">
                                             </a>
                                         </div>
                                         <div class="box-content">
-                                            <a href="contact/">
+                                            <a href="{{ action('OrtherController@contact') }}">
                                                 <h3 class="title weight-700" >{{ trans('index.our-foundation') }}</h3>
                                             </a>
                                             <div class="description" >
-                                                <a href="/contact/">{{ trans('index.we-are-transparent') }}</a>
+                                                <a href="{{ action('OrtherController@contact') }}">{{ trans('index.we-are-transparent') }}</a>
                                             </div>
-                                            <a class="thim-button readmore style7" href="/contact/">{{ trans('index.read-more') }}</a>
+                                            <a class="thim-button readmore style7" href="{{ action('OrtherController@contact') }}">{{ trans('index.read-more') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -108,18 +114,18 @@
                             <div class="thim-box-simple  image-at-top" >
                                 <div class="inner">
                                     <div class="media hidenOverflow" >
-                                        <a href="/faq/">
+                                        <a href="{{ action('OrtherController@faq') }}">
                                             <img src="{{ asset('img/01_home_04_3.jpg') }}" alt="">
                                         </a>
                                     </div>
                                     <div class="box-content">
-                                        <a href="/faq/">
+                                        <a href="{{ action('OrtherController@faq') }}">
                                             <h3 class="title weight-700" >{{ trans('index.ways-to-give') }}</h3>
                                         </a>
                                         <div class="description" >
-                                            <a href="/faq">{{ trans('index.there-are-many') }}</a>
+                                            <a href="{{ action('OrtherController@faq') }}">{{ trans('index.there-are-many') }}</a>
                                         </div>
-                                        <a class="thim-button readmore style7" href="/faq/">{{ trans('index.read-more') }}</a>
+                                        <a class="thim-button readmore style7" href="{{ action('OrtherController@faq') }}">{{ trans('index.read-more') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +158,7 @@
                                                     <div class="thumbnail">
                                                         <a href="#"> <img src="{{ $element->image->image }}" alt="First charity activity of this summer" title="First charity activity of this summer"> </a>
                                                     </div>
-                                                    <a href="#" class="donate_load_form thim-button style3" data-campaign-id="315">{{ trans('index.join-now') }}</a>
+                                                    <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
                                                 </div>
                                                 <div class="event-content">
                                                     <div class="entry-header">
@@ -441,7 +447,7 @@
                         <div class="panel-widget-style">
                             <div class="thim-widget-button thim-widget-button-base">
                                 <div id="button_58f2300d1f540" class="text-center">
-                                    <a href="{{ action('OrtherController@member') }}" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
+                                    <a href="#" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
                                 </div>
                             </div>
                         </div>

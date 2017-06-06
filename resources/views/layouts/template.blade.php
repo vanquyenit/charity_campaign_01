@@ -25,7 +25,6 @@
         {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
         {{ Html::script('js/version1/styling.min.js') }}
-
     @show
 
 </head>
@@ -34,18 +33,19 @@
 page-template-page-templates page-template-homepage page-template-page-templateshomepage-php page page-id-4967
 siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_style thim_header_style2 thim_fixedmenu ">
 
-    @include('layouts.header')
+@include('layouts.header')
 
-    @yield('content')
+@yield('content')
 
-    @include('layouts.footer')
+@include('layouts.footer')
 
-    @section('js')
-        {{ Html::script('js/version1/main.min.js') }}
-        {{ Html::script('js/version1/custom-script.js') }}
-        {{ Html::script('js/version1/custom-scroll.min.js') }}
-        {{ Html::script('js/multiple_language.js') }}
-    @show
+@section('js')
+    {{ Html::script('js/version1/main.min.js') }}
+    {{ Html::script('js/version1/custom-script.js') }}
+    {{ Html::script('js/version1/custom-scroll.min.js') }}
+    {{ Html::script('js/multiple_language.js') }}
+    {{ Html::script('js/custom.js') }}
+@show
 
 </body>
 
