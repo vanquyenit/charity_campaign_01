@@ -3,31 +3,33 @@
 namespace App\Providers;
 
 use App;
-use Session;
-use Illuminate\Support\ServiceProvider;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Repositories\User\UserRepository;
-use App\Repositories\Campaign\CampaignRepositoryInterface;
-use App\Repositories\Campaign\CampaignRepository;
-use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\Category\CategoryRepository;
-use App\Repositories\Contribution\ContributionRepository;
-use App\Repositories\Contribution\ContributionRepositoryInterface;
-use App\Repositories\Comment\CommentRepository;
-use App\Repositories\Comment\CommentRepositoryInterface;
-use App\Repositories\Rating\RatingRepository;
-use App\Repositories\Rating\RatingRepositoryInterface;
-use Illuminate\Support\Facades\Validator;
-use App\Repositories\Follow\FollowRepository;
-use App\Repositories\Follow\FollowRepositoryInterface;
 use App\Repositories\Action\ActionRepository;
 use App\Repositories\Action\ActionRepositoryInterface;
-use App\Repositories\Message\MessageRepository;
-use App\Repositories\Message\MessageRepositoryInterface;
-use App\Repositories\Group\GroupRepository;
-use App\Repositories\Group\GroupRepositoryInterface;
+use App\Repositories\Campaign\CampaignRepository;
+use App\Repositories\Campaign\CampaignRepositoryInterface;
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Comment\CommentRepository;
+use App\Repositories\Comment\CommentRepositoryInterface;
+use App\Repositories\Contact\ContactRepository;
+use App\Repositories\Contact\ContactRepositoryInterface;
+use App\Repositories\Contribution\ContributionRepository;
+use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Event\EventRepository;
 use App\Repositories\Event\EventRepositoryInterface;
+use App\Repositories\Follow\FollowRepository;
+use App\Repositories\Follow\FollowRepositoryInterface;
+use App\Repositories\Group\GroupRepository;
+use App\Repositories\Group\GroupRepositoryInterface;
+use App\Repositories\Message\MessageRepository;
+use App\Repositories\Message\MessageRepositoryInterface;
+use App\Repositories\Rating\RatingRepository;
+use App\Repositories\Rating\RatingRepositoryInterface;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -62,5 +64,6 @@ class AppServiceProvider extends ServiceProvider
         App::bind(MessageRepositoryInterface::class, MessageRepository::class);
         App::bind(GroupRepositoryInterface::class, GroupRepository::class);
         App::bind(EventRepositoryInterface::class, EventRepository::class);
+        App::bind(ContactRepositoryInterface::class, ContactRepository::class);
     }
 }

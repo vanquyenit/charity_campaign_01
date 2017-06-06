@@ -69,4 +69,7 @@ return [
     'news' => 'News',
     'OutReach' => 'OutReach',
     'projects' => 'Projects',
+    'subscribe' => 'Subscribe now and receive weekly newsletter with new events, interesting charity activities.',
+    'contact_error' => 'Rất tiếc chúng tôi chưa xử lý được thông tin phản hồi của bạn, Chúng tôi sẽ sớm khắc phụcSorry, we have not processed your feedback yet, we will fix it soon',
+    'contact_success' => 'Thank you for responding to us, we will contact you shortlyCảm ơn bạn đã phản hồi cho chúng tôi, chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất',
 ];

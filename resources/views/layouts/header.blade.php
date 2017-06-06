@@ -12,25 +12,6 @@
                 </li>
                 <li class="menu-item menu-item-has-children drop_to_right standard">
                     <a href="">
-                        <span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.member') }}</a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.faq') }}</a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.contact') }}</a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                            <a href="">{{ trans('index.blog') }}</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item menu-item-has-children drop_to_right standard">
-                    <a href="">
                         <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
                     </a>
                 </li>
@@ -38,6 +19,25 @@
                     <a href="">
                         <span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span>
                     </a>
+                </li>
+                <li class="menu-item menu-item-has-children drop_to_right standard">
+                    <a href="{{ action('OrtherController@aboutUs') }}">
+                        <span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.member') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="">{{ trans('index.blog') }}</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -73,16 +73,16 @@
                                         <a href=""><span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span></a>
                                     </li>
                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children drop_to_right standard">
-                                        <a href=""><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
+                                        <a href="{{ action('OrtherController@aboutUs') }}"><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
                                         <ul class="sub-menu">
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
                                                 <a href="">{{ trans('index.member') }}</a>
                                             </li>
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                <a href="">{{ trans('index.faq') }}</a>
+                                                <a href="{{ action('OrtherController@faq') }}">{{ trans('index.faq') }}</a>
                                             </li>
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                <a href="">{{ trans('index.contact') }}</a>
+                                                <a href="{{ action('OrtherController@contact') }}">{{ trans('index.contact') }}</a>
                                             </li>
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
                                                 <a href="">{{ trans('index.blog') }}</a>
@@ -104,11 +104,11 @@
                                                             </a>
                                                             <ul class="dropdown-menu dropdown-menu-right">
                                                                 @if (Auth::check())
-                                                                <li><a href="">{{ trans('user.profile') }}</a></li>
-                                                                <li><a href="">{{ trans('message.logout') }}</a></li>
+                                                                    <li><a href="">{{ trans('user.profile') }}</a></li>
+                                                                    <li><a href="">{{ trans('message.logout') }}</a></li>
                                                                 @else
-                                                                <li><a href="">{{ trans('message.login') }}</a></li>
-                                                                <li><a href="">{{ trans('message.register') }}</a></li>
+                                                                    <li><a href="">{{ trans('message.login') }}</a></li>
+                                                                    <li><a href="">{{ trans('message.register') }}</a></li>
                                                                 @endif
                                                             </ul>
                                                         </div>
@@ -116,7 +116,7 @@
                                                 </div>
                                                 <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
                                                     <div class="thimpress_donate_button">
-                                                    <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
+                                                        <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
                                                         <select name="lang" id="countries" class="btn-multiple-language">
                                                             <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} ">
                                                                 {{ config('settings.language.en') }}
