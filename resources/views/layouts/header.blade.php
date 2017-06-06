@@ -56,7 +56,7 @@
                                 <img class="mobile-logo" src="{{ asset('img/icon.png') }}" alt="{{ trans('index.home') }}" />
                             </a>
                         </div>
-                        <div class="thim-menu">
+                        <div class="thim-menu no-right">
                             <div class="main-menu">
                                 <ul class="nav navbar-nav">
                                     <li class="menu-item menu-item-has-children drop_to_right standard">

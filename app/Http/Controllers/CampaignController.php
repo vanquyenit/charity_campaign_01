@@ -64,6 +64,7 @@ class CampaignController extends BaseController
         $this->dataView['countCampaigns'] = $this->campaign->count();
         $this->dataView['countEvents'] = $this->event->count();
         $this->dataView['countInteractives'] = $this->contributionRepository->getInteractive();
+        $this->dataView['topUser'] = $this->userRepository->getUserByRating()->take(config('constants.TOP_USER'));
 
         return view('campaign.index', $this->dataView);
     }

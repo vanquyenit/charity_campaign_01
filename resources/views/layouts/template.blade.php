@@ -17,6 +17,7 @@
         {{ Html::style('css/style.css') }}
         {{ Html::style('css/autoptimize.css') }}
         {{ Html::style('css/master.css') }}
+        {{ Html::style('css/custom.css') }}
     @show
 
     @section('javascript')

@@ -13,6 +13,7 @@ return [
     'TWO_STAR' => 2,
     'THREE_STAR' => 3,
     'FOUR_STAR' => 4,
+    'TOP_USER' => 4,
     'FIVE_STAR' => 5,
     'ROUND_CHART' => 2,
     'EMPTY_DATA' => 0,
