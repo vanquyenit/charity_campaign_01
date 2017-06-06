@@ -52,7 +52,7 @@ tpj(document).ready(function() {
         revapi1 = tpj("#rev_slider_1_1").show().revolution({
             startDelay: 500,
             sliderType: "standard",
-            jsFileLocation: "js/extensions/",
+            jsFileLocation: "//charitywp.thimpress.com/demo-3/wp-content/plugins/revslider/public/assets/js/",
             sliderLayout: "fullwidth",
             dottedOverlay: "none",
             delay: 3000,

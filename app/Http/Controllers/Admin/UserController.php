@@ -6,9 +6,8 @@ use App\Filter\UsersFilter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
-use Validator;
 use DB;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,7 +28,7 @@ class UserController extends Controller
      */
     public function index(UsersFilter $filters)
     {
-        $users =  User::filter($filters)->where('role', config('settings.role.user'))->paginate(config('settings.number_of_record_user'));
+        $users = User::filter($filters)->where('role', config('settings.role.user'))->paginate(config('settings.number_of_record_user'));
         $input = $filters->input();
 
         $linkFilter = $users->appends($input)->links();
@@ -60,7 +59,7 @@ class UserController extends Controller
         $user = $this->userRepository->register($request->all(), 1);
 
         if (!$user) {
-            return redirect()->action('Admin\UserController@create')->with(['message'=> trans('user.message.create_fail')]);
+            return redirect()->action('Admin\UserController@create')->with(['message' => trans('user.message.create_fail')]);
         }
 
         return redirect()->action('Admin\UserController@index')
@@ -108,10 +107,10 @@ class UserController extends Controller
         $user = $this->userRepository->updateProfile($params, $id);
 
         if (!$user) {
-            return redirect()->action('Admin\UserController@index')->with(['message'=> trans('user.message.update_error')]);
+            return redirect()->action('Admin\UserController@index')->with(['message' => trans('user.message.update_error')]);
         }
 
-        return redirect()->action('Admin\UserController@index')->with(['message'=> trans('user.message.update_success')]);
+        return redirect()->action('Admin\UserController@index')->with(['message' => trans('user.message.update_success')]);
     }
 
     /**
@@ -134,13 +133,13 @@ class UserController extends Controller
 
             DB::commit();
 
-            return redirect()->action('Admin\UserController@index')->with(['message'=> trans('user.message.delete_success')]);
+            return redirect()->action('Admin\UserController@index')->with(['message' => trans('user.message.delete_success')]);
         } catch (\Exception $e) {
             DB::rollBack();
 
             dd($e);
 
-            return redirect()->action('Admin\UserController@index')->with(['message'=> trans('user.message.delete_fail')]);
+            return redirect()->action('Admin\UserController@index')->with(['message' => trans('user.message.delete_fail')]);
         }
     }
 }

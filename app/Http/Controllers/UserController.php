@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Repositories\User\UserRepositoryInterface;
-use Auth;
-use App\Repositories\Campaign\CampaignRepositoryInterface;
-use App\Models\Campaign;
-use App\Repositories\Contribution\ContributionRepositoryInterface;
-use App\Repositories\Rating\RatingRepositoryInterface;
-use App\Repositories\Follow\FollowRepositoryInterface;
 use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\Campaign\CampaignRepositoryInterface;
+use App\Repositories\Contribution\ContributionRepositoryInterface;
+use App\Repositories\Follow\FollowRepositoryInterface;
+use App\Repositories\Rating\RatingRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
+use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
@@ -119,7 +117,7 @@ class UserController extends BaseController
             'name' => $user->name = $request->get('name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
-            'avatar' => $request->file('avatar')
+            'avatar' => $request->file('avatar'),
         ];
 
         // update user
@@ -133,7 +131,6 @@ class UserController extends BaseController
 
         return redirect()->back()
             ->with(['alert-success' => trans('user.update_success')]);
-
     }
 
     public function listUserCampaign($id)
@@ -146,7 +143,7 @@ class UserController extends BaseController
 
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)
-            ->paginate(config('constants.PAGINATE_CAMPAIGN'));;
+            ->paginate(config('constants.PAGINATE_CAMPAIGN'));
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['following'] = $this->followRepository->following($id);
         $this->dataView['followers'] = $this->followRepository->followers($id);
