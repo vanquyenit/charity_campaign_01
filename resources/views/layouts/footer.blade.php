@@ -298,3 +298,4 @@
 </div>
 </div>
 </div>
+<div class="modal fade donate_modal" id="donate_result"></div>

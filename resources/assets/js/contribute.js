@@ -6,7 +6,6 @@ Contribute.prototype = {
     init: function () {
         var _self = this;
         _self.contribute();
-        _self.dataTable();
     },
 
     contribute: function () {
@@ -28,7 +27,7 @@ Contribute.prototype = {
                         $('.notify').fadeIn(1000).delay(500).fadeOut(2000);
 
                         setTimeout(function () {
-                            $('#modal-donate').modal('hide');
+                            $('#donate_result').modal('hide');
                             $('#close-modal').click();
                             $('.notify').html('');
                             $('input').val('');
@@ -50,9 +49,4 @@ Contribute.prototype = {
             });
         });
     },
-
-    dataTable: function () {
-        $('#contribution-confirmed').dataTable();
-        $('#contribution-unconfirmed').dataTable();
-    }
 };

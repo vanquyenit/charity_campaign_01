@@ -31,6 +31,7 @@ return [
     'home' => 'Home',
     'blog' => 'Blog',
     'our-foundation' => 'Our Foundation',
+    'what-you-donate' => 'What you donate is shared for the poor',
     'enter' => 'Enter',
     'i-always-want' => 'I always want to join charity activities. Their activities gave me a lot of experience, i go to many land, meet many people and know that there are many poor people that need our help.',
     'menu' => 'Menu',
