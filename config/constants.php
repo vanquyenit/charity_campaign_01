@@ -25,6 +25,7 @@ return [
     ],
     'PAGINATE_CAMPAIGN' => 12,
     'USER_LIMIT' => 8,
+    'ALL_USER_LIMIT' => 16,
     'LIMIT_TITLE_CHARACTERS' => 50,
     'LIMIT_DESCRIPTION_CHARACTERS' => 135,
     'INDEX_CAMPAIGNS' => 3,

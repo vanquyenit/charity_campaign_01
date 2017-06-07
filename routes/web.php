@@ -89,6 +89,10 @@ Route::get('aboutUs', 'OrtherController@aboutUs');
 
 Route::get('faq', 'OrtherController@faq');
 
+Route::get('member', 'OrtherController@member');
+
+Route::get('blog', 'OrtherController@blog');
+
 Route::get('contact', 'OrtherController@contact');
 
 Route::post('contact', 'OrtherController@store');

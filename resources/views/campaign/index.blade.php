@@ -441,7 +441,7 @@
                         <div class="panel-widget-style">
                             <div class="thim-widget-button thim-widget-button-base">
                                 <div id="button_58f2300d1f540" class="text-center">
-                                    <a href="#" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
+                                    <a href="{{ action('OrtherController@member') }}" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
                                 </div>
                             </div>
                         </div>

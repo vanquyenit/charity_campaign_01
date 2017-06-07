@@ -90,5 +90,10 @@ return [
     'activities' => '1-3% đảm bảo giá cả và truy cập nhanh nhất vào quỹ của bạn. Chúng tôi chỉ cần nó cho các hoạt động cần thiết khác.',
     'maximize' => 'Tối đa hóa lợi thế thuế cho quà tặng của bạn',
     'adviser' => 'Chúng tôi sẽ làm việc với cố vấn chuyên nghiệp của bạn để đưa ra cách tiếp cận có hiệu quả cao để tặng từ thiện.',
-
+    'meet-team' => 'Gặp gỡ với nhóm chúng tôi',
+    'meet-team-content' => 'Giao lưu để có thêm nhiều điều thú vị',
+    'all' => 'Tất cả',
+    'slider' => 'Trình chiếu',
+    'image' => 'Hình ảnh',
+    'video' => 'Video',
 ];
