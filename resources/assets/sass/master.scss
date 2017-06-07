@@ -2,6 +2,7 @@ section.content-area {
     .top_site_main {
         background-image: url(../img/page_top_image.jpg);
         background-attachment: fixed;
+        z-index: 1;
     }
 }
 .page_about_count {
