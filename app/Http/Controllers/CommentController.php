@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use LRedis;
-use App\Models\Comment;
-use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
 use App\Repositories\Comment\CommentRepositoryInterface;
+use LRedis;
 
 class CommentController extends Controller
 {
@@ -21,7 +20,7 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request)
     {
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $inputs = $request->only([
                 'campaign_id',
                 'name',
@@ -36,10 +35,10 @@ class CommentController extends Controller
             ];
 
             if (!$comment->user_id) {
-                $result ['name'] = $comment->name;
+                $result['name'] = $comment->name;
             } else {
                 $comment = $this->commentRepository->getDetail($comment->id);
-                $result ['name'] = $comment->user->name;
+                $result['name'] = $comment->user->name;
             }
 
             $result['campaign_id'] = $inputs['campaign_id'];

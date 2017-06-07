@@ -59,10 +59,9 @@ class EventController extends Controller
     public function show($id)
     {
         try {
-            $event = $this->eventRepository->find($id);
-            $this->dataView['event'] = $event;
+            $this->dataView['event'] = $this->eventRepository->getDetail($id);
 
-            return view('event.index', $this->dataView);
+            return view('event.detail', $this->dataView);
         } catch (\Exception $e) {
             return abort(404);
         }

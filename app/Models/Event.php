@@ -21,4 +21,9 @@ class Event extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
