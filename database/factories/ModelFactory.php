@@ -9,7 +9,7 @@
 | you a convenient way to create models for testing and seeding your
 | database. Just tell the factory how a default model should look.
 |
-*/
+ */
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -81,6 +81,11 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
         'campaign_id' => $faker->randomElement($campaignIds ?: $campaignIds = App\Models\Campaign::pluck('id')->toArray()),
+        'address' => $faker->address,
+        'lat' => $faker->latitude,
+        'lng' => $faker->longitude,
+        'start_time' => $faker->dateTime,
+        'end_time' => $faker->dateTime,
     ];
 });
 

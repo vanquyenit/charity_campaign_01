@@ -16,7 +16,7 @@
                     </a>
                 </li>
                 <li class="menu-item menu-item-has-children drop_to_right standard">
-                    <a href="">
+                    <a href="{{ action('EventController@index') }}">
                         <span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span>
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item-has-children drop_to_right standard">
-                                        <a href=""><span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span></a>
+                                        <a href="{{ action('EventController@index') }}"><span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span></a>
                                     </li>
                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children drop_to_right standard">
                                         <a href="{{ action('OrtherController@aboutUs') }}"><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
