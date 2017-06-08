@@ -85,7 +85,7 @@
                     <div class="wrapper-image">
                         <div class="single-image center">
                             <a target="_self" href="#">
-                                <img class="fix-w-h" src="" alt="">
+                                <img class="fix-w-h" src="{{ asset('img/ads.png') }}" alt="">
                             </a>
                         </div>
                     </div>
