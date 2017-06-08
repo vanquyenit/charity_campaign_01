@@ -214,3 +214,11 @@ h3.title {
 .reply-list li:last-child {
     padding-bottom: 0;
 }
+.fix-w-h{
+    height: 300px;
+    width: 269px;
+}
+.fix-img-cp{
+    height: 500px;
+    width: 870px;
+}
