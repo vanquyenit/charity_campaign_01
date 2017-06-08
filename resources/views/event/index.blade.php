@@ -54,12 +54,12 @@
                                                 <img src="{{ asset('uploads/images/' . $element->img) }}" alt="{{ $element->title }}" title="{{ $element->title }}" />
                                             </a>
                                         </div>
-                                        <a href="" class="thim-button style3">{{ trans('index.read-more') }}</a>
+                                        <a href="{{ action('EventController@show', ['id' => $element->id]) }}" class="thim-button style3">{{ trans('index.read-more') }}</a>
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
                                             <h2 class="blog_title">
-                                                <a href="">{{ $element->title }}</a>
+                                                <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
                                         <div class="entry-content">
@@ -71,8 +71,13 @@
                                                 <div class="month">{{  date('M', strtotime($element->start_time)) }}</div>
                                             </div>
                                             <div class="metas">
-                                                <div class="time"><i class="fa fa-clock-o"></i> {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}</div>
-                                                <div class="location"><i class="fa fa-map-marker"></i> {!! $element->address !!}</div>
+                                                <div class="time">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}
+                                                </div>
+                                                <div class="location">
+                                                    <i class="fa fa-map-marker"></i> {!! $element->address !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -93,12 +98,12 @@
                                                 <img src="{{ asset('uploads/images/' . $element->img) }}" alt="{{ $element->title }}" title="{{ $element->title }}" />
                                             </a>
                                         </div>
-                                        <a href="" class="thim-button style3">{{ trans('index.read-more') }}</a>
+                                        <a href="{{ action('EventController@show', ['id' => $element->id]) }}" class="thim-button style3">{{ trans('index.read-more') }}</a>
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
                                             <h2 class="blog_title">
-                                                <a href="">{{ $element->title }}</a>
+                                                <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
                                         <div class="entry-content">
@@ -110,8 +115,13 @@
                                                 <div class="month">{{  date('M', strtotime($element->start_time)) }}</div>
                                             </div>
                                             <div class="metas">
-                                                <div class="time"><i class="fa fa-clock-o"></i> {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}</div>
-                                                <div class="location"><i class="fa fa-map-marker"></i> {!! $element->address !!}</div>
+                                                <div class="time">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}
+                                                </div>
+                                                <div class="location">
+                                                    <i class="fa fa-map-marker"></i> {!! $element->address !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -132,12 +142,12 @@
                                                 <img src="{{ asset('uploads/images/' . $element->img) }}" alt="{{ $element->title }}" title="{{ $element->title }}" />
                                             </a>
                                         </div>
-                                        <a href="" class="thim-button style3">{{ trans('index.read-more') }}</a>
+                                        <a href="{{ action('EventController@show', ['id' => $element->id]) }}" class="thim-button style3">{{ trans('index.read-more') }}</a>
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
                                             <h2 class="blog_title">
-                                                <a href="">{{ $element->title }}</a>
+                                                <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
                                         <div class="entry-content">
@@ -149,8 +159,13 @@
                                                 <div class="month">{{  date('M', strtotime($element->start_time)) }}</div>
                                             </div>
                                             <div class="metas">
-                                                <div class="time"><i class="fa fa-clock-o"></i> {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}</div>
-                                                <div class="location"><i class="fa fa-map-marker"></i> {!! $element->address !!}</div>
+                                                <div class="time">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    {{  date('h:i A', strtotime($element->start_time)) }} - {{  date('h:i A', strtotime($element->end_time)) }}
+                                                </div>
+                                                <div class="location">
+                                                    <i class="fa fa-map-marker"></i> {!! $element->address !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -163,9 +178,7 @@
                     </div>
                 </div>
             </main>
-            <div id="sidebar" class="widget-area col-sm-3" role="complementary">
-                @include('layouts.right_bar')
-            </div>
+            @include('layouts.right_bar')
             <div class="clear"></div>
         </div>
     </div>

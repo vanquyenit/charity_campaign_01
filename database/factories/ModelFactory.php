@@ -80,6 +80,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
+        'content' => $faker->paragraph,
         'campaign_id' => $faker->randomElement($campaignIds ?: $campaignIds = App\Models\Campaign::pluck('id')->toArray()),
         'address' => $faker->address,
         'lat' => $faker->latitude,

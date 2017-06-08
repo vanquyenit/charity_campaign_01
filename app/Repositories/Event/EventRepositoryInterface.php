@@ -8,4 +8,6 @@ interface EventRepositoryInterface
     public function getHappening();
 
     public function getExpired();
+
+    public function getDetail($id);
 }

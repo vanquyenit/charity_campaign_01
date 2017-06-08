@@ -17,7 +17,6 @@
         {{ Html::style('css/style.css') }}
         {{ Html::style('css/autoptimize.css') }}
         {{ Html::style('css/master.css') }}
-        {{ Html::style('css/custom.css') }}
     @show
 
     @section('javascript')
@@ -25,6 +24,7 @@
         {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
         {{ Html::script('js/version1/styling.min.js') }}
+        {{ Html::script('js/version1/share_social.js') }}
     @show
 
 </head>
