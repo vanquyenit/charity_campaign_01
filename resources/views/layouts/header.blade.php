@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="menu-item menu-item-has-children drop_to_right standard">
-                    <a href="">
+                    <a href="{{ action('CampaignController@showCampaigns') }}">
                         <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
                     </a>
                 </li>
@@ -65,7 +65,7 @@
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item-has-children drop_to_right standard">
-                                        <a href="">
+                                        <a href="{{ action('CampaignController@showCampaigns') }}">
                                             <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
                                         </a>
                                     </li>

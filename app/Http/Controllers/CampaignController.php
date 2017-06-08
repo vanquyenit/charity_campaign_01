@@ -119,7 +119,6 @@ class CampaignController extends BaseController
         $this->dataView['campaigns'] = $this->campaignRepository
             ->getAll()
             ->paginate(config('constants.PAGINATE_CAMPAIGN'));
-        $this->dataView['campaign'] = $this->campaignRepository->lastCampaign();
 
         return view('campaign.campaigns', $this->dataView);
     }

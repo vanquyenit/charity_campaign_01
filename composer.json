@@ -29,7 +29,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helper/getImageURL.php"
+            "app/Helper/getImageURL.php",
+            "app/Http/ViewComposers/CategoryComposer.php"
         ]
     },
     "autoload-dev": {
