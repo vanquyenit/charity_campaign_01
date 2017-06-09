@@ -23,6 +23,7 @@
         {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
         {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
+        {{ Html::script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
         {{ Html::script('js/version1/styling.min.js') }}
         {{ Html::script('js/version1/share_social.js') }}
     @show
@@ -45,6 +46,18 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('js/version1/custom-scroll.min.js') }}
     {{ Html::script('js/multiple_language.js') }}
     {{ Html::script('js/custom.js') }}
+    {{ Html::script('js/version1/search.js') }}
+    <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    jQuery(document).ready(function($) {
+        var search = new Search();
+        search.init();
+    });
+</script>
 @show
 
 </body>

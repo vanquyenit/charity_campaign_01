@@ -137,14 +137,7 @@
                                                 <div class="so-panel widget widget_search-box panel-last-child" id="panel-w581a9b3585a4f-0-0-1" data-index="1">
                                                     <div class="thim-widget-search-box thim-widget-search-box-base">
                                                         <div class="thim-search-box">
-                                                            <div class="toggle-form"><i class="fa fa-search"></i> </div>
-                                                            <div class="form-search-wrapper">
-                                                                <div class="background-toggle"></div>
-                                                                {!! Form::open(['class' => 'search-form navbar-form-custom form-group typeahead', 'role' => 'search']) !!}
-                                                                {!! Form::text('search', '', ['class'=>'searchAll typeahead-search search-field', 'placeholder'=> trans('campaign.search_campaign'), 'id' => 'typeahead-search']) !!}
-                                                                <button type="submit"><i class="fa fa-search"></i> </button>
-                                                                {!! Form::close() !!}
-                                                            </div>
+                                                            <div class="toggle-form"><i data-toggle="modal" href='#search_modal' class="fa fa-search"></i> </div>
                                                         </div>
                                                     </div>
                                                 </div>

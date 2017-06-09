@@ -298,4 +298,22 @@
 </div>
 </div>
 </div>
+<div class="modal fade" id="search_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="search">
+                {!! Form::open(['role' => 'search']) !!}
+                {!! Form::text('search', '', [
+                    'class'=>'searchTerm searchAll typeahead-search search-field',
+                    'placeholder'=> trans('campaign.search_campaign'),
+                    'id' => 'typeahead-search'
+                ]) !!}
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade donate_modal" id="donate_result"></div>
