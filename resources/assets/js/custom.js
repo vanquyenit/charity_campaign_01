@@ -12,3 +12,6 @@ $('.donate_load_form').click(function(){
         }
     })
 })
+$(document).ready(function(){
+    $('#contribution-confirmed').DataTable();
+})

@@ -14,7 +14,17 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['campaign.campaigns', 'event.index', 'event.detail', 'campaign.detail'], 'App\Http\ViewComposers\CategoryComposer');
+        View::composer(
+            [
+                'campaign.campaigns',
+                'event.index',
+                'event.detail',
+                'campaign.detail',
+                'campaign.list_contribution_confirmed',
+                'campaign.list_contribution_unconfirmed',
+            ],
+            'App\Http\ViewComposers\CategoryComposer'
+        );
     }
 
     /**

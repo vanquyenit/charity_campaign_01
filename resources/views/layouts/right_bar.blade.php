@@ -1,6 +1,10 @@
 <div id="sidebar" class="widget-area col-sm-3" role="complementary">
     <div class="sidebar theiaStickySidebar">
-        @if ($results)
+        @if (isset($detailCampaign))
+            <button type="button" class="donate_load_form thim-button style3 btn-block" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $detailCampaign->id }}">{{ trans('index.join-now') }}</button>
+        @endif
+
+        @if (count($results))
             <div class="block">
                 <div class="block-title themed-background-dark">
                     <h4 class="block-title-light campaign-title">
@@ -47,6 +51,14 @@
                 </div>
             </div>
         @endif
+
+        @if (isset($detailCampaign))
+            <div class="block-title themed-background-dark">
+                <a type="button" class="donate_load_form thim-button style3 btn-block" href="{{ action('CampaignController@confirmed', $detailCampaign->id) }}">{{ trans('campaign.list-contribution-confirmed') }}</a>
+                <a type="button" class="donate_load_form thim-button style3 btn-block" href="{{ action('CampaignController@unconfirmed', $detailCampaign->id) }}">{{ trans('campaign.list-contribution-unconfirmed') }}</a>
+            </div>
+         @endif
+        <div class="clear"></div>
         <aside id="events-1" class="widget widget_events">
             <div class="thim-widget-events thim-widget-events-base">
                 <div class="thim-events style3">

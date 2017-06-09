@@ -109,6 +109,9 @@ Route::post('review', 'CampaignController@review');
 
 Route::get('campaigns/{id}', 'CampaignController@show');
 
+Route::get('confirmed/{id}', 'CampaignController@confirmed');
+Route::get('unconfirmed/{id}', 'CampaignController@unconfirmed');
+
 Route::resource('contribution', 'ContributionController');
 
 Route::post('comment/create', 'CommentController@store');
