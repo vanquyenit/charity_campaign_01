@@ -11,8 +11,10 @@ return [
     'image' => 'ảnh',
     'address' => 'Địa điểm',
     'description' => 'Mô tả',
+    'member' => 'Thành viên tham gia',
     'status' => 'Trạng thái',
     'action' => 'Hành động',
+    'campaign-content' => 'Nội dung chiến dịch',
     'by' => 'Bởi',
     'contribute' => 'Đóng góp',
     'create_contribute' => 'Taọ đóng góp',
@@ -92,11 +94,11 @@ return [
             'required' => 'Ngaỳ kết thúc là bắt buộc',
         ],
         'location' => [
-            'required' => 'Địa điểm là bắt buộc'
+            'required' => 'Địa điểm là bắt buộc',
         ],
         'description' => [
-            'required' => 'Mô tả là bắt buộc'
-        ]
+            'required' => 'Mô tả là bắt buộc',
+        ],
     ],
     'create_contribute_success' => 'Taọ đóng góp thành công',
     'upload_image_success' => 'Đã tải ảnh lên thành công',

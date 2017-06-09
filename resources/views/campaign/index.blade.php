@@ -156,13 +156,13 @@
                                             <div class="content-inner">
                                                 <div class="entry-thumbnail">
                                                     <div class="thumbnail">
-                                                        <a href="#"> <img src="{{ $element->image->image }}" alt="First charity activity of this summer" title="First charity activity of this summer"> </a>
+                                                        <a href="{{ action('CampaignController@show', $element->id) }}"> <img src="{{ $element->image->image }}" alt="First charity activity of this summer" title="First charity activity of this summer"> </a>
                                                     </div>
                                                     <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
                                                 </div>
                                                 <div class="event-content">
                                                     <div class="entry-header">
-                                                        <h2 class="blog_title"><a href="#"> {{ $element->name }} </a></h2>
+                                                        <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}"> {{ $element->name }} </a></h2>
                                                     </div>
                                                     <div class="entry-content">
                                                         <p>{!! $element->description !!}</p>

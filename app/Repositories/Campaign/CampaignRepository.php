@@ -40,9 +40,9 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
 
     public function lastCampaign()
     {
-        return Campaign::where('start_time', '<', Carbon::now())
+        return Campaign::where('start_time', '>', Carbon::now())
             ->orderBy('start_time', 'DESC')
-            ->first();
+            ->take(config('constants.CAMPAIGN'))->get();
     }
 
     public function createCampaign($params = [])
