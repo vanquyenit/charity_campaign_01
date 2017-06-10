@@ -13,7 +13,9 @@
         {{ Html::style('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,italic,600,600italic,700,700italic,800,800italic&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
         {{ Html::style('http://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
         {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}
+        {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
         {{ Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
+        {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
         {{ Html::style('css/style.css') }}
         {{ Html::style('css/autoptimize.css') }}
         {{ Html::style('css/master.css') }}

@@ -10,4 +10,6 @@ interface EventRepositoryInterface
     public function getExpired();
 
     public function getDetail($id);
+
+    public function createEvent($params = []);
 }

@@ -63,17 +63,21 @@
                                         <a href="{{ action('CampaignController@index') }}">
                                             <span data-hover="{{ trans('index.home') }}">{{ trans('index.home') }}</span>
                                         </a>
+                                        <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
                                     </li>
                                     <li class="menu-item menu-item-has-children drop_to_right standard">
                                         <a href="{{ action('CampaignController@showCampaigns') }}">
                                             <span data-hover="{{ trans('index.campaigns') }}">{{ trans('index.campaigns') }}</span>
                                         </a>
+                                        <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
                                     </li>
                                     <li class="menu-item menu-item-has-children drop_to_right standard">
                                         <a href="{{ action('EventController@index') }}"><span data-hover="{{ trans('index.event') }}">{{ trans('index.event') }}</span></a>
+                                        <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
                                     </li>
                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children drop_to_right standard">
                                         <a href="{{ action('OrtherController@aboutUs') }}"><span data-hover="{{ trans('index.about') }}">{{ trans('index.about') }}</span></a>
+                                        <span class="icon-toggle"><i class="fa fa-angle-down"></i></span>
                                         <ul class="sub-menu">
                                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
                                                 <a href="{{ action('OrtherController@member') }}">{{ trans('index.member') }}</a>
@@ -104,11 +108,13 @@
                                                             </a>
                                                             <ul class="dropdown-menu dropdown-menu-right">
                                                                 @if (Auth::check())
-                                                                <li><a href="">{{ trans('user.profile') }}</a></li>
-                                                                <li><a href="">{{ trans('message.logout') }}</a></li>
+                                                                    <li><a href="{{ action('UserController@show', ['id' => Auth::user()->id]) }}">{{ trans('user.profile') }}</a></li>
+                                                                    <li><a href="{{ action('EventController@create') }}">{{ trans('event.create') }}</a></li>
+                                                                    <li><a href="{{ action('OrtherController@createBlog') }}">{{ trans('blog.create') }}</a></li>
+                                                                    <li><a href="{{ route('logout') }}">{{ trans('message.logout') }}</a></li>
                                                                 @else
-                                                                <li><a href="">{{ trans('message.login') }}</a></li>
-                                                                <li><a href="">{{ trans('message.register') }}</a></li>
+                                                                    <li><a href="{{ route('get_login') }}">{{ trans('message.login') }}</a></li>
+                                                                    <li><a href="{{ route('register') }}">{{ trans('message.register') }}</a></li>
                                                                 @endif
                                                             </ul>
                                                         </div>
@@ -117,7 +123,7 @@
                                                 <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
                                                     <div class="thimpress_donate_button">
                                                         <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
-                                                        <select name="lang" id="countries" class="btn-multiple-language">
+                                                        <select name="lang" id="countries" class="btn-multiple-language form-control">
                                                             <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} ">
                                                                 {{ config('settings.language.en') }}
                                                             </option>
@@ -130,7 +136,7 @@
                                                 <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
                                                     <div class="thimpress_donate_button">
                                                         <div class="donate_button_title thim-button style3">
-                                                            <a href="">{{ trans('campaign.create') }}</a>
+                                                            <a href="{{ action('CampaignController@create') }}">{{ trans('campaign.create') }}</a>
                                                         </div>
                                                     </div>
                                                 </div>

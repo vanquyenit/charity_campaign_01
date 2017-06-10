@@ -60,6 +60,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('campaigns/create', 'CampaignController@create');
 
+    Route::get('event/create', 'EventController@create');
+
+    Route::post('event/create', 'EventController@store');
+
+    Route::get('blog/create', 'OrtherController@createBlog');
+
+    Route::post('blog/create', 'OrtherController@saveBlog');
+
     Route::post('campaigns/create', 'CampaignController@store');
 
     Route::get('user/{userId}/campaigns', 'UserController@listUserCampaign');
@@ -99,8 +107,6 @@ Route::post('contact', 'OrtherController@store');
 
 Route::post('review', 'CampaignController@review');
 
-Route::post('blog', 'BlogController@index');
-
 Route::get('campaigns/{id}', 'CampaignController@show');
 
 Route::resource('contribution', 'ContributionController');
@@ -111,7 +117,9 @@ Route::post('request-join', 'CampaignController@joinOrLeaveCampaign');
 
 Route::get('campaign/search', 'CampaignController@searchCampaign');
 
-Route::resource('event', 'EventController');
+Route::get('event', 'EventController@index');
+
+Route::get('event/{eventId}', 'EventController@show');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     Route::resource('user', 'UserController', [

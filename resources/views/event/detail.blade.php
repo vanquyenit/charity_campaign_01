@@ -67,7 +67,7 @@
                                         <div class="so-widget-sow-editor so-widget-sow-editor-base">
                                             <div class="siteorigin-widget-tinymce textwidget">
                                                 <h5>{{ trans('event.event-description') }}</h5>
-                                                <p>{{ $event->description }}</p>
+                                                <p>{!! $event->description !!}</p>
                                                 <h5>{{ trans('event.event-content') }}</h5>
                                                 {!! $event->content !!}
                                             </div>
