@@ -16,6 +16,7 @@
         {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
         {{ Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
         {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
+        {{ Html::style('bower_components/datatables/media/css/dataTables.bootstrap.min.css') }}
         {{ Html::style('css/style.css') }}
         {{ Html::style('css/autoptimize.css') }}
         {{ Html::style('css/master.css') }}
@@ -47,8 +48,9 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('js/version1/custom-script.js') }}
     {{ Html::script('js/version1/custom-scroll.min.js') }}
     {{ Html::script('js/multiple_language.js') }}
-    {{ Html::script('js/custom.js') }}
+    {{ Html::script('bower_components/datatables/media/js/dataTables.material.min.js') }}
     {{ Html::script('js/version1/search.js') }}
+    {{ Html::script('js/custom.js') }}
     <script type="text/javascript">
     $.ajaxSetup({
         headers: {

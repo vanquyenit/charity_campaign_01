@@ -172,5 +172,6 @@ return [
         'start_time' => 'Ngày bắt đầu',
         'end_time' => 'Ngày kết thúc',
     ],
-
+    'list-contribution-confirmed' => 'Danh sách đóng góp xác nhận',
+    'list-contribution-unconfirmed' => 'Đóng góp chưa được xác nhận',
 ];

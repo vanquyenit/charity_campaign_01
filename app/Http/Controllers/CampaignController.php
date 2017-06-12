@@ -123,6 +123,30 @@ class CampaignController extends BaseController
         return view('campaign.campaigns', $this->dataView);
     }
 
+    public function confirmed($id)
+    {
+        $this->dataView['detailCampaign'] = $this->campaignRepository->getDetail($id);
+
+        if (!$this->dataView['detailCampaign']) {
+            return abort(404);
+        }
+        $this->dataView['contributionConfirmed'] = $this->contributionRepository->getUserContributionConfirmed($id);
+
+        return view('campaign.list_contribution_confirmed', $this->dataView);
+    }
+
+    public function unconfirmed($id)
+    {
+        $this->dataView['detailCampaign'] = $this->campaignRepository->getDetail($id);
+
+        if (!$this->dataView['detailCampaign']) {
+            return abort(404);
+        }
+        $this->dataView['contributionUnConfirmed'] = $this->contributionRepository->getUserContributionUnConfirmed($id);
+
+        return view('campaign.list_contribution_unconfirmed', $this->dataView);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -151,8 +175,6 @@ class CampaignController extends BaseController
         $this->dataView['averageRanking'] = $this->ratingRepository->averageRatingCampaign($this->dataView['detailCampaign']->id);
         $this->dataView['ratingChart'] = $this->ratingRepository->getRatingChart($id);
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['detailCampaign']->owner->user_id);
-        $this->dataView['contributionConfirmed'] = $this->contributionRepository->getUserContributionConfirmed($id);
-        $this->dataView['contributionUnConfirmed'] = $this->contributionRepository->getUserContributionUnConfirmed($id);
         $this->dataView['userRatings'] = $this->ratingRepository->listUserRating($this->dataView['detailCampaign']->owner->user_id);
         $groupId = $this->groupRepository->getGroupIdByCampaignId($id);
 
