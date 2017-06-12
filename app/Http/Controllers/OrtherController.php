@@ -89,4 +89,31 @@ class OrtherController extends Controller
             action('CampaignController@index')
         )->with(['alert-success' => trans('index.contact_success')]);
     }
+
+    public function createBlog()
+    {
+        $this->dataJson['validateMessage'] = json_encode(trans('blog.validate'));
+
+        return view('orther.createBlog', $this->dataJson);
+    }
+
+    public function saveBlog(Request $request)
+    {
+        $inputs = $request->only([
+            'title',
+            'img',
+            'video',
+            'type',
+        ]);
+        $blog = $this->blogRepository->createBlog($inputs);
+
+        if (!$blog) {
+            return redirect(action('OrtherController@createBlog'))
+                ->withMessage(trans('blog.blog_error'));
+        }
+
+        return redirect(
+            action('OrtherController@blog')
+        )->with(['alert-success' => trans('blog.blog_success')]);
+    }
 }

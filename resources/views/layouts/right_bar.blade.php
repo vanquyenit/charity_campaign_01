@@ -113,12 +113,12 @@
                                     @foreach ($events as $element)
                                         <div class="article-title-wrapper">
                                             <div class="article-inner">
-                                                <div class="media">
+                                                <div class="col-xs-6">
                                                     <a href="{{ action('EventController@show', $element->id) }}">
                                                         <img src="{{ asset('uploads/images/' . $element->img) }}" alt="{{ $element->title }}" title="{{ $element->title }}">
                                                     </a>
                                                 </div>
-                                                <div class="content">
+                                                <div class="col-xs-6">
                                                     <a href="{{ action('EventController@show', $element->id) }}" class="article-title">{{ $element->title }}</a>
                                                 </div>
                                             </div>
