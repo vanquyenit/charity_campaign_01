@@ -42,7 +42,7 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
     {
         return Campaign::where('start_time', '>', Carbon::now())
             ->orderBy('start_time', 'DESC')
-            ->take(config('constants.CAMPAIGN'))->get();
+            ->take(config('constants.INDEX_CAMPAIGNS'))->get();
     }
 
     public function createCampaign($params = [])
@@ -75,7 +75,7 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
                 foreach ($contributions as $k => $contribution) {
                     if ($key == $k && $contribution && $goal && $units[$k]) {
                         $inputs[] = [
-                            'name' => $contribution[$key],
+                            'name' => $contribution,
                             'goal' => (int) $goal,
                             'unit' => $units[$key],
                         ];
