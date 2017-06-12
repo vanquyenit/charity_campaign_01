@@ -30,7 +30,11 @@ class CategoryComposer
 
         $id = Request::segment(config('constants.RATING_USER'));
         $campaign = Request::segment(config('constants.ACTIVATED'));
-        if ($id && config('settings.campaign') == $campaign) {
+
+        if ($id && config('settings.campaign') == $campaign ||
+            config('settings.confirmed') == $campaign ||
+            config('settings.unconfirmed') == $campaign
+        ) {
             $this->dataView['events'] = $this->eventRepository->getEvent($id);
             $this->dataView['results'] = $this->contributionRepository->getValueContribution($id);
         } else {

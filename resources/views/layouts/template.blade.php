@@ -47,8 +47,8 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('js/version1/custom-script.js') }}
     {{ Html::script('js/version1/custom-scroll.min.js') }}
     {{ Html::script('js/multiple_language.js') }}
-    {{ Html::script('js/custom.js') }}
     {{ Html::script('js/version1/search.js') }}
+    {{ Html::script('js/custom.js') }}
     <script type="text/javascript">
     $.ajaxSetup({
         headers: {

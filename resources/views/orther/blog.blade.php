@@ -36,7 +36,6 @@
                         <div class="portfolio-tabs-wrapper filters">
                             <div class="portfolio-tabs">
                                 <button class="filter active" data-filter="*">{{ trans('index.all') }}</button>
-                                <button class="filter" data-filter=".slider">{{ trans('index.slider') }}</button>
                                 <button class="filter" data-filter=".video">{{ trans('index.video') }}</button>
                                 <button class="filter" data-filter=".image">{{ trans('index.image') }}</button>
                             </div>
@@ -44,7 +43,7 @@
                         <div class="portfolio_column">
                             <div class="content_portfolio" data-style="same_width" data-columns="4" data-gutter="0">
                                 @foreach ($arBlog as $element)
-                                <div class="element-item {{ $element->type }}  four-col item_portfolio col-xs-3">
+                                <div class="element-item {{ $element->type }}  four-col item_portfolio">
                                     <div class="portfolio-image">
                                         @if ($element->type == 'video')
                                             @php($img = getImageYoutube($element->content))
