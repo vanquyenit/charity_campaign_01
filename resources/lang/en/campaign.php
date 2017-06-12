@@ -10,7 +10,9 @@ return [
     'start_date' => 'Start date',
     'end_date' => 'End date',
     'image' => 'Image',
+    'member' => 'Who come with us ',
     'address' => 'Location',
+    'campaign-content' => 'Campaign content',
     'description' => 'Description',
     'status' => 'Status',
     'action' => 'Action',
@@ -93,11 +95,11 @@ return [
             'required' => 'End date is required',
         ],
         'location' => [
-            'required' => 'Location is required'
+            'required' => 'Location is required',
         ],
         'description' => [
-            'required' => 'Description is required'
-        ]
+            'required' => 'Description is required',
+        ],
     ],
     'create_contribute_success' => 'Create successful contribution',
     'upload_image_success' => 'Upload successful image',

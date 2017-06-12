@@ -131,9 +131,9 @@ class CampaignController extends BaseController
      */
     public function show($id)
     {
-        $this->dataView['campaign'] = $this->campaignRepository->getDetail($id);
+        $this->dataView['detailCampaign'] = $this->campaignRepository->getDetail($id);
 
-        if (!$this->dataView['campaign']) {
+        if (!$this->dataView['detailCampaign']) {
             return abort(404);
         }
 
@@ -148,12 +148,12 @@ class CampaignController extends BaseController
 
         // get list members of campaign
         $this->dataView['members'] = $this->campaignRepository->getMembers($id);
-        $this->dataView['averageRanking'] = $this->ratingRepository->averageRatingCampaign($this->dataView['campaign']->id);
+        $this->dataView['averageRanking'] = $this->ratingRepository->averageRatingCampaign($this->dataView['detailCampaign']->id);
         $this->dataView['ratingChart'] = $this->ratingRepository->getRatingChart($id);
-        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['campaign']->owner->user_id);
+        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['detailCampaign']->owner->user_id);
         $this->dataView['contributionConfirmed'] = $this->contributionRepository->getUserContributionConfirmed($id);
         $this->dataView['contributionUnConfirmed'] = $this->contributionRepository->getUserContributionUnConfirmed($id);
-        $this->dataView['userRatings'] = $this->ratingRepository->listUserRating($this->dataView['campaign']->owner->user_id);
+        $this->dataView['userRatings'] = $this->ratingRepository->listUserRating($this->dataView['detailCampaign']->owner->user_id);
         $groupId = $this->groupRepository->getGroupIdByCampaignId($id);
 
         if ($groupId) {
@@ -162,7 +162,7 @@ class CampaignController extends BaseController
 
         $this->dataView['groupName'] = $this->groupRepository->getGroupNameByCampaignId($id);
 
-        return view('campaign.show', $this->dataView);
+        return view('campaign.detail', $this->dataView);
     }
 
     public function review(Request $request)
