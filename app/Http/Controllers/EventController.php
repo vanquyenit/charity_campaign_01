@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
+use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
+use App\Services\Purifier;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
 
     protected $eventRepository;
+    protected $campaignRepository;
 
-    public function __construct(EventRepositoryInterface $eventRepository)
-    {
+    public function __construct(
+        EventRepositoryInterface $eventRepository,
+        CampaignRepositoryInterface $campaignRepository
+    ) {
         $this->eventRepository = $eventRepository;
+        $this->campaignRepository = $campaignRepository;
     }
 
     /**
@@ -36,7 +43,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $this->data['campaign'] = $this->campaignRepository->listCampaignOfUser(auth()->id())->get();
+        $this->data['validateMessage'] = json_encode(trans('event.validate'));
+
+        return view('event.create', $this->data);
     }
 
     /**
@@ -45,9 +55,31 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        //
+        $inputs = $request->only([
+            'campaign_id',
+            'name',
+            'image',
+            'start_date',
+            'end_date',
+            'address',
+            'lattitude',
+            'longitude',
+            'description',
+            'content',
+        ]);
+        $inputs['description'] = Purifier::clean($inputs['description']);
+        $event = $this->eventRepository->createEvent($inputs);
+
+        if (!$event) {
+            return redirect(action('EventController@create'))
+                ->withMessage(trans('event.create_error'));
+        }
+
+        return redirect(
+            action('EventController@index', ['id' => auth()->id()])
+        )->with(['alert-success' => trans('event.create_success')]);
     }
 
     /**

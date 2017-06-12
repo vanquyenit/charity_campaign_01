@@ -9,7 +9,14 @@ class Event extends Model
     protected $fillable = [
         'title',
         'description',
+        'content',
+        'img',
         'campaign_id',
+        'address',
+        'lat',
+        'lng',
+        'start_time',
+        'end_time',
     ];
 
     public function schedules()

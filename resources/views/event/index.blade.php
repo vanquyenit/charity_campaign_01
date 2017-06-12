@@ -63,7 +63,7 @@
                                             </h2>
                                         </div>
                                         <div class="entry-content">
-                                            <p>{{ str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) }}</p>
+                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">
@@ -107,7 +107,7 @@
                                             </h2>
                                         </div>
                                         <div class="entry-content">
-                                            <p>{{ str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) }}</p>
+                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">
@@ -151,7 +151,7 @@
                                             </h2>
                                         </div>
                                         <div class="entry-content">
-                                            <p>{{ str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) }}</p>
+                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">
