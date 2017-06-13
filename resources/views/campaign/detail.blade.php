@@ -5,14 +5,13 @@
     {{ Html::style('css/custom.css') }}
 @stop
 
-@section('javascript')
+@section('js')
     @parent
     {{ Html::script('js/version1/google-map.js') }}
     {{ Html::script('js/version1/jquery.plugin.min.js') }}
-    {{ Html::script('js/version1/jquery.countdown.min.js') }}
-    {{ Html::script('js/version1/events.min.js') }}
     {{ Html::script('js/comment.js') }}
     {{ Html::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyDluWcImjhXgQDLQcDvGi3Glu1TOYG6oew&callback=initMap', ['async', 'defer']) }}
+    {{ Html::script('js/version1/jquery.countdown.min.js') }}
     <script type="text/javascript">
         $(document).ready(function () {
             var comment = new Comment('{{ action('CommentController@store') }}',
@@ -22,9 +21,6 @@
                 '{{ trans('campaign.request_join') }}'
                 );
             comment.init();
-
-            var contribute = new Contribute('{{ action('ContributionController@store') }}');
-            contribute.init();
         });
     </script>
 @stop
@@ -74,7 +70,7 @@
                             </a>
                         </div>
                         <div class="entry-countdown">
-                            <div class="tp_event_counter" data-time="{{ $detailCampaign->start_time }} +0000"></div>
+                            <div class="tp_event_counter" id="cowndown_timmer" data-time="{{ $detailCampaign->start_time }}"></div>
                         </div>
                     </div>
                     <div class="entry-content">
@@ -85,7 +81,7 @@
                                     <div class="so-widget-sow-editor so-widget-sow-editor-base">
                                         <div class="siteorigin-widget-tinymce textwidget">
                                             <h5>{{ trans('campaign.description') }}</h5>
-                                            <p>{{ $detailCampaign->description }}</p>
+                                            <p>{!! $detailCampaign->description !!}</p>
                                         </div>
                                     </div>
                                 </div>

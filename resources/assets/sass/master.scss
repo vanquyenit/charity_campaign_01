@@ -398,9 +398,28 @@ select, select:focus {
         .media {
             transform: scale(1.1);
             img {
-                transform: 0;
-                -webkit-transform: 0;
+                transform: 0 !important;
+                -webkit-transform: 0 !important;
+                -moz-transform: 0 !important;
+                -ms-transform: 0 !important;
+                -o-transform: 0 !important;
             }
+        }
+    }
+}
+#cowndown_timmer {
+    background-color: inherit !important;
+}
+.entry-thumbnail {
+    min-height: 150px;
+}
+.archive-content {
+    article {
+        .thumbnail {
+            z-index: 1;
+        }
+        .thim-button.style3 {
+            z-index: 1 !important;
         }
     }
 }

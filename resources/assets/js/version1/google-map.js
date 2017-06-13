@@ -10,4 +10,10 @@ function initMap() {
         position: uluru,
         map: map
     });
+    jQuery('#googleMap').on("mouseleave", function(){
+        map.setOptions({ scrollwheel: false });
+    });
+    jQuery('#googleMap').on("mousedown", function() {
+        map.setOptions({ scrollwheel: true });
+    });
 }
