@@ -20,7 +20,7 @@
                             </li>
                             <li class="separator separator-home"></li>
                             <li class="item-current item-cat item-custom-post-type-tp_event">
-                                <a itemprop="item" class="bread-cat bread-custom-post-type-tp_event" href="{{ action('CampaignController@show', $detailCampaign->id) }}" title="Events">
+                                <a itemprop="item" class="bread-cat bread-custom-post-type-tp_event" href="{{ action('CampaignController@showCampaigns') }}">
                                     <span itemprop="name">{{ trans('index.campaigns') }}</span>
                                 </a>
                             </li>

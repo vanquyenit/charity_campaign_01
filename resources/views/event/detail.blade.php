@@ -10,13 +10,30 @@
     {{ Html::script('js/version1/google-map.js') }}
     {{ Html::script('js/version1/jquery.plugin.min.js') }}
     {{ Html::script('js/version1/jquery.countdown.min.js') }}
+    {{ Html::script('https://cdn.socket.io/socket.io-1.3.4.js') }}
     {{ Html::script('js/version1/comment.js') }}
+    {{ Html::script('js/version1/comment_socket.js') }}
     {{ Html::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyDluWcImjhXgQDLQcDvGi3Glu1TOYG6oew&callback=initMap', ['async', 'defer']) }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var comment = new Comment('{{ action('CommentController@store') }}',
+                '{{ config('path.to_avatar_default') }}',
+                '{{ action('CampaignController@joinOrLeaveCampaign') }}',
+                '{{ trans('campaign.request_sent') }}',
+                '{{ trans('campaign.request_join') }}'
+            );
+            comment.init();
+        });
+    </script>
 @stop
 
 @section('content')
 
 <section class="content-area">
+    <div class="hide-comment" data-campaign-id="{{ $event->id }}"
+        data-host="{{ config('app.key_program.socket_host') }}"
+        data-port="{{ config('app.key_program.socket_port') }}">
+    </div>
     <div class="top_site_main thim-parallax-image"  data-stellar-background-ratio="0.5">
         <span class="overlay-top-header"></span>
         <div class="page-title-wrapper">
@@ -123,7 +140,7 @@
                 </article>
                 <div class="share-wrapper">
                     <div class="fb-like"
-                        data-href="{{ URL::action('EventController@show', $event->id) }}"
+                        data-href="{{ action('EventController@show', $event->id) }}"
                         data-layout="standard" data-action="like"
                         data-size="small" data-show-faces="true"
                         data-share="true">
@@ -145,30 +162,67 @@
                                 <div role="tabpanel" class="tab-pane active" id="home">
                                     <div id="comments" class="comments-area">
                                         <div class="comment-respond-area">
-                                            <div id="respond" class="comment-respond">
-                                                {!! Form::open(['method' => 'post', 'action' => 'EventController@store', 'id' => 'commentform', 'class' => 'comment-form']) !!}
-                                                <p class="comment-form-comment">
-                                                    {!! Form::textarea('comment', '', [
-                                                        'id' => 'comment',
-                                                        'class' => 'comment_area',
-                                                        'cols' => '45', 'rows' => '8',
-                                                        'placeholder' => trans('event.comment'),
-                                                    ]) !!}
-                                                </p>
-                                                <p class="form-submit">
-                                                    {!! Form::submit(trans('event.post-comment'), ['data-id' => $event->id, 'id' => 'submit-comment', 'class' => 'submit', 'disabled']) !!}
-                                                </p>
+                                            <div id="respond">
+                                                <div class="notify-comment"></div>
+                                                {!! Form::open([
+                                                    'method' => 'post',
+                                                    'id' => 'formComment',
+                                                    'class' => 'comment-form',
+                                                ]) !!}
+                                                    {!! Form::hidden('event_id', $event->id) !!}
+                                                    <div class="row">
+                                                        @if (auth()->check())
+                                                            {!! Form::hidden('name', auth()->user()->name) !!}
+                                                            {!! Form::hidden('email', auth()->user()->email) !!}
+                                                        @else
+                                                            <div class="col-xs-6">
+                                                                {!! Form::text('name', null, [
+                                                                    'class' => 'form-control',
+                                                                    'placeholder' => trans('index.your-name'),
+                                                                ]) !!}
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                {!! Form::email('email', null, [
+                                                                    'class' => 'form-control',
+                                                                    'placeholder' => trans('index.your-mail'),
+                                                                ]) !!}
+                                                            </div>
+                                                        @endif
+                                                        <div class="col-xs-12">
+                                                            {!! Form::textarea('text', '', [
+                                                                'id' => 'text',
+                                                                'class' => 'form-control',
+                                                                'cols' => '10',
+                                                                'rows' => '3',
+                                                                'placeholder' => trans('campaign.comments'),
+                                                            ]) !!}
+                                                        </div>
+                                                        <p class="form-submit">
+                                                            {!! Form::submit(trans('campaign.comments'), [
+                                                                'data-id' => $event->id,
+                                                                'id' => 'buttonComment',
+                                                                'class' => 'submit',
+                                                            ]) !!}
+                                                        </p>
+                                                    </div>
                                                 {!! Form::close() !!}
                                             </div>
                                         </div>
-                                        @if (count($event->comments) > 0)
-                                            @include('event.comment')
-                                        @endif
+                                        <div class="comment-list-inner">
+                                            <h2 class="comments-title">
+                                                <span id="count_comment">{{ count($event->comments) }}</span> {{ trans('campaign.comments') }}
+                                            </h2>
+                                            <div class="comments-container">
+                                                <ul id="comments-list" class="comments-list">
+                                                    @include('event.comment')
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="clear"></div>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="profile">
-                                    <div class="fb-comments" data-href="{{ URL::action('EventController@show', $event->id) }}" data-order-by="reverse_time" data-numposts="5" data-width="100%"></div>
+                                    <div class="fb-comments" data-href="{{ action('EventController@show', $event->id) }}" data-order-by="reverse_time" data-numposts="5" data-width="100%"></div>
                                 </div>
                             </div>
                         </div>

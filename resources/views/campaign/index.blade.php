@@ -156,7 +156,7 @@
                                             <div class="content-inner">
                                                 <div class="entry-thumbnail">
                                                     <div class="thumbnail">
-                                                        <a href="{{ action('CampaignController@show', $element->id) }}"> <img src="{{ $element->image->image }}" alt="First charity activity of this summer" title="First charity activity of this summer"> </a>
+                                                        <a href="{{ action('CampaignController@show', $element->id) }}"> <img src="{{ $element->image->image }}" alt="{{ $element->name }}" title="{{ $element->name }}"> </a>
                                                     </div>
                                                     <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
                                                 </div>
