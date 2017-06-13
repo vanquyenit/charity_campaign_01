@@ -97,4 +97,6 @@ return [
     'slider' => 'Trình chiếu',
     'image' => 'Hình ảnh',
     'video' => 'Video',
+    'send' => 'Gửi',
+    'text-chat' => 'Nhập tin nhắn tại đây',
 ];

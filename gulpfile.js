@@ -10,6 +10,9 @@ elixir(function (mix) {
     mix.sass([
         'resources/assets/sass/master.scss',
     ], 'public/css/master.css');
+    mix.sass([
+        'resources/assets/sass/chat.scss',
+    ], 'public/css/chatbox.css');
     mix.copy('resources/assets/css', 'public/css');
     mix.copy('resources/assets/img', 'public/img');
     mix.copy('resources/assets/js', 'public/js');

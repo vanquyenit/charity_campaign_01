@@ -99,4 +99,6 @@ return [
     'slider' => 'Slider',
     'image' => 'Images',
     'video' => 'Videos',
+    'send' => 'Send',
+    'text-chat' => 'Write message here',
 ];
