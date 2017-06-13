@@ -18,7 +18,7 @@
                             <div class="so-panel widget widget_button panel-last-child" id="panel-w5743ce68bcdfc-0-0-1" data-index="1">
                                 <div class="thim-widget-button thim-widget-button-base">
                                     <div id="button_590e5660cd6e3" class="text-center">
-                                        <a href="#" class="thim-button style4 inner size-default">{{ trans('index.now') }}</a>
+                                        <a href="{{ route('register') }}" class="thim-button style4 inner size-default">{{ trans('index.now') }}</a>
                                     </div>
                                 </div>
                             </div>

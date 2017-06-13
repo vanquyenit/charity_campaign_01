@@ -5,12 +5,11 @@
     {{ Html::style('css/custom.css') }}
 @stop
 
-@section('javascript')
+@section('js')
     @parent
     {{ Html::script('js/version1/google-map.js') }}
     {{ Html::script('js/version1/jquery.plugin.min.js') }}
     {{ Html::script('js/version1/jquery.countdown.min.js') }}
-    {{ Html::script('js/version1/events.min.js') }}
     {{ Html::script('js/version1/comment.js') }}
     {{ Html::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyDluWcImjhXgQDLQcDvGi3Glu1TOYG6oew&callback=initMap', ['async', 'defer']) }}
 @stop
@@ -56,7 +55,7 @@
                             <img width="870" height="500" src="{{ asset('uploads/images/' . $event->img) }}" class="attachment-full size-full wp-post-image" alt="{{ $event->title }}"  sizes="(max-width: 870px) 100vw, 870px" />
                         </div>
                         <div class="entry-countdown">
-                            <div class="tp_event_counter" data-time="{{ $event->start_time }} +0000"></div>
+                            <div class="tp_event_counter" id="cowndown_timmer" data-time="{{ $event->start_time }}"></div>
                         </div>
                     </div>
                     <div class="entry-content">
