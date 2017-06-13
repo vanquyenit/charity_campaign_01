@@ -61,7 +61,7 @@ class UserController extends BaseController
         $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
 
-        return view('user.show', $this->dataView);
+        return view('user.detail', $this->dataView);
     }
 
     /**

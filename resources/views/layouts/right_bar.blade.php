@@ -65,41 +65,27 @@
                     <div class="events archive-content">
                         <h3 class="widget-title"><span>{{ trans('listcampaign.upcoming-campaign') }}</span></h3>
                         @foreach ($campaign as $element)
-                        <article class="post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
-                            <div class="content-inner">
-                                <div class="event-content">
-                                    <div class="entry-meta">
-                                        <div class="date pull-left col-xs-6">
-                                            <span class="day">{{ date('d', strtotime($element->start_time)) }}</span>
-                                            <span class="month">{{ date('M', strtotime($element->start_time)) }}</span>
-                                        </div>
-                                        <div class="metas col-xs-6">
-                                            <div class="entry-header">
-                                                <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a></h2>
+                            <article class="post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
+                                <div class="content-inner">
+                                    <div class="event-content">
+                                        <div class="entry-meta">
+                                            <div class="date pull-left col-xs-6">
+                                                <span class="day">{{ date('d', strtotime($element->start_time)) }}</span>
+                                                <span class="month">{{ date('M', strtotime($element->start_time)) }}</span>
                                             </div>
-                                            <span class="location"><i class="fa fa-map-marker"></i> {{ $element->address }}</span>
+                                            <div class="metas col-xs-6">
+                                                <div class="entry-header">
+                                                    <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a></h2>
+                                                </div>
+                                                <span class="location"><i class="fa fa-map-marker"></i> {{ $element->address }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
                         @endforeach
                     </div>
                 </div>
-            </div>
-        </aside>
-        <aside id="campaign-categories-1" class="widget widget_campaign-categories">
-            <div class="thim-widget-campaign-categories thim-widget-campaign-categories-base">
-                <li class="dn_campaign_cat">
-                    <h3 class="widget-title"><span>{{ trans('listcampaign.categories-campaign') }}</span></h3>
-                    <ul>
-                        <li class="cat-item cat-item-24"><a href="#">{{ trans('listcampaign.community-charities') }}</a></li>
-                        <li class="cat-item cat-item-24"><a href="#">{{ trans('listcampaign.community-charities') }}</a></li>
-                        <li class="cat-item cat-item-24"><a href="#">{{ trans('listcampaign.community-charities') }}</a></li>
-                        <li class="cat-item cat-item-24"><a href="#">{{ trans('listcampaign.community-charities') }}</a></li>
-                        <li class="cat-item cat-item-24"><a href="#">{{ trans('listcampaign.community-charities') }}</a></li>
-                    </ul>
-                </li>
             </div>
         </aside>
         @if (count($events))

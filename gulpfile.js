@@ -20,4 +20,10 @@ elixir(function (mix) {
         'resources/assets/css/themes.css',
         'resources/assets/css/chat.css'
     ], 'public/css/templates.css');
+    mix.styles([
+        'resources/assets/css/profile_00.css',
+        'resources/assets/css/profile_01.css',
+        'resources/assets/css/profile_02.css',
+        'resources/assets/css/profile_03.css'
+    ], 'public/css/user_profile.css');
 });
