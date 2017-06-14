@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'ZERO' => 0,
+    'ONE' => 1,
     'NOT_ACTIVE' => 0,
     'ACTIVATED' => 1,
     'AVATAR' => 'AVATAR',

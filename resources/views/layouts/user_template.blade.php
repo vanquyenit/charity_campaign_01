@@ -10,17 +10,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @section('css')
-    {{ Html::style('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,italic,600,600italic,700,700italic,800,800italic&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
-    {{ Html::style('http://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
-    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}
-    {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
-    {{ Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
-    {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
-    {{ Html::style('bower_components/datatables/media/css/dataTables.bootstrap.min.css') }}
-    {{ Html::style('css/style.css') }}
-    {{ Html::style('css/autoptimize.css') }}
-    {{ Html::style('css/master.css') }}
-    {{ Html::style('css/user_profile.css') }}
+        {{ Html::style('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,italic,600,600italic,700,700italic,800,800italic&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
+        {{ Html::style('http://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&#038;subset=greek-ext,greek,cyrillic-ext,latin-ext,latin,vietnamese,cyrillic') }}
+        {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}
+        {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
+        {{ Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
+        {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
+        {{ Html::style('bower_components/datatables/media/css/dataTables.bootstrap.min.css') }}
+        {{ Html::style('css/style.css') }}
+        {{ Html::style('css/autoptimize.css') }}
+        {{ Html::style('css/master.css') }}
+        {{ Html::style('css/user_profile.css') }}
     @show
 
 </head>
@@ -58,7 +58,24 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="search_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="search">
+                {!! Form::open(['role' => 'search']) !!}
+                {!! Form::text('search', '', [
+                    'class'=>'searchTerm searchAll typeahead-search search-field',
+                    'placeholder'=> trans('campaign.search_campaign'),
+                    'id' => 'typeahead-search',
+                ]) !!}
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
 @section('js')
     {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
     {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}

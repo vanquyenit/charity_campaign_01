@@ -11,4 +11,14 @@ class Blog extends Model
         'content',
         'type',
     ];
+
+    public function timelines()
+    {
+        return $this->hasMany(Timeline::class);
+    }
+
+    public function contentPath()
+    {
+        return asset('uploads/images/' . $this->content);
+    }
 }

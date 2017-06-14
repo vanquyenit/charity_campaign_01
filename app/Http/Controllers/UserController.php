@@ -8,6 +8,7 @@ use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Follow\FollowRepositoryInterface;
 use App\Repositories\Rating\RatingRepositoryInterface;
+use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class UserController extends BaseController
 {
     protected $user;
     protected $userRepository;
+    protected $timelineRepository;
     protected $campaignRepository;
     protected $contributionRepository;
     protected $ratingRepository;
@@ -24,6 +26,7 @@ class UserController extends BaseController
     public function __construct(
         User $user,
         UserRepositoryInterface $userRepository,
+        TimelineRepositoryInterface $timelineRepository,
         CampaignRepositoryInterface $campaignRepository,
         ContributionRepositoryInterface $contributionRepository,
         RatingRepositoryInterface $ratingRepository,
@@ -32,6 +35,7 @@ class UserController extends BaseController
     ) {
         $this->user = $user;
         $this->userRepository = $userRepository;
+        $this->timelineRepository = $timelineRepository;
         $this->campaignRepository = $campaignRepository;
         $this->contributionRepository = $contributionRepository;
         $this->ratingRepository = $ratingRepository;
@@ -47,6 +51,7 @@ class UserController extends BaseController
      */
     public function show($id)
     {
+
         try {
             $this->dataView['user'] = $this->user->findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -54,12 +59,14 @@ class UserController extends BaseController
         }
 
         $this->dataView['follow'] = $this->followRepository->getFollowUser($id);
+        $this->dataView['userTimeline'] = $this->userRepository->getTimeline($id);
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['actions'] = $this->actionRepository->getActionByUser($id);
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['following'] = $this->followRepository->following($id);
         $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
+        $this->dataView['UserList'] = $this->userRepository->getListUser($id)->take(config('constants.PAGINATE'));
 
         return view('user.detail', $this->dataView);
     }

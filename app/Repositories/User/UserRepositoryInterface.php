@@ -21,4 +21,6 @@ interface UserRepositoryInterface
     public function getUsersInCampaign($campaignId);
 
     public function getUserByRating();
+
+    public function getTimeline($userId);
 }

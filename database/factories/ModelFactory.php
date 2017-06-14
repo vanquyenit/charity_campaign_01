@@ -17,6 +17,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'fullname' => $faker->name,
         'avatar' => 'default.jpg',
         'cover' => 'default.jpg',
         'address' => $faker->address,

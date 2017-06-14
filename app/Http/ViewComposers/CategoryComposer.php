@@ -31,7 +31,7 @@ class CategoryComposer
         $id = Request::segment(config('constants.RATING_USER'));
         $campaign = Request::segment(config('constants.ACTIVATED'));
 
-        if ($id && config('settings.campaign') == $campaign ||
+        if ($id && config('settings.campaigns') == $campaign ||
             config('settings.confirmed') == $campaign ||
             config('settings.unconfirmed') == $campaign
         ) {

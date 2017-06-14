@@ -172,4 +172,24 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->orderBy('star', 'desc')->get();
     }
+
+    public function getListUser($id)
+    {
+        return $this->model->where('id', '<>', $id)->orderBy('star', 'desc')->get();
+    }
+
+    public function getTimeline($userId)
+    {
+        return $this->model->with([
+            'timelines' => function ($query) use ($userId) {
+                $query->with(['event', 'blog'])
+                    ->with(['friend' => function ($queryUser) use ($userId) {
+                        $queryUser->where('id', '<>', $userId);
+                    }])
+                    ->with(['campaign' => function ($queryCampaign) {
+                        $queryCampaign->with('image');
+                    }])->orderBy('id', 'desc');
+            },
+        ])->find($userId);
+    }
 }
