@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
-use App\QueryFilter;
 
 class Campaign extends Model
 {
@@ -72,6 +72,11 @@ class Campaign extends Model
     public function contributions()
     {
         return $this->hasMany(Contribution::class);
+    }
+
+    public function timelines()
+    {
+        return $this->hasMany(Timeline::class);
     }
 
     public function comments()

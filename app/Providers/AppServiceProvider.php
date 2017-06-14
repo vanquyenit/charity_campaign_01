@@ -27,6 +27,8 @@ use App\Repositories\Message\MessageRepository;
 use App\Repositories\Message\MessageRepositoryInterface;
 use App\Repositories\Rating\RatingRepository;
 use App\Repositories\Rating\RatingRepositoryInterface;
+use App\Repositories\Timeline\TimelineRepository;
+use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
@@ -68,5 +70,6 @@ class AppServiceProvider extends ServiceProvider
         App::bind(EventRepositoryInterface::class, EventRepository::class);
         App::bind(ContactRepositoryInterface::class, ContactRepository::class);
         App::bind(BlogRepositoryInterface::class, BlogRepository::class);
+        App::bind(TimelineRepositoryInterface::class, TimelineRepository::class);
     }
 }

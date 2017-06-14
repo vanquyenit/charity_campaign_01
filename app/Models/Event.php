@@ -33,4 +33,14 @@ class Event extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function timelines()
+    {
+        return $this->hasMany(Timeline::class);
+    }
+
+    public function imgPath()
+    {
+        return asset('uploads/images/' . $this->img);
+    }
 }

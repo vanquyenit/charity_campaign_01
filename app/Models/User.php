@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Auth;
 use App\QueryFilter;
+use Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -20,8 +20,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'fullname',
         'email',
         'avatar',
+        'cover',
+        'adddress',
+        'birthday',
         'password',
         'is_active',
         'star',
@@ -56,7 +60,7 @@ class User extends Authenticatable
         'password' => 'required|min:6|confirmed',
         'phone_number' => 'required',
         'password' => 'required|min:6|max:30|confirmed',
-        'password_confirmation' => 'min:6'
+        'password_confirmation' => 'min:6',
     ];
 
     public $loginRules = [
@@ -71,7 +75,7 @@ class User extends Authenticatable
             'email' => 'required|email|unique:users,email,' . $id,
             'avatar' => ['mimes:jpg,jpeg,JPEG,png,gif', 'max:2024'],
             'password' => 'min:6|max:30|confirmed',
-            'password_confirmation' => 'min:6'
+            'password_confirmation' => 'min:6',
         ];
     }
 
@@ -148,5 +152,10 @@ class User extends Authenticatable
     public function scopeFilter($query, QueryFilter $filters)
     {
         return $filters->apply($query);
+    }
+
+    public function timelines()
+    {
+        return $this->hasMany(Timeline::class);
     }
 }
