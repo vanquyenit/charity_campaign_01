@@ -1,11 +1,7 @@
-<div class="row msg_container base_receive">
-    <div class="col-md-2 col-xs-2 avatar">
-        <img src="{{ $avatar }}" class=" img-responsive ">
-    </div>
-    <div class="col-md-10 col-xs-10">
-        <div class="messages msg_receive">
-            <p>{{ $content }}</p>
-            <time datetime="2009-11-13T20:00"><span>[{{ $name }}]</span> {{ $time }}</time>
-        </div>
-    </div>
+<div class="message new">
+    <figure class="avatar">
+        <img src="{{ $avatar }}">
+    </figure>
+    <p class="send_mess">{{ $content }}</p>
+    <div class="timestamp">{{ $time }}</div>
 </div>

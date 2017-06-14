@@ -155,6 +155,7 @@ class CampaignController extends BaseController
      */
     public function show($id)
     {
+
         $this->dataView['detailCampaign'] = $this->campaignRepository->getDetail($id);
 
         if (!$this->dataView['detailCampaign']) {

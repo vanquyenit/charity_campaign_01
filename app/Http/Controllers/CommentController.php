@@ -26,11 +26,22 @@ class CommentController extends Controller
                 'name',
                 'email',
                 'text',
+                'event_id',
             ]);
 
             $comment = $this->commentRepository->createComment($inputs);
+
+            if (is_null($inputs['campaign_id'])) {
+                $result['campaign_id'] = $inputs['event_id'];
+                $count = $this->commentRepository->getTotalCommentByCampaign('event_id', $inputs['campaign_id']);
+            } else {
+                $result['campaign_id'] = $inputs['campaign_id'];
+                $count = $this->commentRepository->getTotalCommentByCampaign('campaign_id', $inputs['campaign_id']);
+            }
+
             $result = [
                 'html' => view('layouts.comment', ['comment' => $comment])->render(),
+                'count' => $count,
                 'success' => true,
             ];
 
@@ -40,8 +51,6 @@ class CommentController extends Controller
                 $comment = $this->commentRepository->getDetail($comment->id);
                 $result['name'] = $comment->user->name;
             }
-
-            $result['campaign_id'] = $inputs['campaign_id'];
 
             $redis = LRedis::connection();
             $redis->publish('comment', json_encode($result));

@@ -124,7 +124,10 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
         }
 
         return $this->model->where('status', config('constants.ACTIVATED'))
-            ->with(['image', 'owner.user', 'comments.user'])
+            ->with(['image', 'owner.user'])
+            ->with(['comments' => function ($query) {
+                $query->orderBy('id', 'desc');
+            }])
             ->with(['contributions.user', 'contributions' => function ($query) {
                 $query->where('status', config('constants.ACTIVATED'));
             }])
