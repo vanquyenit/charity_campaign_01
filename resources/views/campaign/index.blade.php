@@ -156,16 +156,20 @@
                                             <div class="content-inner">
                                                 <div class="entry-thumbnail">
                                                     <div class="thumbnail">
-                                                        <a href="{{ action('CampaignController@show', $element->id) }}"> <img src="{{ $element->image->image }}" alt="{{ $element->name }}" title="{{ $element->name }}"> </a>
+                                                        <a href="{{ action('CampaignController@show', $element->id) }}">
+                                                            <img src="{{ $element->image->image }}" alt="{{ $element->name }}" title="{{ $element->name }}">
+                                                        </a>
                                                     </div>
                                                     <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
                                                 </div>
                                                 <div class="event-content">
                                                     <div class="entry-header">
-                                                        <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}"> {{ $element->name }} </a></h2>
+                                                        <h2 class="blog_title">
+                                                            <a href="{{ action('CampaignController@show', $element->id) }}">{{ $element->trimName() }} </a>
+                                                        </h2>
                                                     </div>
                                                     <div class="entry-content">
-                                                        <p>{!! $element->description !!}</p>
+                                                        <p>{!! $element->trimDescription() !!}</p>
                                                     </div>
                                                     <div class="entry-meta">
                                                         <div class="date">

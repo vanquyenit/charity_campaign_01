@@ -171,8 +171,9 @@ class CampaignController extends BaseController
             'campaign_id' => $id,
         ]);
 
-        // get list members of campaign
         $this->dataView['members'] = $this->campaignRepository->getMembers($id);
+        $this->dataView['contributionConfirmed'] = $this->contributionRepository->getUserContributionConfirmed($id);
+        $this->dataView['contributionUnConfirmed'] = $this->contributionRepository->getUserContributionUnConfirmed($id);
         $this->dataView['averageRanking'] = $this->ratingRepository->averageRatingCampaign($this->dataView['detailCampaign']->id);
         $this->dataView['ratingChart'] = $this->ratingRepository->getRatingChart($id);
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['detailCampaign']->owner->user_id);

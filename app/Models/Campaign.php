@@ -144,4 +144,24 @@ class Campaign extends Model
 
         return str_limit($value, config('constants.LIMIT_DESCRIPTION_CHARACTERS'));
     }
+
+    public function trimName()
+    {
+        return str_limit($this->name, config('constants.LIMIT_TITLE_CHARACTERS'));
+    }
+
+    public function trimDescription()
+    {
+        return str_limit($this->description, config('constants.LIMIT_TITLE_CHARACTERS'));
+    }
+
+    public function timeHours($param)
+    {
+        return date('h:i A', strtotime($this->$param));
+    }
+
+    public function timeDay($param)
+    {
+        return date('D , F d , Y', strtotime($this->$param));
+    }
 }
