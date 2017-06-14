@@ -2,7 +2,6 @@
 namespace App\Validation;
 
 use Illuminate\Support\Facades\Validator;
-use Request;
 
 class ContributionValidate extends Validator
 {
@@ -11,15 +10,13 @@ class ContributionValidate extends Validator
         $count = 0;
         foreach ($value as $item) {
             if ($item < 0) {
-
                 return false;
             }
 
-            $count += $item;
+            $count += (int) $item;
         }
 
         if ($count == 0) {
-
             return false;
         }
 

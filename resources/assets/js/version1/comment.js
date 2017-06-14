@@ -25,11 +25,12 @@ Comment.prototype = {
                 data: $("#formComment").serialize(),
                 error: function (errors) {
                     var arrayErrors = errors.responseJSON;
-                    $error = $('<div>', {'class': 'alert alert alert-danger'})
+                    var errorsHtml = '<div class="alert alert-danger">';
                     $.each(arrayErrors, function (key, value) {
-                        $error.append('<p>' + value + '</p>')
+                        errorsHtml += '<p>' + value + '</p>';
                     });
-                    $('.notify-comment').html($error);
+                    errorsHtml += '</div>';
+                    $('.notify-comment').html(errorsHtml);
                     $('.notify-comment').fadeIn(1000).delay(1000).fadeOut(3000);
                 }
             });

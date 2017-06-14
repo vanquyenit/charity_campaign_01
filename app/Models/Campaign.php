@@ -135,4 +135,13 @@ class Campaign extends Model
     {
         return $filters->apply($query);
     }
+
+    public function getDescriptionAttribute($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+
+        return str_limit($value, config('constants.LIMIT_DESCRIPTION_CHARACTERS'));
+    }
 }

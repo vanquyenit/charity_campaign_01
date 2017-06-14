@@ -33,7 +33,6 @@ class ContributionRequest extends FormRequest
         }
 
         $rules = [
-            'campaign_id' => 'required|numeric|exists:campaigns,id',
             'amount' => 'required|amount:amount',
             'description' => 'required',
         ];

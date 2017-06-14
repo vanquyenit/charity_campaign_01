@@ -34,7 +34,6 @@ class CommentRequest extends FormRequest
 
         $rules = [
             'text' => 'required|max:255',
-            'campaign_id' => 'required|numeric|exists:campaigns,id',
         ];
 
         return array_merge($rules, $rulesGuest);
