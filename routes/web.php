@@ -76,6 +76,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user/{userId}/campaigns', 'UserController@listUserCampaign');
 
+    Route::get('user/{userId}/event', 'UserController@listUserEvent');
+
+    Route::get('user/{userId}/blog', 'UserController@listUserBlog');
+
     Route::get('user/{userId}/campaigns/{campaignId}', 'UserController@manageCampaign');
 
     Route::post('campaigns/approve', 'CampaignController@approveOrRemove');
@@ -133,5 +137,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
         'except' => 'show',
     ]);
 
-    Route::resource('campaign', 'CampaignController');
+    Route::resource('campaigns', 'CampaignController');
 });

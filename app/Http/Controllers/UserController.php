@@ -63,7 +63,7 @@ class UserController extends BaseController
         $this->dataView['actions'] = $this->actionRepository->getActionByUser($id);
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
-        $this->dataView['UserList'] = $this->userRepository->getListUser($id)->take(config('constants.PAGINATE'));
+        $this->dataView['UserList'] = $this->userRepository->getListUserFollow($id);
 
         return view('user.detail', $this->dataView);
     }
@@ -151,6 +151,7 @@ class UserController extends BaseController
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['following'] = $this->followRepository->following($id);
         $this->dataView['followers'] = $this->followRepository->followers($id);
+        $this->dataView['UserList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.campaigns', $this->dataView);
     }
@@ -163,7 +164,7 @@ class UserController extends BaseController
             return abort(404);
         }
 
-        $this->dataView['campaign'] = $this->campaignRepository->getDetail($campaignId);
+        $this->dataView['campaign'] = $this->campaignRepository->getInfoCampaign($campaignId);
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['campaignUsers'] = $this->userRepository->getUsersInCampaign($campaignId)
             ->paginate(config('constants.PAGINATE'));

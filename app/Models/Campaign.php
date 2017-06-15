@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\QueryFilter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -163,5 +164,14 @@ class Campaign extends Model
     public function timeDay($param)
     {
         return date('D , F d , Y', strtotime($this->$param));
+    }
+
+    public function countTimer($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+
+        return Carbon::now()->subSeconds(time() - strtotime($this->$value))->diffForHumans();
     }
 }

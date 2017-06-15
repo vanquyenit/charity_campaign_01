@@ -82,7 +82,6 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
     {{ Html::script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
     {{ Html::script('js/version1/styling.min.js') }}
-    {{ Html::script('js/version1/share_social.js') }}
     {{ Html::script('js/version1/main.min.js') }}
     {{ Html::script('js/version1/custom-script.js') }}
     {{ Html::script('js/version1/custom-scroll.min.js') }}

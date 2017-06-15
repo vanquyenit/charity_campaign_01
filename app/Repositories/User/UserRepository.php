@@ -3,6 +3,7 @@
 namespace App\Repositories\User;
 
 use App\Models\Campaign;
+use App\Models\Relationship;
 use App\Models\SocialAccount;
 use App\Models\User;
 use App\Repositories\BaseRepository;
@@ -107,6 +108,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             if (empty($user)) {
                 $user = $this->model->create([
                     'name' => $providerUser->getName(),
+                    'fullname' => $providerUser->getName(),
                     'email' => $providerUser->getEmail(),
                     'avatar' => $providerUser->getAvatar(),
                     'is_active' => config('constants.ACTIVATED'),
@@ -191,5 +193,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                     }])->orderBy('id', 'desc');
             },
         ])->find($userId);
+    }
+
+    public function getListUserFollow($id)
+    {
+        return $this->model->whereNotIn('id', Relationship::where('user_id', '=', $id)
+                ->select('target_id')->get())->where('id', '<>', $id)->inRandomOrder()->get();
     }
 }

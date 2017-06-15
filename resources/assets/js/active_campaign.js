@@ -17,7 +17,7 @@ Active.prototype = {
         $(".active-campaign").click(function (e) {
             e.preventDefault();
             var thisButton = this;
-            var thisStatus = $(this).closest('tr').find('.badge');
+            var thisStatus = $(this).closest('.dropdown').find('.badge');
             var divChangeAmount = $(this).parent();
             var campaignId = divChangeAmount.data('campaignId');
             var token = $('.hide').data('token');
@@ -33,11 +33,11 @@ Active.prototype = {
                         },
                         success: function (data) {
                             if (data.status) {
-                                $(thisButton).attr('value', _self.btnClose);
+                                $(thisButton).html(_self.btnClose);
                                 $(thisStatus).html(_self.btnActive);
                                 $(thisStatus).attr('class', 'badge label-primary');
                             } else {
-                                $(thisButton).attr('value', _self.btnActive);
+                                $(thisButton).html(_self.btnActive);
                                 $(thisStatus).html(_self.btnClose);
                                 $(thisStatus).attr('class', 'badge label-warning-custom');
                             }
