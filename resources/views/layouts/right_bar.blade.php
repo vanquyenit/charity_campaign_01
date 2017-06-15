@@ -1,7 +1,16 @@
 <div id="sidebar" class="widget-area col-sm-3" role="complementary">
     <div class="sidebar theiaStickySidebar">
         @if (isset($detailCampaign))
-            <button type="button" class="donate_load_form thim-button style3 btn-block" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $detailCampaign->id }}">{{ trans('index.join-now') }}</button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-info donate_load_form"
+                data-toggle="modal" href='.donate_modal'
+                data-hiden="{{ csrf_token() }}"
+                data-url="{{ action('CampaignController@review') }}"
+                data-campaign-id="{{ $detailCampaign->id }}">{{ trans('index.join-now') }}</button>
+                @if ($userCampaign)
+                    <a href="{{ action('EventController@eventCreate', $detailCampaign->id) }}" type="button" class="btn btn-default">{{ trans('event.create') }}</a>
+                @endif
+            </div>
         @endif
 
         @if (count($results))

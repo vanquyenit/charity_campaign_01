@@ -173,6 +173,5 @@ return [
         'start_time' => 'Start time',
         'end_time' => 'End time',
     ],
-    'list-contribution-confirmed' => 'List contribution confirmed',
-    'list-contribution-unconfirmed' => 'List contribution unconfirmed',
+    'list-contribution' => 'List contribution',
 ];

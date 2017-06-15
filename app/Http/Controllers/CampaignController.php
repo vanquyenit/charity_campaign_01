@@ -11,6 +11,7 @@ use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Group\GroupRepositoryInterface;
 use App\Repositories\Message\MessageRepositoryInterface;
 use App\Repositories\Rating\RatingRepositoryInterface;
+use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Purifier;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class CampaignController extends BaseController
     protected $contributionRepository;
     protected $ratingRepository;
     protected $categoryCampaignRepository;
+    protected $timelineRepository;
     protected $userRepository;
     protected $messageRepository;
     protected $groupRepository;
@@ -38,6 +40,7 @@ class CampaignController extends BaseController
         ContributionRepositoryInterface $contributionRepository,
         RatingRepositoryInterface $ratingRepository,
         UserRepositoryInterface $userRepository,
+        TimelineRepositoryInterface $timelineRepository,
         MessageRepositoryInterface $messageRepository,
         GroupRepositoryInterface $groupRepository
     ) {
@@ -45,6 +48,7 @@ class CampaignController extends BaseController
         $this->campaign = $campaign;
         $this->event = $event;
         $this->categoryRepository = $categoryRepository;
+        $this->timelineRepository = $timelineRepository;
         $this->contributionRepository = $contributionRepository;
         $this->ratingRepository = $ratingRepository;
         $this->userRepository = $userRepository;
@@ -109,9 +113,13 @@ class CampaignController extends BaseController
                 ->withMessage(trans('campaign.create_error'));
         }
 
-        return redirect(
-            action('UserController@listUserCampaign', ['id' => auth()->id()])
-        )->with(['alert-success' => trans('campaign.create_success')]);
+        if (!$this->timelineRepository->createTimeline(['campaign_id' => $campaign->id])) {
+            return redirect(action('UserController@listUserCampaign', ['id' => auth()->id()]))
+                ->with(['alert-danger' => trans('timeline.create_error')]);
+        }
+
+        return redirect(action('UserController@listUserCampaign', ['id' => auth()->id()]))
+            ->with(['alert-success' => trans('campaign.create_success')]);
     }
 
     public function showCampaigns()

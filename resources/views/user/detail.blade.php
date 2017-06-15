@@ -197,9 +197,6 @@
                                                 <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}">
                                                 <span class="FullNameGroup">
                                                     <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
-                                                    <span class="UserBadges">
-                                                        <span class="Icon Icon--verified"><span class="u-hiddenVisually">{{ trans('user.verified-account') }}</span></span>
-                                                    </span>
                                                     <span class="UserNameBreak">&nbsp;</span>
                                                 </span>
                                                 <span class="username u-dir">@<b>{{ trans('user.follow-user') }}</b></span>
@@ -228,7 +225,6 @@
                                                 {{ $timeline->friend->fullname }}
                                             </p>
                                         </div>
-                                        <p class="u-hiddenVisually" aria-hidden="true">{{ trans('user.barack-obama-added,') }}</p>
                                         <div class="QuoteTweet u-block js-tweet-details-fixer">
                                             <div class="QuoteTweet-container">
                                                 <div class="QuoteTweet-innerContainer u-cf js-permalink js-media-container" href="{{ action('CampaignController@show', $timeline->friends_id) }}">
@@ -237,7 +233,7 @@
                                                             <div class="QuoteMedia-container js-quote-media-container">
                                                                 <div class="QuoteMedia-singlePhoto">
                                                                     <div class="QuoteMedia-photoContainer js-quote-photo" data-element-context="platform_photo_card">
-                                                                        <a href="{{ action('UserController@show', $timeline->friends_id) }}" title="{{ $timeline->friend->fullname }}">
+                                                                        <a href="{{ action('UserController@show', $timeline->friends_id) }}">
                                                                             <img src="{{ $timeline->friend->avatar }}" alt="{{ $timeline->friend->avatar }}">
                                                                         </a>
                                                                     </div>
@@ -249,9 +245,6 @@
                                                                 <a href="{{ action('UserController@show', $timeline->friends_id) }}" title="{{ $timeline->friend->fullname }}">
                                                                     <b class="QuoteTweet-fullname u-linkComplex-target">{{ $timeline->friend->fullname }}</b>
                                                                 </a>
-                                                                <span class="UserBadges">
-                                                                    <span class="Icon Icon--verified"><span class="u-hiddenVisually">{{ trans('user.verified-account') }}</span></span>
-                                                                </span>
                                                                 <span class="UserNameBreak">&nbsp;</span><span class="username u-dir">@<b>{{ $timeline->friend->name }}</b></span>
                                                             </div>
                                                             <div>
