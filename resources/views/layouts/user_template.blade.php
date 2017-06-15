@@ -90,6 +90,7 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('bower_components/datatables/media/js/dataTables.material.min.js') }}
     {{ Html::script('js/version1/search.js') }}
     {{ Html::script('js/custom.js') }}
+    {{ Html::script('js/follow_user.js') }}
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -99,6 +100,16 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
         jQuery(document).ready(function($) {
             var search = new Search();
             search.init();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var follow = new Follow(
+                '{{ action('FollowController@followOrUnFollowUser') }}',
+                '{{ trans('user.follow') }}',
+                '{{ trans('user.unfollow') }}'
+            );
+            follow.init();
         });
     </script>
 @show

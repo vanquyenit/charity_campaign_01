@@ -86,9 +86,8 @@ class User extends Authenticatable
         }
 
         $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
-        preg_match($pattern, $value, $matches);
 
-        if (!empty($matches)) {
+        if (!preg_match($pattern, $value)) {
             return $value;
         }
 
@@ -107,7 +106,7 @@ class User extends Authenticatable
 
     public function isCurrent()
     {
-        return $this->id == auth()->id();
+        return $this->id = auth()->id();
     }
 
     public function userCampaign()
@@ -141,7 +140,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role == config('settings.role.admin');
+        return $this->role = config('settings.role.admin');
     }
 
     public function showRole()
@@ -157,5 +156,20 @@ class User extends Authenticatable
     public function timelines()
     {
         return $this->hasMany(Timeline::class);
+    }
+
+    public function getCoverAttribute($value)
+    {
+        if (empty($value)) {
+            return config('path.to_cover_default');
+        }
+
+        $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
+
+        if (!preg_match($pattern, $value)) {
+            return $value;
+        }
+
+        return config('path.images') . $value;
     }
 }

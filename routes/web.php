@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('user', 'UserController');
 
+    Route::get('user/{userId}/follower', 'UserController@follower');
+
+    Route::get('user/{userId}/following', 'UserController@following');
+
     Route::get('campaigns/create', 'CampaignController@create');
 
     Route::get('event/create', 'EventController@create');

@@ -59,12 +59,9 @@ class UserController extends BaseController
         }
 
         $this->dataView['follow'] = $this->followRepository->getFollowUser($id);
-        $this->dataView['userTimeline'] = $this->userRepository->getTimeline($id);
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['actions'] = $this->actionRepository->getActionByUser($id);
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
-        $this->dataView['following'] = $this->followRepository->following($id);
-        $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
         $this->dataView['UserList'] = $this->userRepository->getListUser($id)->take(config('constants.PAGINATE'));
 
@@ -178,5 +175,33 @@ class UserController extends BaseController
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
 
         return view('user.campaign_detail', $this->dataView);
+    }
+
+    public function follower($id)
+    {
+        try {
+            $this->dataView['user'] = $this->user->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+
+        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
+        $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
+
+        return view('user.follower', $this->dataView);
+    }
+
+    public function following($id)
+    {
+        try {
+            $this->dataView['user'] = $this->user->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+
+        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
+        $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
+
+        return view('user.following', $this->dataView);
     }
 }
