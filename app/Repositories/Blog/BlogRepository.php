@@ -29,6 +29,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                         'title' => $params['title'],
                         'content' => $image,
                         'type' => $params['type'],
+                        'user_id' => auth()->id(),
                     ]);
                 }
 
@@ -45,6 +46,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                 'title' => $params['title'],
                 'content' => $params['video'],
                 'type' => $params['type'],
+                'user_id' => auth()->id(),
             ]);
         }
     }

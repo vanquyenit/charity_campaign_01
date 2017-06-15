@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -12,6 +13,7 @@ class Event extends Model
         'content',
         'img',
         'campaign_id',
+        'user_id',
         'address',
         'lat',
         'lng',
@@ -47,5 +49,14 @@ class Event extends Model
     public function timeDay($param)
     {
         return date('D , F d , Y', strtotime($this->$param));
+    }
+
+    public function countTimer($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+
+        return Carbon::now()->subSeconds(time() - strtotime($this->$value))->diffForHumans();
     }
 }

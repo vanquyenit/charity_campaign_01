@@ -7,6 +7,7 @@ use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
 use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Services\Purifier;
+use Gate;
 use Illuminate\Http\Request;
 
 class EventController extends BaseController
@@ -122,7 +123,15 @@ class EventController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $this->data['detailEvent'] = $this->eventRepository->getDetail($id);
+
+        if (!$this->data['detailEvent'] || Gate::denies('event', $this->data['detailEvent'])) {
+            return abort(404);
+        }
+
+        $this->data['validateMessage'] = json_encode(trans('event.validate'));
+
+        return view('event.edit', $this->data);
     }
 
     /**
@@ -134,7 +143,29 @@ class EventController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->only([
+            'event_id',
+            'name',
+            'file',
+            'start_date',
+            'end_date',
+            'address',
+            'lattitude',
+            'longitude',
+            'description',
+            'content',
+        ]);
+        $inputs['content'] = Purifier::clean($inputs['content']);
+
+        $event = $this->eventRepository->updateEvent($inputs);
+
+        if (!$event) {
+            return redirect(action('EventController@edit', ['userId' => auth()->id(), 'eventId' => $id]))
+                ->withMessage(trans('event.update_error'));
+        }
+
+        return redirect(action('UserController@listUserEvent', ['userId' => auth()->id()]))
+            ->with(['alert-success' => trans('event.update_success')]);
     }
 
     /**
@@ -145,6 +176,26 @@ class EventController extends BaseController
      */
     public function destroy($id)
     {
-        //
+
+        $event = $this->eventRepository->find($id);
+
+        if (!$event || Gate::denies('event', $event)) {
+            return abort(404);
+        }
+
+        $event = $this->eventRepository->deleteEvent($id);
+
+        if (!$event) {
+            return redirect(action('UserController@listUserEvent', ['userId' => auth()->id()]))
+                ->withMessage(trans('event.delete_error'));
+        }
+
+        if (!$this->timelineRepository->deleteTimeline(auth()->id(), 'event_id', $id)) {
+            return redirect(action('OrtherController@blog'))
+                ->with(['alert-danger' => trans('timeline.create_error_blog')]);
+        }
+
+        return redirect(action('UserController@listUserEvent', ['userId' => auth()->id()]))
+            ->with(['alert-success' => trans('event.delete_success')]);
     }
 }

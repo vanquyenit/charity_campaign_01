@@ -514,3 +514,11 @@ select, select:focus {
     width: 95%;
     padding: 15px 0;
 }
+.unstyle-button-submit {
+    padding: 0 10px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: #fff !important;
+    width: 100% !important;
+    font-size: 13px;
+}

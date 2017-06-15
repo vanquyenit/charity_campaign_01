@@ -15,7 +15,7 @@
                 '{{ trans('campaign.active') }}',
                 '{{ trans('campaign.close') }}',
                 '{{ action('CampaignController@activeOrCloseCampaign') }}',
-                '{{ trans('campaign.message_confirm') }}'
+                '{{ trans('campaign.message_confirm') }}',
             );
             active.init();
         });
@@ -27,7 +27,6 @@
 <div class="Grid-cell">
     <div class="js-profileClusterFollow"></div>
 </div>
-<div class="hide" data-token="{{ csrf_token() }}"></div>
 <div class="Grid-cell u-lg-size2of3" data-test-selector="ProfileTimeline">
     <div class="ProfileHeading">
         <div class="ProfileHeading-spacer"></div>
