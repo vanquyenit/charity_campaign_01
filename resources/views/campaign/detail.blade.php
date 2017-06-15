@@ -40,7 +40,7 @@
         data-host="{{ config('app.key_program.socket_host') }}"
         data-port="{{ config('app.key_program.socket_port') }}">
     </div>
-    <div class="top_site_main thim-parallax-image"  data-stellar-background-ratio="0.5">
+    <div class="top_site_main thim-parallax-image" data-stellar-background-ratio="0.5">
         <span class="overlay-top-header"></span>
         <div class="page-title-wrapper">
             <div class="banner-wrapper container article_heading">
@@ -49,15 +49,15 @@
                         <h1 class="heading__primary">{{ trans('index.campaigns') }}</h1>
                     </div>
                     <div class="col-xs-6">
-                        <ul id="thim_breadcrumbs" class="thim-breadcrumbs" itemscope >
-                            <li class="item-home" itemprop="itemListElement" itemscope >
-                                <a itemprop="item" class="bread-link bread-home" href="{{ action('CampaignController@index') }}" title="Home">
+                        <ul id="thim_breadcrumbs" class="thim-breadcrumbs">
+                            <li class="item-home" itemprop="itemListElement">
+                                <a itemprop="item" class="bread-link bread-home" href="{{ action('CampaignController@index') }}">
                                     <span itemprop="name">{{ trans('index.home') }}</span>
                                 </a>
                             </li>
                             <li class="separator separator-home"></li>
                             <li class="item-current item-cat item-custom-post-type-tp_event">
-                                <a itemprop="item" class="bread-cat bread-custom-post-type-tp_event" href="{{ action('CampaignController@showCampaigns') }}" title="Events">
+                                <a itemprop="item" class="bread-cat bread-custom-post-type-tp_event" href="{{ action('CampaignController@showCampaigns') }}">
                                     <span itemprop="name">{{ trans('index.campaigns') }}</span>
                                 </a>
                             </li>
@@ -73,10 +73,43 @@
             <main id="main" class="site-main col-sm-9">
                 <article id="tp_event-4934" class="tp_single_event post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
                     <div class="entry-header">
-                        <h1 class="blog_title">{{ $detailCampaign->name }}</h1>
+                        <h1 class="blog_title col-xs-9">{{ $detailCampaign->name }}</h1>
+                        <div class="col-xs-3">
+                            <div class="btn-group pull-right">
+                                @if ($detailCampaign->status)
+                                    @if (auth()->check())
+                                        {!! Form::open(['method' => 'POST', 'id' => 'formRequest', 'class' => 'pull-left']) !!}
+                                        {!! Form::hidden('campaign_id', $detailCampaign->id) !!}
+                                        @if (empty($userCampaign))
+                                            {!! Form::submit(trans('campaign.request_join'), ['class' => 'btn btn-info joinOrLeave']) !!}
+                                        @elseif (empty($userCampaign->status) && empty($userCampaign->is_owner))
+                                            {!! Form::submit(trans('campaign.request_sent'), ['class' => 'btn btn-info joinOrLeave']) !!}
+                                        @elseif ($userCampaign->status && empty($userCampaign->is_owner))
+                                            {!! Form::submit(trans('campaign.leave_campaign'), ['class' => 'btn btn-info joinOrLeave']) !!}
+                                        @endif
+                                            {!! Form::close() !!}
+                                    @else
+                                        <a href="{{ action('Auth\UserLoginController@getLogin') }}"
+                                        class="btn btn-info text-white">{{ trans('campaign.request_join') }}</a>
+                                    @endif
+                                @endif
+                                <button type="button" class="btn btn-info dropdown-toggle height-40" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">{{ trans('campaign.list-contribute') }}</li>
+                                    <li class="li-confirm">
+                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-confirmed'>{{ trans('campaign.list-contribution-confirmed') }}</a>
+                                    </li>
+                                    <li class="li-confirm">
+                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-unconfirmed'>{{ trans('campaign.list-contribution-unconfirmed') }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="summary entry-summary">
-                        <div class='post-formats-wrapper'>
+                        <div class='post-formats-wrapper max-width-height'>
                             <a class="post-image" href="">
                                 <img src="{{ $detailCampaign->image->image }}" class="attachment-full size-full wp-post-image fix-img-cp" alt="{{ $detailCampaign->name }}" srcset="{{ $detailCampaign->image->image }} 870w, {{ $detailCampaign->image->image }} 300w, {{ $detailCampaign->image->image }} 768w" sizes="(max-width: 870px) 100vw, 870px" />
                             </a>
@@ -105,27 +138,27 @@
                                             <div class="thim-event-info">
                                                 <div class="inner-box">
                                                     <div class="box start">
-                                                        <div class="icon"><i class="fa fa-clock-o"></i> </div>
+                                                        <div class="icon"><i class="fa fa-clock-o"></i></div>
                                                         <div class="info-detail">
-                                                            <div class="title"><strong>{{ trans('campaign.label_for.start_time') }}</strong> </div>
+                                                            <div class="title"><strong>{{ trans('campaign.label_for.start_time') }}</strong></div>
                                                             <div class="info-content">
-                                                             <div class="time">{{ date('h:i A', strtotime($detailCampaign->start_time)) }}</div>
-                                                             <div class="date">{{ date('D , F d , Y', strtotime($detailCampaign->start_time)) }}</div>
+                                                             <div class="time">{{ $detailCampaign->timeHours('start_time') }}</div>
+                                                             <div class="date">{{ $detailCampaign->timeDay('start_time') }}</div>
                                                          </div>
                                                      </div>
                                                  </div>
                                                  <div class="box finish">
-                                                    <div class="icon"><i class="fa fa-flag"></i> </div>
+                                                    <div class="icon"><i class="fa fa-flag"></i></div>
                                                     <div class="info-detail">
-                                                        <div class="title"><strong>{{ trans('campaign.label_for.end_time') }}</strong> </div>
+                                                        <div class="title"><strong>{{ trans('campaign.label_for.end_time') }}</strong></div>
                                                         <div class="info-content">
-                                                            <div class="time">{{ date('h:i A', strtotime($detailCampaign->end_time)) }}</div>
-                                                            <div class="date">{{ date('D , F d , Y', strtotime($detailCampaign->end_time)) }}</div>
+                                                            <div class="time">{{ $detailCampaign->timeHours('end_time') }}</div>
+                                                            <div class="date">{{ $detailCampaign->timeDay('end_time') }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="box address">
-                                                    <div class="icon"><i class="fa fa-map-marker"></i> </div>
+                                                    <div class="icon"><i class="fa fa-map-marker"></i></div>
                                                     <div class="info-detail">
                                                         <div class="title"><strong>{{ trans('campaign.address') }}</strong> </div>
                                                         <div class="info-content">{{ $detailCampaign->address }}</div>
@@ -193,27 +226,6 @@
                 </h4>
             </div>
             <div class="widget-extra">
-                <div class="timeline col-sm-5">
-                    <div class="request-join">
-                        @if ($detailCampaign->status)
-                            @if (auth()->check())
-                                {!! Form::open(['method' => 'POST', 'id' => 'formRequest']) !!}
-                                    {!! Form::hidden('campaign_id', $detailCampaign->id) !!}
-                                    @if (empty($userCampaign))
-                                        {!! Form::submit(trans('campaign.request_join'), ['class' => 'btn btn-raised btn-success joinOrLeave']) !!}
-                                    @elseif (empty($userCampaign->status) && empty($userCampaign->is_owner))
-                                        {!! Form::submit(trans('campaign.request_sent'), ['class' => 'btn btn-raised btn-success joinOrLeave']) !!}
-                                    @elseif ($userCampaign->status && empty($userCampaign->is_owner))
-                                        {!! Form::submit(trans('campaign.leave_campaign'), ['class' => 'btn btn-raised btn-success joinOrLeave']) !!}
-                                    @endif
-                                {!! Form::close() !!}
-                            @else
-                                <a href="{{ action('Auth\UserLoginController@getLogin') }}"
-                                class="btn btn-raised btn-primary join">{{ trans('campaign.request_join') }}</a>
-                            @endif
-                        @endif
-                    </div>
-                </div>
                 <div class="col-sm-7">
                     <div class="fb-like"
                     data-href="{{ action('EventController@show', $detailCampaign->id) }}"
@@ -228,7 +240,7 @@
         <div class="tab__comment">
             <div>
                 <div class="card">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="no-margin-left nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a href="#home" aria-controls="home" role="tab" data-toggle="tab">{{ trans('event.account') }}</a>
                         </li>
@@ -306,10 +318,17 @@
         </div>
     </main>
     @if (auth()->check() &&  ($detailCampaign->owner->user_id == auth()->id() || $detailCampaign->checkMemberOfCampaignByUserId(auth()->id())))
+        <a href="javascript:void(0)" id="show-box-chat">
+            <img class="irc_mi" src="{{ asset('/img/chatbox.png') }}">
+        </a>
         @include('layouts.chat')
     @endif
         @include('layouts.right_bar')
         <div class="clear"></div>
     </div>
+    @include('campaign.list_contribution_confirmed')
+    @include('campaign.list_contribution_unconfirmed', [
+            'contributionUnConfirmed' => $contributionUnConfirmed
+        ])
 </section>
 @stop

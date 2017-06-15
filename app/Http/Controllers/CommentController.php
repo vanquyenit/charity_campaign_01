@@ -32,7 +32,7 @@ class CommentController extends Controller
             $comment = $this->commentRepository->createComment($inputs);
 
             if (is_null($inputs['campaign_id'])) {
-                $count = $this->commentRepository->getTotalCommentByCampaign('event_id', $inputs['campaign_id']);
+                $count = $this->commentRepository->getTotalCommentByCampaign('event_id', $inputs['event_id']);
             } else {
                 $count = $this->commentRepository->getTotalCommentByCampaign('campaign_id', $inputs['campaign_id']);
             }

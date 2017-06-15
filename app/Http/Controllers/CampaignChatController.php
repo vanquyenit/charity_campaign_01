@@ -53,6 +53,7 @@ class CampaignChatController extends Controller
                         'time' => $comment->created_at->diffForHumans(),
                         'avatar' => $currentUser->avatar,
                         'name' => $currentUser->name,
+                        'user_id' => auth()->id(),
                     ];
                     $messageSendHtml = view('layouts.message_send', $dataLayout)->render();
                     $messageReceiveHtml = view('layouts.message_receive', $dataLayout)->render();

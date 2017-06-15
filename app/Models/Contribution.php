@@ -62,4 +62,9 @@ class Contribution extends Model
             ->with('category', 'contribution')
             ->get();
     }
+
+    public function trimDescription()
+    {
+        return str_limit($this->description, config('constants.LIMIT_TITLE_CHARACTERS'));
+    }
 }

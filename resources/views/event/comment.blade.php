@@ -10,14 +10,16 @@
             </div>
             <div class="comment-box col-xs-10">
                 <div class="comment-head">
-                    @if ($element->user)
-                        <h6 class="comment-name">
-                            <a href="{{ action('UserController@show', ['id' => $element->user['id']]) }}">{{ $element->user['name'] }}</a>
-                        </h6>
-                    @else
-                        <span>{{{ $element->name }}}</span>
-                    @endif
-                    <span>{{ Carbon\Carbon::now()->subSeconds(time() - strtotime($element->created_at))->diffForHumans() }}</span>
+                    <h6 class="comment-name">
+                        @if ($element->user)
+                            <h6 class="comment-name">
+                                <a href="{{ action('UserController@show', ['id' => $element->user['id']]) }}">{{ $element->user['name'] }}</a>
+                            </h6>
+                        @else
+                            <span>{{{ $element->name }}}</span>
+                        @endif
+                    </h6>
+                    <span>{{ $element->created_at }}</span>
                 </div>
                 <div class="comment-content">{{{ $element->text }}}</div>
             </div>

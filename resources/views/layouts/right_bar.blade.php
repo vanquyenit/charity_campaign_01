@@ -51,13 +51,6 @@
                 </div>
             </div>
         @endif
-
-        @if (isset($detailCampaign))
-            <div class="block-title themed-background-dark">
-                <a type="button" class="donate_load_form thim-button style3 btn-block" href="{{ action('CampaignController@confirmed', $detailCampaign->id) }}">{{ trans('campaign.list-contribution-confirmed') }}</a>
-                <a type="button" class="donate_load_form thim-button style3 btn-block" href="{{ action('CampaignController@unconfirmed', $detailCampaign->id) }}">{{ trans('campaign.list-contribution-unconfirmed') }}</a>
-            </div>
-         @endif
         <div class="clear"></div>
         <aside id="events-1" class="widget widget_events">
             <div class="thim-widget-events thim-widget-events-base">
@@ -109,6 +102,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="clearfix"></div>
                                     @endforeach
                                 </div>
                             </div>

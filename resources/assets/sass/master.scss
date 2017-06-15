@@ -281,6 +281,7 @@ select, select:focus {
 }
 .main-menu .navbar-nav .menu-item a span {
     padding: 3px 10px !important;
+    font-weight: 700 !important;
 }
 .campaign {
     #image-preview {
@@ -324,6 +325,8 @@ select, select:focus {
 }
 .error {
     color: red;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 #img-previews span img {
@@ -373,7 +376,8 @@ select, select:focus {
         .no-padding {
             padding: 0 !important;
         }
-    } @else {
+    }
+    @else {
         .no-padding-#{$side} {
             padding-#{$side}: 0 !important;
         }
@@ -385,6 +389,25 @@ select, select:focus {
 @include no-padding("top");
 @include no-padding("bottom");
 @include no-padding("all");
+
+@mixin no-margin($side) {
+    @if $side == 'all' {
+        .no-margin {
+            margin: 0 !important;
+        }
+    }
+    @else {
+        .no-margin-#{$side} {
+            margin-#{$side}: 0 !important;
+        }
+    }
+}
+
+@include no-margin("left");
+@include no-margin("right");
+@include no-margin("top");
+@include no-margin("bottom");
+@include no-margin("all");
 #sidebar {
     .themed-background-dark {
         margin-bottom: 20px;
@@ -432,4 +455,55 @@ select, select:focus {
 .max-width-height {
     width: 100%;
     height: 100%;
+}
+#tp_event-4934 {
+    .entry-header {
+        overflow: inherit;
+        height: 50px;
+        .margin-top-45 {
+            margin-top: 45px;
+        }
+        .text-white {
+            height: 40px;
+        }
+    }
+}
+.text-white {
+    color: #fff;
+}
+.progress {
+    height: 20px !important;
+}
+.joinOrLeave {
+    padding: 0 10px !important;
+    border: 0 !important;
+    border-radius: 4px 0 0 4px !important;
+}
+.height-40 {
+    height: 40px;
+}
+.send_mess {
+    margin: 0;
+}
+@mixin width-height-80 {
+    width: 80px;
+    height: 80px;
+}
+.irc_mi {
+    @include width-height-80;
+    z-index: 10;
+    right: 5px;
+    position: fixed;
+}
+.chat {
+    display: none;
+}
+.modal-content {
+    cursor: default;
+}
+#donate_hidden {
+    background: #fff;
+}
+.img-80 {
+    @include width-height-80;
 }

@@ -12,6 +12,7 @@ function updateScrollbar() {
 
 function setDate() {
     d = new Date()
+
     if (m != d.getMinutes()) {
         m = d.getMinutes();
         $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
@@ -39,6 +40,11 @@ $(window).on('keydown', function(e) {
 })
 
 $(document).ready(function() {
+    $('#show-box-chat').click(function() {
+        $('.chat').fadeIn(300);
+        $(this).fadeOut();
+        updateScrollbar();
+    })
     $('#minim_chat_window').on('click', function() {
         $('.messages').slideToggle(500, 'swing');
         $('.message-box').fadeToggle(300, 'swing');
@@ -46,12 +52,9 @@ $(document).ready(function() {
     $('.chat-close').on('click', function(e) {
         e.preventDefault();
         $('.chat').fadeOut(300);
+        $('#show-box-chat').fadeIn(300);
     });
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
     var host = $('.hide-chat').data('host');
     var port = $('.hide-chat').data('port');
     var link = (port == '') ? host : host + ":" + port;
@@ -64,6 +67,7 @@ $(document).ready(function() {
 
         if (data.success && data.campaign_id == campaignId) {
             if (data.user_id != currentUserId) {
+                $('.chat').fadeIn(300);
                 $('.messages-content').append(data.html);
                 updateScrollbar();
             }

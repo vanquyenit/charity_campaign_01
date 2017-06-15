@@ -26,7 +26,6 @@
     box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
     background: #fff;
     border-radius: 20px 20px 0 0;
-    display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
@@ -38,7 +37,8 @@
     color: #fff;
     text-transform: uppercase;
     text-align: left;
-    padding: 5px;
+    padding: 12px 0px;
+    height: 40px;
     h1, h2 {
         font-weight: normal;
         font-size: 12px;
