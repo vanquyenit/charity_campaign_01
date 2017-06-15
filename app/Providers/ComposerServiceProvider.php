@@ -22,6 +22,9 @@ class ComposerServiceProvider extends ServiceProvider
                 'campaign.detail',
                 'campaign.list_contribution_confirmed',
                 'campaign.list_contribution_unconfirmed',
+                'user.detail',
+                'user.follower',
+                'user.following',
             ],
             'App\Http\ViewComposers\CategoryComposer'
         );
