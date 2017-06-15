@@ -75,16 +75,20 @@
                     <div class="PhotoRail-heading">
                         <span class="fa fa-video-camera"></span>
                         <span class="PhotoRail-headingText PhotoRail-headingText--withCount">
-                            <a href="#" class="PhotoRail-headingWithCount js-nav">{{ trans('user.video-images') }}</a>
+                            <a href="{{ action('UserController@listUserBlog', $user->id) }}" class="PhotoRail-headingWithCount js-nav">{{ trans('user.video-images') }}</a>
                         </span>
                     </div>
-                    <div class="PhotoRail-mediaBox">
-                        <span class="tweet-media-img-placeholder js-nav">
-                            <div class="media-overlay"></div>
-                            <img src="" alt="">
-                        </span>
-                        <span class="js-photoRailInsertPoint"></span>
-                    </div>
+                    @if (count($listImage))
+                        <div class="PhotoRail-mediaBox">
+                            @foreach (json_decode($listImage->content) as $element)
+                                <span class="tweet-media-img-placeholder js-nav">
+                                    <div class="media-overlay"></div>
+                                    <img src="{{ config('path.images') . $element }}" class="max-width-height">
+                                </span>
+                                <span class="js-photoRailInsertPoint"></span>
+                             @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

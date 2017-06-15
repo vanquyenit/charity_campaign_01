@@ -72,21 +72,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('blog/create', 'OrtherController@saveBlog');
 
-    Route::get('user/{userId}/event/{eventId}/edit', 'EventController@edit');
-
     Route::post('campaigns/create', 'CampaignController@store');
 
     Route::post('campaigns/update', 'CampaignController@update');
 
-    Route::resource('event', 'EventController', [
-        'except' => 'edit',
-    ]);
+    Route::resource('event', 'EventController');
 
     Route::get('user/{userId}/campaigns', 'UserController@listUserCampaign');
 
     Route::get('user/{userId}/event', 'UserController@listUserEvent');
 
     Route::get('user/{userId}/blog', 'UserController@listUserBlog');
+
+    Route::delete('blog/{blogId}', 'OrtherController@deleteBlog');
 
     Route::get('user/{userId}/campaigns/{campaignId}', 'UserController@manageCampaign');
 

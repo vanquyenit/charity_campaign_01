@@ -191,8 +191,8 @@ class EventController extends BaseController
         }
 
         if (!$this->timelineRepository->deleteTimeline(auth()->id(), 'event_id', $id)) {
-            return redirect(action('OrtherController@blog'))
-                ->with(['alert-danger' => trans('timeline.create_error_blog')]);
+            return redirect(action('UserController@listUserEvent', ['userId' => auth()->id()]))
+                ->with(['alert-danger' => trans('event.delete_error')]);
         }
 
         return redirect(action('UserController@listUserEvent', ['userId' => auth()->id()]))

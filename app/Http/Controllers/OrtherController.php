@@ -11,6 +11,7 @@ use App\Repositories\Contact\ContactRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use Gate;
 use Illuminate\Http\Request;
 
 class OrtherController extends BaseController
@@ -123,5 +124,29 @@ class OrtherController extends BaseController
 
         return redirect(action('OrtherController@blog'))
             ->with(['alert-success' => trans('blog.blog_success')]);
+    }
+
+    public function deleteBlog($id)
+    {
+        $blog = $this->blogRepository->find($id);
+
+        if (!$blog || Gate::denies('blog', $blog)) {
+            return abort(404);
+        }
+
+        $blog = $this->blogRepository->deleteBlog($id);
+
+        if (!$blog) {
+            return redirect(action('UserController@listUserBlog', ['userId' => auth()->id()]))
+                ->withMessage(trans('event.delete_error'));
+        }
+
+        if (!$this->timelineRepository->deleteTimeline(auth()->id(), 'blog_id', $id)) {
+            return redirect(action('UserController@listUserBlog', ['userId' => auth()->id()]))
+                ->with(['alert-danger' => trans('event.delete_error')]);
+        }
+
+        return redirect(action('UserController@listUserBlog', ['userId' => auth()->id()]))
+            ->with(['alert-success' => trans('event.delete_success')]);
     }
 }
