@@ -107,9 +107,8 @@
                                                                 <i class="fa fa-user-circle-o user_profile fa-3x"></i>
                                                             </a>
                                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                                @if (Auth::check())
-                                                                    <li><a href="{{ action('UserController@show', ['id' => Auth::user()->id]) }}">{{ trans('user.profile') }}</a></li>
-                                                                    <li><a href="{{ action('EventController@create') }}">{{ trans('event.create') }}</a></li>
+                                                                @if (auth()->check())
+                                                                    <li><a href="{{ action('UserController@show', ['id' => auth()->id()]) }}">{{ trans('user.profile') }}</a></li>
                                                                     <li><a href="{{ action('OrtherController@createBlog') }}">{{ trans('blog.create') }}</a></li>
                                                                     <li><a href="{{ route('logout') }}">{{ trans('message.logout') }}</a></li>
                                                                 @else

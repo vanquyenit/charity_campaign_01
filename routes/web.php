@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('campaigns/create', 'CampaignController@create');
 
-    Route::get('event/create', 'EventController@create');
+    Route::get('campaigns/{id}/event-create', 'EventController@eventCreate');
 
     Route::post('event/create', 'EventController@store');
 

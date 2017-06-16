@@ -1,3 +1,12 @@
+@section('css')
+    @parent
+    {{ Html::style('bower_components/datatables/media/css/dataTables.material.min.css') }}
+@show
+
+@section('javascript')
+    @parent
+    {{ Html::script('bower_components/datatables/media/js/jquery.dataTables.min.js') }}
+@show
 <div class="modal fade list-contribute-confirmed" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

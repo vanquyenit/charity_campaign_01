@@ -73,8 +73,8 @@
             <main id="main" class="site-main col-sm-9">
                 <article id="tp_event-4934" class="tp_single_event post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
                     <div class="entry-header">
-                        <h1 class="blog_title col-xs-9">{{ $detailCampaign->name }}</h1>
-                        <div class="col-xs-3">
+                        <h1 class="blog_title col-xs-8">{{ $detailCampaign->name }}</h1>
+                        <div class="col-xs-4">
                             <div class="btn-group pull-right">
                                 @if ($detailCampaign->status)
                                     @if (auth()->check())
@@ -97,12 +97,12 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-header">{{ trans('campaign.list-contribute') }}</li>
+                                    <li class="dropdown-header"> <i class="glyphicon glyphicon-list"></i> {{ trans('campaign.list-contribution') }}</li>
                                     <li class="li-confirm">
-                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-confirmed'>{{ trans('campaign.list-contribution-confirmed') }}</a>
+                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-confirmed'> <i class="glyphicon glyphicon-ok-sign"></i> {{ trans('campaign.confirmed') }}</a>
                                     </li>
                                     <li class="li-confirm">
-                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-unconfirmed'>{{ trans('campaign.list-contribution-unconfirmed') }}</a>
+                                        <a class="confirm-button" data-toggle="modal" href='.list-contribute-unconfirmed'> <i class="glyphicon glyphicon-question-sign"></i> {{ trans('campaign.unconfirmed') }}</a>
                                     </li>
                                 </ul>
                             </div>

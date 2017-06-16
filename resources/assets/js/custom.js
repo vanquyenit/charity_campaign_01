@@ -15,6 +15,7 @@ $('.donate_load_form').click(function(){
 $(document).ready(function() {
     var url = window.location.pathname;
     var name = url.substring(url.lastIndexOf('/') + 1);
+
     if (name == 'follower') {
         $('.ProfileNav-item--followers').addClass('is-active');
     } else if (name == 'following') {
@@ -22,4 +23,7 @@ $(document).ready(function() {
     } else {
         $('.ProfileNav-item--tweets').addClass('is-active');
     }
+
+    $('#contribution-confirmed').DataTable();
+    $('#contribution-unconfirmed').DataTable();
 });

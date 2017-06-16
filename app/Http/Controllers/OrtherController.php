@@ -9,21 +9,24 @@ use App\Models\Event;
 use App\Repositories\Blog\BlogRepositoryInterface;
 use App\Repositories\Contact\ContactRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
+use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
-class OrtherController extends Controller
+class OrtherController extends BaseController
 {
     protected $campaign;
     protected $event;
     protected $contributionRepository;
     protected $userRepository;
+    protected $timelineRepository;
 
     public function __construct(
         Campaign $campaign,
         Event $event,
         ContributionRepositoryInterface $contributionRepository,
         UserRepositoryInterface $userRepository,
+        TimelineRepositoryInterface $timelineRepository,
         ContactRepositoryInterface $contactRepository,
         BlogRepositoryInterface $blogRepository
     ) {
@@ -31,6 +34,7 @@ class OrtherController extends Controller
         $this->event = $event;
         $this->contributionRepository = $contributionRepository;
         $this->userRepository = $userRepository;
+        $this->timelineRepository = $timelineRepository;
         $this->contactRepository = $contactRepository;
         $this->blogRepository = $blogRepository;
     }
@@ -85,9 +89,8 @@ class OrtherController extends Controller
                 ->withMessage(trans('index.contact_error'));
         }
 
-        return redirect(
-            action('CampaignController@index')
-        )->with(['alert-success' => trans('index.contact_success')]);
+        return redirect(action('CampaignController@index'))
+            ->with(['alert-success' => trans('index.contact_success')]);
     }
 
     public function createBlog()
@@ -105,6 +108,7 @@ class OrtherController extends Controller
             'video',
             'type',
         ]);
+
         $blog = $this->blogRepository->createBlog($inputs);
 
         if (!$blog) {
@@ -112,8 +116,12 @@ class OrtherController extends Controller
                 ->withMessage(trans('blog.blog_error'));
         }
 
-        return redirect(
-            action('OrtherController@blog')
-        )->with(['alert-success' => trans('blog.blog_success')]);
+        if (!$this->timelineRepository->createTimeline(['blog_id' => $blog->id])) {
+            return redirect(action('OrtherController@blog'))
+                ->with(['alert-danger' => trans('timeline.create_error_blog')]);
+        }
+
+        return redirect(action('OrtherController@blog'))
+            ->with(['alert-success' => trans('blog.blog_success')]);
     }
 }

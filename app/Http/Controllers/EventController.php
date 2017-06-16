@@ -5,21 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
+use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Services\Purifier;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class EventController extends BaseController
 {
 
     protected $eventRepository;
     protected $campaignRepository;
+    protected $timelineRepository;
 
     public function __construct(
         EventRepositoryInterface $eventRepository,
-        CampaignRepositoryInterface $campaignRepository
+        CampaignRepositoryInterface $campaignRepository,
+        TimelineRepositoryInterface $timelineRepository
     ) {
         $this->eventRepository = $eventRepository;
         $this->campaignRepository = $campaignRepository;
+        $this->timelineRepository = $timelineRepository;
     }
 
     /**
@@ -41,9 +45,16 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function eventCreate($id)
     {
-        $this->data['campaign'] = $this->campaignRepository->listCampaignOfUser(auth()->id())->get();
+        if (!$this->campaignRepository->checkUserCampaign([
+            'user_id' => auth()->id(),
+            'campaign_id' => $id,
+        ])) {
+            return abort(404);
+        }
+
+        $this->data['campaign_id'] = $id;
         $this->data['validateMessage'] = json_encode(trans('event.validate'));
 
         return view('event.create', $this->data);
@@ -77,9 +88,13 @@ class EventController extends Controller
                 ->withMessage(trans('event.create_error'));
         }
 
-        return redirect(
-            action('EventController@index', ['id' => auth()->id()])
-        )->with(['alert-success' => trans('event.create_success')]);
+        if (!$this->timelineRepository->createTimeline(['event_id' => $event->id])) {
+            return redirect(action('EventController@show', ['id' => $event->id]))
+                ->with(['alert-danger' => trans('timeline.create_error_event')]);
+        }
+
+        return redirect(action('EventController@show', ['id' => $event->id]))
+            ->with(['alert-success' => trans('event.create_success')]);
     }
 
     /**

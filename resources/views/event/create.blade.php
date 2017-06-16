@@ -43,7 +43,14 @@
                         </div>
                     @endif
                     <div class="campaign">
-                        {!! Form::open(['action' => 'EventController@store', 'method' => 'POST', 'id' => 'create-event', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open([
+                            'action' => 'EventController@store',
+                            'method' => 'POST',
+                            'id' => 'create-event',
+                            'class' => 'form-horizontal',
+                            'enctype' => 'multipart/form-data',
+                        ]) !!}
+                            {!! Form::hidden('campaign_id', $campaign_id, []) !!}
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                 <div class="col-lg-10 col-lg-offset-1">
                                     <div id="image-preview">
@@ -55,17 +62,6 @@
                                             </span>
                                         @endif
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('campaign_id') ? ' has-error' : '' }}">
-                                <label for="campaign_id" class="col-md-3 control-label">{{ trans('event.campaign_id') }}</label>
-                                <div class="col-md-8">
-                                    <select name="campaign_id" id="campaign_id" class="form-control">
-                                        <option value="">{{ trans('event.validate.campaign_id.required') }}</option>
-                                        @foreach ($campaign as $element)
-                                            <option value="{!! $element->id !!}">{!! $element->name !!}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
