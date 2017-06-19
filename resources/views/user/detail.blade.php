@@ -15,13 +15,13 @@
                     <span aria-hidden="true">{{ trans('user.timeline') }}</span>
                 </li>
                 <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="tweets_with_replies_toggle">
-                    <a class="ProfileHeading-toggleLink js-nav" href="" data-nav="tweets_with_replies_toggle">{{ trans('user.campaigns') }}</a>
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserCampaign', $userTimeline->id) }}" data-nav="tweets_with_replies_toggle">{{ trans('user.campaigns') }}</a>
                 </li>
                 <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="photos_and_videos_toggle">
-                    <a class="ProfileHeading-toggleLink js-nav" href="" data-nav="photos_and_videos_toggle">{{ trans('user.events') }}</a>
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserEvent', $userTimeline->id) }}" data-nav="photos_and_videos_toggle">{{ trans('user.events') }}</a>
                 </li>
                 <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="photos_and_videos_toggle">
-                    <a class="ProfileHeading-toggleLink js-nav" href="" data-nav="photos_and_videos_toggle">{{ trans('user.blogs') }}</a>
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserBlog', $userTimeline->id) }}" data-nav="photos_and_videos_toggle">{{ trans('user.blogs') }}</a>
                 </li>
             </ul>
         </div>
@@ -33,58 +33,130 @@
                 <ol class="stream-items js-navigable-stream" id="stream-items-id">
                     @foreach ($userTimeline->timelines as $timeline)
                         @if ($timeline->data_type == config('settings.campaign'))
-                            <li class="js-stream-item stream-item stream-item">
-                                <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards  has-content">
-                                    <div class="context"> </div>
-                                    <div class="content">
-                                        <div class="stream-item-header">
-                                            <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
-                                                <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}">
-                                                <span class="FullNameGroup">
-                                                    <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
-                                                    <span class="UserNameBreak">&nbsp;</span>
-                                                </span>
-                                                <span class="username u-dir" >@<b>{{ trans('user.campaigns') }}</b></span>
-                                            </a>
-                                            <small class="time">
-                                                <a class="tweet-timestamp js-permalink js-nav js-tooltip" title="{{ $timeline->created_at }}">
-                                                    <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
+                            @if (auth()->id() == $userTimeline->id)
+                                <li class="js-stream-item stream-item stream-item">
+                                    <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards  has-content">
+                                        <div class="content">
+                                            <div class="stream-item-header">
+                                                <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
+                                                    <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}">
+                                                    <span class="FullNameGroup">
+                                                        <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
+                                                        <span class="UserNameBreak">&nbsp;</span>
+                                                    </span>
+                                                    <span class="username u-dir" >@<b>{{ trans('user.campaigns') }}</b></span>
                                                 </a>
-                                            </small>
-                                            <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle"  data-toggle="dropdown">
-                                                        <span class="glyphicon glyphicon-option-vertical"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
+                                                <small class="time">
+                                                    <a class="tweet-timestamp js-permalink js-nav js-tooltip" title="{{ $timeline->created_at }}">
+                                                        <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
+                                                    </a>
+                                                </small>
+                                                <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
+                                                    <div class="dropdown">
+                                                        <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            <div class="IconContainer js-tooltip" >
+                                                                @if ($timeline->campaign->status)
+                                                                    <span class="badge label-primary">{{ trans('campaign.active') }}</span>
+                                                                @else
+                                                                    <span class="badge label-warning-custom">{{ trans('campaign.close') }}</span>
+                                                                @endif
+                                                            </div>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="js-tweet-text-container">
-                                            <a href="{{ action('CampaignController@show', $timeline->campaign_id) }}" class="twitter-timeline-link">{{ $timeline->campaign->name }}</a>
-                                        </div>
-                                        <div class="AdaptiveMediaOuterContainer">
-                                            <div class="AdaptiveMedia is-square">
-                                                <div class="AdaptiveMedia-container">
-                                                    <div class="AdaptiveMedia-singlePhoto">
-                                                        <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
-                                                            <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}">
+                                            <div class="js-tweet-text-container">
+                                                <a href="{{ action('CampaignController@show', $timeline->campaign_id) }}" class="twitter-timeline-link">{{ $timeline->campaign->name }}</a>
+                                                <p>
+                                                    <i class="fa fa-calendar"></i>
+                                                    <span>{{ $timeline->campaign->timeDay('start_time') }}</span>
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-calendar"></i>
+                                                    <span>{{ $timeline->campaign->timeDay('end_time') }}</span>
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-map-marker"></i>
+                                                    <a href="#" title="">{{ $timeline->campaign->address }}</a>
+                                                </p>
+                                            </div>
+                                            <div class="AdaptiveMediaOuterContainer">
+                                                <div class="AdaptiveMedia is-square">
+                                                    <div class="AdaptiveMedia-container">
+                                                        <div class="AdaptiveMedia-singlePhoto">
+                                                            <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
+                                                                <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            @else
+                                @if ($timeline->campaign->status)
+                                    <li class="js-stream-item stream-item stream-item">
+                                        <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards  has-content">
+                                            <div class="content">
+                                                <div class="stream-item-header">
+                                                    <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
+                                                        <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}">
+                                                        <span class="FullNameGroup">
+                                                            <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
+                                                            <span class="UserNameBreak">&nbsp;</span>
+                                                        </span>
+                                                        <span class="username u-dir" >@<b>{{ trans('user.campaigns') }}</b></span>
+                                                    </a>
+                                                    <small class="time">
+                                                        <a class="tweet-timestamp js-permalink js-nav js-tooltip" title="{{ $timeline->created_at }}">
+                                                            <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
+                                                        </a>
+                                                    </small>
+                                                    <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
+                                                        <div class="dropdown">
+                                                            <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                                                                <div class="IconContainer js-tooltip" >
+                                                                    <span class="badge label-primary">{{ trans('campaign.active') }}</span>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-tweet-text-container">
+                                                    <a href="{{ action('CampaignController@show', $timeline->campaign_id) }}" class="twitter-timeline-link">{{ $timeline->campaign->name }}</a>
+                                                    <p>
+                                                        <i class="fa fa-calendar"></i>
+                                                        <span>{{ $timeline->campaign->timeDay('start_time') }}</span>
+                                                    </p>
+                                                    <p>
+                                                        <i class="fa fa-calendar"></i>
+                                                        <span>{{ $timeline->campaign->timeDay('end_time') }}</span>
+                                                    </p>
+                                                    <p>
+                                                        <i class="fa fa-map-marker"></i>
+                                                        <a href="#" title="">{{ $timeline->campaign->address }}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="AdaptiveMediaOuterContainer">
+                                                    <div class="AdaptiveMedia is-square">
+                                                        <div class="AdaptiveMedia-container">
+                                                            <div class="AdaptiveMedia-singlePhoto">
+                                                                <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
+                                                                    <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endif
+                            @endif
                         @elseif ($timeline->data_type == config('settings.event'))
                             <li class="js-stream-item stream-item stream-item">
                                 <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards has-content">
-                                    <div class="context"> </div>
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
@@ -100,21 +172,21 @@
                                                     <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
                                                 </a>
                                             </small>
-                                            <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle" data-toggle="dropdown">
-                                                        <span class="glyphicon glyphicon-option-vertical"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="js-tweet-text-container">
-                                        <a href="{{ action('EventController@show', $timeline->event_id) }}" class="twitter-timeline-link">{{ $timeline->event->title }}</a>
+                                            <a href="{{ action('EventController@show', $timeline->event_id) }}" class="twitter-timeline-link">{{ $timeline->event->title }}</a>
+                                            <p>
+                                                <i class="fa fa-calendar"></i>
+                                                <span>{{ $timeline->event->timeDay('start_time') }}</span>
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-calendar"></i>
+                                                <span>{{ $timeline->event->timeDay('end_time') }}</span>
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-map-marker"></i>
+                                                <a href="#" title="">{{ $timeline->event->address }}</a>
+                                            </p>
                                         </div>
                                         <div class="AdaptiveMediaOuterContainer">
                                             <div class="AdaptiveMedia is-square">
@@ -133,7 +205,6 @@
                         @elseif ($timeline->data_type == config('settings.blog'))
                             <li class="js-stream-item stream-item stream-item">
                                 <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards has-content">
-                                    <div class="context"> </div>
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
@@ -149,18 +220,6 @@
                                                     <span class="_timestamp js-short-timestamp" data-aria-label-part="last" data-long-form="true">{{ $timeline->created_at }}</span>
                                                 </a>
                                             </small>
-                                            <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle" data-toggle="dropdown">
-                                                        <span class="glyphicon glyphicon-option-vertical"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="js-tweet-text-container">
                                             @if ($timeline->blog->type == config('settings.video'))
@@ -190,7 +249,6 @@
                         @elseif ($timeline->data_type == config('settings.follow'))
                             <li class="js-stream-item stream-item stream-item">
                                 <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet">
-                                    <div class="context"></div>
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
@@ -206,18 +264,6 @@
                                                     <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
                                                 </a>
                                             </small>
-                                            <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle" data-toggle="dropdown">
-                                                        <span class="glyphicon glyphicon-option-vertical"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="js-tweet-text-container">
                                             <p class="">
@@ -248,8 +294,8 @@
                                                                 <span class="UserNameBreak">&nbsp;</span><span class="username u-dir">@<b>{{ $timeline->friend->name }}</b></span>
                                                             </div>
                                                             <div>
-                                                                <span>{{ $timeline->friend->address }}</span>
-                                                                <span>{{ $timeline->friend->email }}</span>
+                                                                <span><i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ $timeline->friend->address }}</span>
+                                                                <span><a href="mailto:{{ $timeline->friend->email }}">{{ $timeline->friend->email }}</a></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -262,7 +308,6 @@
                         @elseif ($timeline->data_type == config('settings.unfollow'))
                             <li class="js-stream-item stream-item stream-item">
                                 <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet">
-                                    <div class="context"></div>
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
@@ -279,18 +324,6 @@
                                                     <span class="_timestamp js-short-timestamp">{{ $timeline->created_at }}</span>
                                                 </a>
                                             </small>
-                                            <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                                                <div class="dropdown">
-                                                    <button class="dropdown-toggle" data-toggle="dropdown">
-                                                        <span class="glyphicon glyphicon-option-vertical"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="js-tweet-text-container">
                                             <p class="">

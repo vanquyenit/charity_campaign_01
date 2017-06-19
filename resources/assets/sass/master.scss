@@ -507,3 +507,10 @@ select, select:focus {
 .img-80 {
     @include width-height-80;
 }
+.WhoToFollow-footer {
+    position: absolute;
+    top: 89%;
+    background-color: #fff;
+    width: 95%;
+    padding: 15px 0;
+}

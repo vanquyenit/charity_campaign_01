@@ -215,9 +215,7 @@ class CampaignController extends BaseController
     public function joinOrLeaveCampaign(Request $request)
     {
         if ($request->ajax()) {
-            $inputs = $request->only([
-                'campaign_id',
-            ]);
+            $inputs = $request->only('campaign_id');
 
             $inputs['user_id'] = auth()->id();
 

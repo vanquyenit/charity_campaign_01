@@ -91,7 +91,7 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
 
             $campaign->owner()->create([
                 'user_id' => Auth::user()->id,
-                'is_owner' => config('constants.OWNER'),
+                'is_owner' => config('constants.NOT_OWNER'),
                 'status' => config('constants.ACTIVATED'),
             ]);
 
@@ -188,10 +188,8 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
         }
 
         return $this->model->whereHas('owner', function ($query) use ($userId) {
-            $query->where('user_id', $userId)
-                ->where('is_owner', config('constants.OWNER'));
-        })
-            ->orderBy('id', 'desc');
+            $query->where('user_id', $userId);
+        })->with('image')->orderBy('id', 'desc');
     }
 
     public function approveOrRemove($params = [])
@@ -348,5 +346,19 @@ class CampaignRepository extends BaseRepository implements CampaignRepositoryInt
             ->where('is_owner', config('constants.NOT_OWNER'))
             ->with('user')
             ->get();
+    }
+
+    public function getInfoCampaign($id)
+    {
+        if (!$id) {
+            return false;
+        }
+
+        return $this->model->with(['image', 'owner.user'])
+            ->with(['comments' => function ($query) {
+                $query->orderBy('id', 'desc');
+            }])
+            ->with(['contributions.user', 'contributions', 'categories'])
+            ->find($id);
     }
 }

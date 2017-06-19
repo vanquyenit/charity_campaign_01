@@ -87,7 +87,9 @@ class User extends Authenticatable
 
         $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
 
-        if (!preg_match($pattern, $value)) {
+        preg_match($pattern, $value, $matches);
+
+        if (!empty($matches)) {
             return $value;
         }
 
@@ -166,7 +168,9 @@ class User extends Authenticatable
 
         $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
 
-        if (!preg_match($pattern, $value)) {
+        preg_match($pattern, $value, $matches);
+
+        if (!empty($matches)) {
             return $value;
         }
 

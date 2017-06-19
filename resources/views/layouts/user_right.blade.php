@@ -7,16 +7,16 @@
                         <div class="WhoToFollow module is-visible">
                             <div class="WhoToFollow-header">
                                 <h3 class="WhoToFollow-title">{{ trans('user.followers-that-you-know') }}</h3> ·
-                                <a class="js-view-all-link" href="#" rel="noopener">{{ trans('user.view-all') }}</a>
+                                <a class="js-view-all-link" href="{{ action('UserController@following', $user->id) }}" rel="noopener">{{ trans('user.view-all') }}</a>
                             </div>
-                            <div class="WhoToFollow-users js-recommended-followers">
+                            <div class="WhoToFollow-users">
                                 @foreach ($UserList as $element)
-                                    <div class="UserSmallListItem js-account-summary account-summary js-actionable-user">
+                                    <div class="UserSmallListItem account-summary">
                                         <div class="dismiss js-action-dismiss">
-                                            <span class="fa fa-times"></span>
+                                            <span class="fa fa-times close-user-follow"></span>
                                         </div>
                                         <div class="content">
-                                            <a class="account-group js-recommend-link js-user-profile-link user-thumb" href="{{ action('UserController@show', $element->id) }}"rel="noopener">
+                                            <a class="account-group js-recommend-link js-user-profile-link user-thumb" href="{{ action('UserController@show', $element->id) }}" rel="noopener">
                                                 <img class="avatar js-action-profile-avatar" src="{{ $element->avatar }}" alt="{{ $element->fullname }}">
                                                 <span class="account-group-inner">
                                                     <strong class="fullname">{{ $element->fullname }}</strong>
@@ -27,13 +27,11 @@
                                             <small class="metadata social-context">
                                             </small>
                                             <div class="user-actions not-following not-muting">
-                                                <span class="user-actions-follow-button js-follow-btn follow-button">
-                                                    <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text">
+                                                <span class="user-actions-follow-button js-follow-btn follow-button" data-user-id="{{ $element->id }}" data-size="small">
+                                                    <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text follow">
                                                         <span class="fa fa-user-plus"></span>
                                                         <span>{{ trans('user.follow') }}</span>
                                                     </button>
-                                                    <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text"> {{ trans('user.following') }}</button>
-                                                    <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text">{{ trans('user.unfollow') }}</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -41,7 +39,7 @@
                                 @endforeach
                             </div>
                             <div class="WhoToFollow-footer">
-                                <a href="#" class="js-find-friends-link" rel="noopener">{{ trans('user.view-all') }} ...</a>
+                                <a href="#" class="show_all_follow" rel="noopener">{{ trans('user.view-all') }}</a>
                             </div>
                         </div>
                         <div class="Footer module roaming-module Footer--slim Footer--blankBackground">

@@ -123,4 +123,10 @@ return [
     'unfollow-user' => 'Bạn đã hủy kêt bạn với',
     'upload-video' => 'Bạn đã đăng 1 video',
     'add-image' => 'Bạn đã thêm một ảnh',
+    'manager' => [
+        'error' => 'Đã xảy ra lỗi, bạn hảy thử lại',
+        'success' => 'Xóa thành công',
+        'delete' => 'Xóa',
+        'edit' => 'Sửa',
+    ],
 ];

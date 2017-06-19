@@ -43,4 +43,9 @@ class Event extends Model
     {
         return asset('uploads/images/' . $this->img);
     }
+
+    public function timeDay($param)
+    {
+        return date('D , F d , Y', strtotime($this->$param));
+    }
 }

@@ -123,4 +123,10 @@ return [
     'unfollow-user' => 'You unfriends with',
     'upload-video' => 'You upload a video',
     'add-image' => 'You add image',
+    'manager' => [
+        'error' => 'An error occurred please try again !!',
+        'success' => 'Delete success',
+        'delete' => 'Delete',
+        'edit' => 'Edit',
+    ],
 ];
