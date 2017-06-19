@@ -118,12 +118,19 @@ class UserController extends BaseController
 
         $params = [
             'id' => $user->id,
-            'name' => $user->name = $request->get('name'),
+            'name' => $request->get('name'),
+            'fullname' => $request->get('fullname'),
+            'address' => $request->get('address'),
+            'birthday' => $request->get('birthday'),
+            'phone_number' => $request->get('phone_number'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
             'avatar' => $request->file('avatar'),
+            'cover' => $request->file('cover'),
         ];
 
+        if (!is_null($request->get('password'))) {
+            $params['password'] = bcrypt($request->get('password'));
+        }
         // update user
         $user = $this->userRepository->updateProfile($params, $id);
 

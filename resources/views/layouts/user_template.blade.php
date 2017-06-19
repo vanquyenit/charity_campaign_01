@@ -28,27 +28,19 @@
 <body class="archive post-type-archive post-type-archive-dn_campaign group-blog tp_event-template-default single single-tp_event home page-template
 page-template-page-templates page-template-homepage page-template-page-templateshomepage-php page page-id-4967
 siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_style thim_header_style2 thim_fixedmenu ">
-
 @include('layouts.header')
-
 <div dir="ltr" data-fouc-class-names="swift-loading" class="three-col logged-in user-style-BarackObama enhanced-mini-profile ProfilePage ProfilePage--withWarning supports-drag-and-drop">
     <div id="doc" class="route-profile">
         <div id="page-outer">
             <div id="page-container">
-
                 @include('layouts.user_top')
-
-                  <div class="AppContainer">
+                <div class="AppContainer">
                     <div class="AppContent-main content-main u-cf" role="main" aria-labelledby="content-main-heading">
                         <div class="Grid Grid--withGutter">
-
                             @include('layouts.user_left')
-
                             <div class="Grid-cell u-size2of3 u-lg-size3of4">
                                 <div class="Grid Grid--withGutter">
-
                                     @yield('content')
-
                                 </div>
                             </div>
                         </div>
@@ -67,51 +59,63 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
                     'class'=>'searchTerm searchAll typeahead-search search-field',
                     'placeholder'=> trans('campaign.search_campaign'),
                     'id' => 'typeahead-search',
-                ]) !!}
-                <button type="submit" class="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
-                {!! Form::close() !!}
+                    ]) !!}
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
-</div>
-@section('js')
-    {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
-    {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
-    {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
-    {{ Html::script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
-    {{ Html::script('js/version1/styling.min.js') }}
-    {{ Html::script('js/version1/main.min.js') }}
-    {{ Html::script('js/version1/custom-script.js') }}
-    {{ Html::script('js/version1/custom-scroll.min.js') }}
-    {{ Html::script('js/multiple_language.js') }}
-    {{ Html::script('bower_components/datatables/media/js/dataTables.material.min.js') }}
-    {{ Html::script('js/version1/search.js') }}
-    {{ Html::script('js/custom.js') }}
-    {{ Html::script('js/follow_user.js') }}
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        jQuery(document).ready(function($) {
-            var search = new Search();
-            search.init();
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var follow = new Follow(
-                '{{ action('FollowController@followOrUnFollowUser') }}',
-                '{{ trans('user.follow') }}',
-                '{{ trans('user.unfollow') }}'
-            );
-            follow.init();
-        });
-    </script>
-@show
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{ trans('user.panel_head.edit') }}</h4>
+                </div>
+                <div class="modal-body">
+                    @include('user.edit_user')
+                </div>
+            </div>
+        </div>
+    </div>
+    @section('js')
+        {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
+        {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
+        {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
+        {{ Html::script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
+        {{ Html::script('js/version1/styling.min.js') }}
+        {{ Html::script('js/version1/share_social.js') }}
+        {{ Html::script('js/version1/main.min.js') }}
+        {{ Html::script('js/version1/custom-script.js') }}
+        {{ Html::script('js/version1/custom-scroll.min.js') }}
+        {{ Html::script('js/multiple_language.js') }}
+        {{ Html::script('bower_components/datatables/media/js/dataTables.material.min.js') }}
+        {{ Html::script('js/version1/search.js') }}
+        {{ Html::script('js/custom.js') }}
+        {{ Html::script('js/follow_user.js') }}
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            jQuery(document).ready(function($) {
+                var search = new Search();
+                search.init();
+            });
+            $(document).ready(function () {
+                var follow = new Follow(
+                    '{{ action('FollowController@followOrUnFollowUser') }}',
+                    '{{ trans('user.follow') }}',
+                    '{{ trans('user.unfollow') }}'
+                );
+                follow.init();
+            });
+        </script>
+    @show
 
 </body>
 

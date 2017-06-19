@@ -129,4 +129,12 @@ return [
         'delete' => 'Xóa',
         'edit' => 'Sửa',
     ],
+    'edit-profile' => [
+        'image-avatar' => 'Ảnh đại diện',
+        'image-cover' => 'Ảnh bài',
+        'fullname' => 'Họ tên',
+        'birthday' => 'Ngày sinh',
+        'username' => 'Tài khoản',
+        'address' => 'Địa chỉ',
+    ],
 ];
