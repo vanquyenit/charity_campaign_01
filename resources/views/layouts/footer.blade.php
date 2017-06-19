@@ -43,7 +43,12 @@
                             </div>
                             <div class="so-panel widget widget_mc4wp_form_widget panel-last-child" id="panel-w581ad7d988d0a-0-0-1" data-index="1">
                                 <div class="panel-widget-style" >
-                                    {!! Form::open(['action'=>'HomeController@index','method' => 'post','id' => 'mc4wp-form-1', 'class' => 'mc4wp-form mc4wp-form-74']) !!}
+                                    {!! Form::open([
+                                        'action'=>'OrtherController@store',
+                                        'method' => 'post',
+                                        'id' => 'mc4wp-form-1',
+                                        'class' => 'mc4wp-form mc4wp-form-74'])
+                                    !!}
                                     <div class="mc4wp-form-fields">
                                         {!! Form::email('email', '', ['placeholder' => trans('index.email-address'), 'required'=>'required']) !!}
                                         <button type="submit">
@@ -75,7 +80,7 @@
                             <div class="panel-widget-style">
                                 <div class="thim-widget-button thim-widget-button-base">
                                     <div id="button_590e5660cf914" class="text-center">
-                                        <a href="#" class="thim-button style3 inner size-default">{{ trans('index.join-now') }}</a>
+                                        <a href="{{ action('OrtherController@contact') }}" class="thim-button style3 inner size-default">{{ trans('index.contact') }}</a>
                                     </div>
                                 </div>
                             </div>

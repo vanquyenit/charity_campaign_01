@@ -135,6 +135,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $inputs['avatar'] = $avatar;
         }
 
+        if (empty($inputs['cover'])) {
+            unset($inputs['cover']);
+        } else {
+            $cover = $this->uploadImage($inputs['cover'], config('path.images'));
+            $inputs['cover'] = $cover;
+        }
+
         DB::beginTransaction();
         try {
             $user = $this->model->where('id', $id)->update($inputs);

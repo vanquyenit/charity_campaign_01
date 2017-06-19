@@ -101,4 +101,5 @@ return [
     'video' => 'Videos',
     'send' => 'Send',
     'text-chat' => 'Write message here',
+    'contact' => 'Contact',
 ];

@@ -129,4 +129,12 @@ return [
         'delete' => 'Delete',
         'edit' => 'Edit',
     ],
+    'edit-profile' => [
+        'image-avatar' => 'Image avatar',
+        'image-cover' => 'Image cover',
+        'fullname' => 'Fullname',
+        'birthday' => 'Birthday',
+        'username' => 'Username',
+        'address' => 'Address',
+    ],
 ];

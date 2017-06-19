@@ -99,4 +99,5 @@ return [
     'video' => 'Video',
     'send' => 'Gửi',
     'text-chat' => 'Nhập tin nhắn tại đây',
+    'contact' => 'Liên hệ',
 ];

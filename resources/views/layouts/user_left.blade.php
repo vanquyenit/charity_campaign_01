@@ -37,18 +37,20 @@
                         <i class="fa fa-handshake-o"></i>
                         <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ trans('user.joined') . ' ' . $user->created_at }}">{{ trans('user.joined') . ' ' . $user->created_at }}</span>
                     </div>
-                    <div class="ProfileMessagingActions">
-                        <div class="ProfileMessagingActions-actionsContainer">
-                            <div class="ProfileMessagingActions-buttonWrapper u-sizeFull">
-                                <button class="NewTweetButton u-sizeFull js-tooltip EdgeButton EdgeButton--primary  u-textTruncate" type="button" title="{{ $user->name }}">
-                                    <span class="NewTweetButton-content button-text tweeting-text">
-                                        <span class="NewTweetButton-text" aria-hidden="true">{{ trans('user.update-user') }}</span>
-                                        <span class="u-hiddenVisually">{{ trans('user.update-user') }}</span>
-                                    </span>
-                                </button>
+                    @if ($user->id == auth()->id())
+                        <div class="ProfileMessagingActions">
+                            <div class="ProfileMessagingActions-actionsContainer">
+                                <div class="ProfileMessagingActions-buttonWrapper u-sizeFull">
+                                    <button data-toggle="modal" href='#modal-id' class="NewTweetButton u-sizeFull js-tooltip EdgeButton EdgeButton--primary  u-textTruncate" type="button" title="{{ $user->name }}">
+                                        <span class="NewTweetButton-content button-text tweeting-text">
+                                            <span class="NewTweetButton-text" aria-hidden="true">{{ trans('user.update-user') }}</span>
+                                            <span class="u-hiddenVisually">{{ trans('user.update-user') }}</span>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="ProfileUserList ProfileUserList--socialProof">
                     <div class="ProfileUserList-heading">
