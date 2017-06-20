@@ -498,7 +498,8 @@ select, select:focus {
 .chat {
     display: none;
 }
-.modal-content {
+.modal-content,
+.modal-dialog {
     cursor: default;
 }
 #donate_hidden {
@@ -538,4 +539,52 @@ select, select:focus {
 }
 .height-50 {
     height: 50% !important;
+}
+.height-200 {
+    height: 150px
+}
+.bootstrap-dialog-title{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.bootstrap-dialog-body {
+    margin-top: 15px;
+}
+.profile-user-page {
+    .img-user-profile {
+        margin: 0 auto;
+        text-align: center;
+        .profile-bgHome {
+            width: 44.23em;
+            height: 16em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1px;
+        }
+        .avatar {
+            margin: 0 auto;
+            background: #fff;
+            width: 7em;
+            height: 7em;
+            padding: 0.25em;
+            border-radius: .4em;
+            margin-top: -10em;
+            box-shadow: 0 0 .1em rgba(0, 0, 0, 0.35);
+        }
+    }
+}
+
+.trim-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;
+    max-height: 110px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.trim-title {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }

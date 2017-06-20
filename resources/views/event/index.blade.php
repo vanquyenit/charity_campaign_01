@@ -58,12 +58,12 @@
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
-                                            <h2 class="blog_title">
+                                            <h2 class="blog_title trim-title">
                                                 <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
-                                        <div class="entry-content">
-                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
+                                        <div class="entry-content trim-description">
+                                            {!! $element->description !!}
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">
@@ -102,12 +102,12 @@
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
-                                            <h2 class="blog_title">
+                                            <h2 class="blog_title trim-title">
                                                 <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
-                                        <div class="entry-content">
-                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
+                                        <div class="entry-content trim-description">
+                                            {!! $element->description !!}
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">
@@ -146,12 +146,12 @@
                                     </div>
                                     <div class="event-content">
                                         <div class="entry-header">
-                                            <h2 class="blog_title">
+                                            <h2 class="blog_title trim-title">
                                                 <a href="{{ action('EventController@show', ['id' => $element->id]) }}">{{ $element->title }}</a>
                                             </h2>
                                         </div>
-                                        <div class="entry-content">
-                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
+                                        <div class="entry-content trim-description">
+                                            {!! $element->description !!}
                                         </div>
                                         <div class="entry-meta">
                                             <div class="date">

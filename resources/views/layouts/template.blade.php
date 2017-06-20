@@ -49,17 +49,18 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
     {{ Html::script('js/multiple_language.js') }}
     {{ Html::script('js/version1/search.js') }}
     {{ Html::script('js/custom.js') }}
+    {{ Html::script('js/version1/equal-height.js') }}
     <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    jQuery(document).ready(function($) {
-        var search = new Search();
-        search.init();
-    });
-</script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        jQuery(document).ready(function($) {
+            var search = new Search();
+            search.init();
+        });
+    </script>
 @show
 
 </body>

@@ -48,10 +48,10 @@
                                 <div class="event-content">
                                     <div class="dn-content-inner">
                                         <div class="entry-header">
-                                            <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a></h2>
+                                            <h2 class="blog_title trim-title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! $element->name !!}</a></h2>
                                         </div>
-                                        <div class="entry-content">
-                                            <p>{!! str_limit($element->description, config('constants.LIMIT_DESCRIPTION_CHARACTERS')) !!}</p>
+                                        <div class="entry-content trim-description">
+                                            {!! $element->description !!}
                                         </div>
                                     </div>
                                     <div class="dn-content-countdown-box">

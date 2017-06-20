@@ -85,7 +85,7 @@
                                                     <div class="AdaptiveMedia-container">
                                                         <div class="AdaptiveMedia-singlePhoto">
                                                             <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
-                                                                <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}">
+                                                                <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}" class="height-379">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -143,7 +143,7 @@
                                                         <div class="AdaptiveMedia-container">
                                                             <div class="AdaptiveMedia-singlePhoto">
                                                                 <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
-                                                                    <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}">
+                                                                    <img src="{{ $timeline->campaign->image->image }}" alt="{{ $timeline->campaign->image->image }}" class="height-379">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -193,7 +193,7 @@
                                                 <div class="AdaptiveMedia-container">
                                                     <div class="AdaptiveMedia-singlePhoto">
                                                         <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
-                                                            <img src="{{ $timeline->event->imgPath() }}">
+                                                            <img src="{{ $timeline->event->imgPath() }}" class="height-379">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,7 +229,7 @@
                                                 <p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text">{{ trans('user.add-image') }}</p>
                                             @endif
                                             <strong>{{ $timeline->blog->title }}</strong>
-                                            @if (count($images) > 5)
+                                            @if (count($images) >= 5)
                                                 <strong class="hover_count_image">
                                                     + {{ count($images) - 4 }}
                                                 </strong>
@@ -287,7 +287,7 @@
                                                                         </div>
                                                                     @endforeach
                                                                 </div>
-                                                            @elseif(count($images) < 5)
+                                                            @elseif(count($images) == 4)
                                                                 @php($getFirst = $images[0])
                                                                 <div class="AdaptiveMedia-threeQuartersWidthPhoto">
                                                                     <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjtyUMAEasfW.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
@@ -306,7 +306,7 @@
                                                                         </div>
                                                                     @endforeach
                                                                 </div>
-                                                            @elseif(count($images) > 5)
+                                                            @elseif(count($images) >= 5)
                                                                 @php($getFirst = $images[0])
                                                                 <div class="AdaptiveMedia-threeQuartersWidthPhoto">
                                                                     <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjtyUMAEasfW.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
@@ -342,7 +342,7 @@
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
-                                                <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}">
+                                                <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}" class="max-width-height">
                                                 <span class="FullNameGroup">
                                                     <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
                                                     <span class="UserNameBreak">&nbsp;</span>
@@ -370,7 +370,7 @@
                                                                 <div class="QuoteMedia-singlePhoto">
                                                                     <div class="QuoteMedia-photoContainer js-quote-photo" data-element-context="platform_photo_card">
                                                                         <a href="{{ action('UserController@show', $timeline->friends_id) }}">
-                                                                            <img src="{{ $timeline->friend->avatar }}" alt="{{ $timeline->friend->avatar }}">
+                                                                            <img src="{{ $timeline->friend->avatar }}" alt="{{ $timeline->friend->avatar }}" class="max-width-height">
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -401,7 +401,7 @@
                                     <div class="content">
                                         <div class="stream-item-header">
                                             <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="{{ action('UserController@show', $userTimeline->id) }}">
-                                                <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}">
+                                                <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}" class="max-width-height">
                                                 <span class="FullNameGroup">
                                                     <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
                                                     <span class="UserNameBreak">&nbsp;</span>
