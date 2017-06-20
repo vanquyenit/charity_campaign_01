@@ -37,6 +37,20 @@
                         <i class="fa fa-handshake-o"></i>
                         <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ trans('user.joined') . ' ' . $user->created_at }}">{{ trans('user.joined') . ' ' . $user->created_at }}</span>
                     </div>
+                    <div class="ProfileHeaderCard-joinDate">
+                        @if (Auth::user()->id != $user->id)
+                            {!! Form::hidden('target_id', $user->id, ['id' => 'target_id']) !!}
+                            {!! Form::hidden('input-1', '', ['id' => 'allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => '5']) !!}
+                        @else
+                            {!! Form::hidden('input-1', '', ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
+                        @endif
+                    </div>
+                    <div class="ProfileHeaderCard-joinDate">
+                        <div class="reviews-stats"> {{ trans('campaign.total') }}
+                            <span class="glyphicon glyphicon-user color"></span>
+                            <span class="reviews-num-user">{{ $averageRankingUser['amount'] }}</span>
+                        </div>
+                    </div>
                     @if ($user->id == auth()->id())
                         <div class="ProfileMessagingActions">
                             <div class="ProfileMessagingActions-actionsContainer">

@@ -28,6 +28,7 @@ class ComposerServiceProvider extends ServiceProvider
                 'user.campaigns',
                 'user.event',
                 'user.blog',
+                'user.campaign_detail',
             ],
             'App\Http\ViewComposers\CategoryComposer'
         );

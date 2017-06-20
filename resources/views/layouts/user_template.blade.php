@@ -18,6 +18,8 @@
         {{ Html::style('bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css') }}
         {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
         {{ Html::style('bower_components/datatables/media/css/dataTables.bootstrap.min.css') }}
+        {{ Html::style('bower_components/bootstrap-star-rating/css/star-rating.css') }}
+        {{ Html::style('bower_components/bootstrap-star-rating/css/theme-krajee-fa.css') }}
         {{ Html::style('css/style.css') }}
         {{ Html::style('css/autoptimize.css') }}
         {{ Html::style('css/master.css') }}

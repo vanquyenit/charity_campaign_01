@@ -81,7 +81,7 @@ class EventController extends BaseController
             'description',
             'content',
         ]);
-        $inputs['description'] = Purifier::clean($inputs['description']);
+        $inputs['content'] = Purifier::clean($inputs['content']);
         $event = $this->eventRepository->createEvent($inputs);
 
         if (!$event) {

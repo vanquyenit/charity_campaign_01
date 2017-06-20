@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.user_template')
 
 @section('js')
     @parent
@@ -16,175 +16,213 @@
                 '{{ trans('user.request_status.waiting') }}',
                 '{{ trans('campaign.confirmed') }}',
                 '{{ trans('campaign.waiting') }}'
-            );
+                );
             approve.init();
         });
     </script>
-@stop
+@endsection
 
 @section('content')
-    <div id="page-content">
-        <div class="row">
-        <div class="hide" data-token="{{ csrf_token() }}"></div>
-            <div id="sidebar" class="widget-area col-sm-3" role="complementary">
-            @include('user.profile')
 
-            <div class="col-md-9 center-panel" id="main">
-                <div class="block">
-                    <div class="content-header content-header-media">
-                        <div class="header-section">
-                            <h1>
-                                <a href="{{ action('CampaignController@show', ['id' => $campaign->id]) }}">
-                                    <span class="campaign-name-custom">{{ $campaign->name }}</span>
+<div class="Grid-cell u-lg-size2of3" data-test-selector="ProfileTimeline">
+    <div class="ProfileHeading">
+        <div class="ProfileHeading-spacer"></div>
+        <div class="ProfileHeading-content">
+            <h2 id="content-main-heading" class="ProfileHeading-title u-hiddenVisually">{{ trans('user.timeline') }}</h2>
+            <ul class="ProfileHeading-toggle">
+                <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="tweets_toggle">
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@show', $userTimeline->id) }}" data-nav="tweets_with_replies_toggle">{{ trans('user.timeline') }}</a>
+                </li>
+                <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="tweets_with_replies_toggle">
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserCampaign', $userTimeline->id) }}" data-nav="tweets_with_replies_toggle">{{ trans('user.campaigns') }}</a>
+                </li>
+                <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="photos_and_videos_toggle">
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserEvent', $userTimeline->id) }}" data-nav="photos_and_videos_toggle">{{ trans('user.events') }}</a>
+                </li>
+                <li class="ProfileHeading-toggleItem u-textUserColor" data-element-term="photos_and_videos_toggle">
+                    <a class="ProfileHeading-toggleLink js-nav" href="{{ action('UserController@listUserBlog', $userTimeline->id) }}" data-nav="photos_and_videos_toggle">{{ trans('user.blogs') }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="timeline" class="ProfileTimeline">
+        <div class="stream-container">
+            <div class="stream-item js-new-items-bar-container"></div>
+            <div class="stream">
+                <ol class="stream-items js-navigable-stream" id="stream-items-id">
+                    <li class="js-stream-item stream-item stream-item">
+                        <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet">
+                            <div class="col-xs-3">
+                                <img src="{{ $campaignInfo->image->image }}" class="max-width-height" alt="{{ $campaignInfo->name }}">
+                            </div>
+                            <div class="col-xs-9">
+                                <a href="{{ action('CampaignController@show', ['id' => $campaignInfo->id]) }}">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="campaign-name-custom">{{ $campaignInfo->name }}</span>
                                 </a>
-                            </h1>
-                            <span><i class="glyphicon glyphicon-map-marker"></i> {{ $campaign->address }}</span><br>
-                            <span><i class="glyphicon glyphicon-calendar"></i> {{ date('Y-m-d', strtotime($campaign->start_time))}}</span><br>
-                            <span><i class="glyphicon glyphicon-calendar"></i> {{ date('Y-m-d', strtotime($campaign->start_time)) }}</span>
-                        </div>
-
-                        <img src="{{ $campaign->image->image }}" alt="header image">
-                    </div>
-                </div>
-
-                @if ($campaignUsers->count())
-                <div class="block">
-                    <div class="block-title themed-background-dark">
-                        <h2 class="block-title-light campaign-title"><strong>{{ trans('campaign.members') }}</strong></h2>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-responsive table-custome">
-                            <tr>
-                                <th>{{ trans('campaign.index') }}</th>
-                                <th>{{ trans('user.avatar') }}</th>
-                                <th>{{ trans('user.name') }}</th>
-                                <th>{{ trans('user.email') }}</th>
-                                <th>{{ trans('user.status') }}</th>
-                                <th>{{ trans('campaign.action') }}</th>
-                            </tr>
-                            <tbody>
-                                @foreach ($campaignUsers as $key => $user)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>
-                                        <div class="profile_thumb">
-                                            <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
-                                                <img src="{{ $user->avatar }}" alt="avatar" class="img-responsive img-circle">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="profile_thumb">
-                                            <a href="{{ action('UserController@show', ['id' => $user->id]) }}">
-                                                <p>{{ $user->name }}</p>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        @if ($user->userCampaign->status)
-                                        <span class="badge label-primary">{{ trans('user.request_status.joined') }}</span>
-                                        @else
-                                        <span class="badge label-warning-custom">{{ trans('user.request_status.waiting') }}</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if (!$user->userCampaign->status)
-                                        <div data-campaign-id="{{ $campaign->id }}" data-user-id="{{ $user->id }}">
-                                            {!! Form::submit(trans('campaign.approve'), ['class' => 'btn active btn-default approve']) !!}
-                                        </div>
-                                        @else
-                                        <div data-campaign-id="{{ $campaign->id }}" data-user-id="{{ $user->id }}">
-                                            {!! Form::submit(trans('campaign.remove'), ['class' => 'btn active btn-default approve']) !!}
-                                        </div>
-                                        @endif
-                                    </td>
-                                </tr>
+                                <p>
+                                    <i class="fa fa-map-marker"></i>
+                                    {{ $campaignInfo->address }}
+                                </p>
+                                @foreach ($campaignInfo->categories as  $value)
+                                    <span><i class="fa fa-circle-o"></i> {{ $value->name }} : <strong>{{ $value->goal }}</strong>: <small>{{ $value->unit }}</small></span><br>
                                 @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    {{ $campaignUsers->links() }}
-                </div>
-                @endif
-
-                @if ($contributions->count())
-                <div class="block">
-                    <div class="block-title themed-background-dark">
-                        <h2 class="block-title-light campaign-title"><strong>{{ trans('campaign.contribute') }}</strong></h2>
-                    </div>
-
-                    <table class="table table-hover table-responsive table-custome">
-                        <tr>
-                            <th>{{ trans('campaign.contribution.index') }}</th>
-                            <th>{{ trans('campaign.contribution.avatar') }}</th>
-                            <th>{{ trans('campaign.contribution.name') }}</th>
-                            <th>{{ trans('campaign.contribution.email') }}</th>
-                            <th>{{ trans('campaign.contribute') }}</th>
-                            <th>{{ trans('campaign.contribution.description') }}</th>
-                            <th>{{ trans('campaign.contribution.status') }}</th>
-                            <th>{{ trans('campaign.action') }}</th>
-                        </tr>
-                        <tbody>
+                                <p>
+                                    <i class="fa fa-calendar"></i>
+                                    {{ $campaignInfo->timeDay('start_time') }}
+                                </p>
+                                <p>
+                                    <i class="fa fa-calendar"></i>
+                                    {{ $campaignInfo->timeDay('end_time') }}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    @if ($contributions->count())
                         @foreach ($contributions as $key => $contribution)
-                            <tr>
-                                <th scope="row">{{ $key + 1 }}</th>
-                                @if ($contribution->user)
-                                    <td>
-                                        <div class="profile_thumb">
-                                            <a href="{{ action('UserController@show', ['id' => $contribution->user->id]) }}">
-                                                <img src="{{ $contribution->user->avatar }}" alt="avatar" class=" img-circle">
-                                            </a>
+                            <li class="AdaptiveStreamUserGallery AdaptiveSearchTimeline-separationModule">
+                                <div class="AdaptiveSearchPage-moduleHeader">
+                                    <h3 class="AdaptiveSearchPage-moduleTitle">
+                                        {{ trans('campaign.contribute') }}
+                                        <a href="" class="AdaptiveSearchPage-moduleLink u-textUserColor">{{ trans('user.view-all') }}</a>
+                                    </h3>
+                                </div>
+                                <div class="Grid Grid--withGutter">
+                                    <div class="Grid-cell u-size1of2">
+                                        <div class="AdaptiveStreamUserGallery-user js-stream-item">
+                                            <div class="ProfileCard js-actionable-user">
+                                                <a class="ProfileCard-bg js-nav" href="{{ action('UserController@show', ['id' => $contribution->user->id]) }}">
+                                                    <img src="{{ $contribution->user->cover }}" alt="">
+                                                </a>
+                                                <div class="ProfileCard-content">
+                                                    <a class="ProfileCard-avatarLink js-nav js-tooltip" href="{{ action('UserController@show', ['id' => $contribution->user->id]) }}" title="{{ $contribution->user->name }}">
+                                                        <img class="ProfileCard-avatarImage js-action-profile-avatar" src="{{ $contribution->user->avatar }}" alt="">
+                                                    </a>
+                                                    <div class="ProfileCard-actions">
+                                                        <div class="ProfileCard-userActions with-rightCaret js-userActions">
+                                                            <div class="UserActions UserActions--small u-textLeft">
+                                                                <div class="user-actions btn-group not-following not-muting">
+                                                                    <span class="user-actions-follow-button js-follow-btn follow-button" data-contribution-id="{{ $contribution->id }}">
+                                                                        @if (!$contribution->status)
+                                                                            <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small follow-text confirm">
+                                                                                <span class="fa fa-user-plus"></span>
+                                                                                <span>{{ trans('campaign.approve') }}</span>
+                                                                            </button>
+                                                                        @else
+                                                                            <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small following-text confirm">
+                                                                                <span class="fa fa-user-times"></span>
+                                                                                <span>{{ trans('campaign.remove') }}</span>
+                                                                            </button>
+                                                                        @endif
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ProfileCard-userFields">
+                                                        <div class="ProfileNameTruncated account-group">
+                                                            <div class="u-textTruncate u-inlineBlock ProfileNameTruncated-withBadges ProfileNameTruncated-withBadges--1">
+                                                                <a class="fullname ProfileNameTruncated-link u-textInheritColor js-nav" href="{{ action('UserController@show', ['id' => $contribution->user->id]) }}">
+                                                                    {{ $contribution->user->name }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <span class="ProfileCard-screenname">
+                                                            <a href="mailto:{{ $contribution->user->email }}" class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="">
+                                                                <span class="username u-dir" dir="ltr">@<b class="u-linkComplex-target">{{ $contribution->user->email }}</b>
+                                                                </span>
+                                                            </a>
+                                                        </span>
+                                                        <br>
+                                                        @foreach ($contribution->categoryContributions as $value)
+                                                            <span>{{ $value->category->name }} : <strong>{{ $value->amount }}</strong> {{ $value->category->unit }}</span>
+                                                            <br>
+                                                        @endforeach
+                                                        <span>{{ $contribution->description }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div class="profile_thumb">
-                                            <a href="{{ action('UserController@show', ['id' => $contribution->user->id]) }}">
-                                               <p>{{ $contribution->user->name }}</p>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>{{ $contribution->user->email }}</td>
-                                @else
-                                    <td>
-                                        <div class="profile_thumb">
-                                            <img src="{{ config('path.to_avatar_default') }}"  alt="avatar" class=" img-circle">
-                                        </div>
-                                    </td>
-                                    <td>{{ $contribution->name }}</td>
-                                    <td>{{ $contribution->email }}</td>
-                                @endif
-
-                                <td>
-                                    @foreach ($contribution->categoryContributions as $value)
-                                        <span>{{ $value->category->name }} : <small>{{ $value->amount }}</small></span>
-                                        <br>
-                                    @endforeach
-                                </td>
-                                <td>{{ $contribution->description }}</td>
-                                <td>
-                                    @if ($contribution->status)
-                                        <span class="badge label-primary">{{ trans('campaign.confirmed') }}</span>
-                                    @else
-                                        <span class="badge label-warning-custom">{{ trans('campaign.waiting') }}</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <div data-contribution-id="{{ $contribution->id }}">
-                                    @if (!$contribution->status)
-                                        {!! Form::submit(trans('campaign.confirm'), ['class' => 'btn active btn-default confirm']) !!}
-                                    @else
-                                        {!! Form::submit(trans('campaign.remove'), ['class' => 'btn active btn-default confirm']) !!}
-                                    @endif
-                                </td>
-                            </tr>
+                                    </div>
+                                </div>
+                            </li>
                         @endforeach
-                        </tbody>
-                    </table>
-                    {{ $contributions->links() }}
-                </div>
-                @endif
+                    @endif
+                </ol>
             </div>
         </div>
     </div>
+</div>
+@if ($campaignUsers->count())
+    <div class="Grid-cell u-size1of3">
+        <div class="Grid Grid--withGutter">
+            <div class="Grid-cell">
+                <div class="ProfileSidebar ProfileSidebar--withRightAlignment">
+                    <div class="MoveableModule">
+                        <div class="SidebarCommonModules">
+                            <div class="WhoToFollow module is-visible">
+                                <div class="WhoToFollow-header">
+                                    <h3 class="WhoToFollow-title">{{ trans('campaign.members') }}</h3>
+                                </div>
+                                <div class="WhoToFollow-users">
+                                    @foreach ($campaignUsers as $element)
+                                        <div class="UserSmallListItem account-summary">
+                                            <div class="dismiss js-action-dismiss">
+                                                <span class="fa fa-times close-user-follow"></span>
+                                            </div>
+                                            <div class="content">
+                                                <a class="account-group js-recommend-link js-user-profile-link user-thumb" href="{{ action('UserController@show', $element->id) }}" rel="noopener">
+                                                    <img class="avatar js-action-profile-avatar" src="{{ $element->avatar }}" alt="{{ $element->fullname }}">
+                                                    <span class="account-group-inner">
+                                                        <strong class="fullname">{{ $element->fullname }}</strong>
+                                                    </span>
+                                                </a>
+                                                <div class="user-actions not-following not-muting">
+                                                    <span class="user-actions-follow-button js-follow-btn follow-button" data-campaign-id="{{ $campaignInfo->id }}" data-user-id="{{ $element->id }}" data-size="small">
+                                                        @if (!$element->userCampaign->status)
+                                                            <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small follow-text approve">
+                                                                <span class="fa fa-user-plus"></span>
+                                                                <span>{{ trans('campaign.approve') }}</span>
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small following-text approve">
+                                                                <span class="fa fa-user-times"></span>
+                                                                <span>{{ trans('campaign.remove') }}</span>
+                                                            </button>
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="WhoToFollow-footer">
+                                    <a href="#" class="show_all_follow" rel="noopener">{{ trans('user.view-all') }}</a>
+                                </div>
+                            </div>
+                            <div class="Footer module roaming-module Footer--slim Footer--blankBackground">
+                                <div class="flex-module">
+                                    <div class="flex-module-inner js-items-container">
+                                        <ul class="u-cf">
+                                            <li class="Footer-item Footer-copyright copyright">&copy;{{ trans('user.2017-charity') }}</li>
+                                            <li class="Footer-item">
+                                                <a class="Footer-link" href="{{ action('OrtherController@aboutUs') }}" rel="noopener">{{ trans('user.abouts') }}</a>
+                                            </li>
+                                            <li class="Footer-item">
+                                                <a class="Footer-link" href="{{ action('OrtherController@contact') }}" rel="noopener">{{ trans('user.help-center') }}</a>
+                                            </li>
+                                            <li class="Footer-item">
+                                                <a class="Footer-link" href="{{ action('OrtherController@member') }}" rel="noopener">{{ trans('user.terms') }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 @stop
