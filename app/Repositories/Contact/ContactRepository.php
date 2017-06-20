@@ -27,11 +27,11 @@ class ContactRepository extends BaseRepository implements ContactRepositoryInter
             return false;
         }
 
-        return $this->model->create([
-            'fullname' => $params['fullname'],
-            'email' => $params['email'],
-            'subject' => $params['subject'],
-            'message' => $params['message'],
-        ]);
+        return $this->model->create($params);
+    }
+
+    public function deleteAll($params = [])
+    {
+        return $this->model->whereIn('id', $params)->delete();
     }
 }

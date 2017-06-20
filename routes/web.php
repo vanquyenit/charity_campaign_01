@@ -143,5 +143,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
         'except' => 'show',
     ]);
 
-    Route::resource('campaigns', 'CampaignController');
+    Route::resource('campaign', 'CampaignController');
+
+    Route::resource('contact', 'ContactController');
+
+    Route::get('contact-sent', 'ContactController@showSent');
+
+    Route::post('delete', 'ContactController@delAll');
 });

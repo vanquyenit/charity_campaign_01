@@ -128,31 +128,45 @@
                                                 <div role="form" class="wpcf7" id="wpcf7-f10-p13-o1" lang="en-US" dir="ltr">
                                                     <div class="screen-reader-response"></div>
                                                     {!! Form::open(['method' => 'post', 'action' => 'OrtherController@store', 'class' => 'wpcf7-form']) !!}
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <span class="wpcf7-form-control-wrap your-name">
-                                                                {!! Form::text('fullname', '', ['class' => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required', 'placeholder' => trans('index.your-name')]) !!}
-                                                            </span>
+                                                        {!! Form::hidden('role', config('constants.ONE'), []) !!}
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <span class="wpcf7-form-control-wrap your-name">
+                                                                    {!! Form::text('fullname', '', [
+                                                                        'class' => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required',
+                                                                        'placeholder' => trans('index.your-name')])
+                                                                    !!}
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span class="wpcf7-form-control-wrap your-email">
+                                                                    {!! Form::email('email', '', [
+                                                                        'class' => 'wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email',
+                                                                        'placeholder' => trans('index.your-mail')])
+                                                                    !!}
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <span class="wpcf7-form-control-wrap your-email">
-                                                                {!! Form::email('email', '', ['class' => 'wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email', 'placeholder' => trans('index.your-mail')]) !!}
+                                                        <p>
+                                                            <span class="wpcf7-form-control-wrap your-subject">
+                                                                {!! Form::text('subject', '', [
+                                                                    'class' => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required',
+                                                                    'placeholder' => trans('index.your-subject')])
+                                                                !!}
                                                             </span>
-                                                        </div>
-                                                    </div>
-                                                    <p>
-                                                        <span class="wpcf7-form-control-wrap your-subject">
-                                                            {!! Form::text('subject', '', ['class' => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required', 'placeholder' => trans('index.your-subject')]) !!}
-                                                        </span>
-                                                        <br>
-                                                        <span class="wpcf7-form-control-wrap your-message">
-                                                            {!! Form::textarea('message', '', ['rows' => 4, 'class' => 'wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required', 'placeholder' => trans('index.your-message') ]) !!}
-                                                        </span>
-                                                        <br>
-                                                        {!! Form::submit(trans('index.submit'), ['class' => 'wpcf7-form-control wpcf7-submit']) !!}
-                                                        <span class="ajax-loader"></span>
-                                                    </p>
-                                                    <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                                            <br>
+                                                            <span class="wpcf7-form-control-wrap your-message">
+                                                                {!! Form::textarea('message', '', [
+                                                                    'rows' => 4,
+                                                                    'class' => 'wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required',
+                                                                    'placeholder' => trans('index.your-message') ])
+                                                                !!}
+                                                            </span>
+                                                            <br>
+                                                            {!! Form::submit(trans('index.submit'), ['class' => 'wpcf7-form-control wpcf7-submit']) !!}
+                                                            <span class="ajax-loader"></span>
+                                                        </p>
+                                                        <div class="wpcf7-response-output wpcf7-display-none"></div>
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>

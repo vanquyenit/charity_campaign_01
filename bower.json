@@ -26,6 +26,7 @@
     "ms-Dropdown": "https://github.com/marghoobsuleman/ms-Dropdown.git",
     "adminbsb-materialdesign": "^1.0.4",
     "datatables": "1.10.15",
-    "bootstrap3-dialog": "1.35.4"
+    "bootstrap3-dialog": "1.35.4",
+    "jscroll": "jquery.jscroll#^2.3.9"
   }
 }

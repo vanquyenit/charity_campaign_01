@@ -136,7 +136,7 @@ class UserController extends BaseController
             'cover' => $request->file('cover'),
         ];
 
-        if (!is_null($request->get('password'))) {
+        if ($request->get('password') != '') {
             $params['password'] = bcrypt($request->get('password'));
         }
         // update user

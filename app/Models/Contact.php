@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
@@ -11,5 +12,12 @@ class Contact extends Model
         'email',
         'subject',
         'message',
+        'review',
+        'role',
     ];
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
 }

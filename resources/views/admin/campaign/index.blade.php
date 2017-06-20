@@ -7,7 +7,7 @@
         <div class="header">
             <h2>
                 {{ trans('campaign.panel_head.index') }}
-                <a href="{{ URL::action('CampaignController@create') }}"
+                <a href="{{ action('CampaignController@create') }}"
                    class="btn btn-success btn-lg waves-effect">
                     {{ trans('campaign.button.create') }}
                 </a>
@@ -22,7 +22,7 @@
             <div class="header bg-cyan" id="search-text">
                 <h5>
                     {{ trans('campaign.label.search') }}
-                    <a href="{{ route('admin.campaign.index') }}"
+                    <a href="{{ action('CampaignController@index') }}"
                        class="header-dropdown m-r--5 btn bg-red btn-xs waves-effect">
                         {{ trans('campaign.button.reset_search') }}
                     </a>
@@ -122,7 +122,7 @@
                             }}
 
                                 <!-- BUTTON EDIT USER -->
-                                <a href="{{ URL::action('CampaignController@show', $campaign->id) }}"
+                                <a href="{{ action('CampaignController@show', $campaign->id) }}"
                                    class="btn bg-orange btn-xs" data-toggle="tooltip" data-placement="top"
                                    title="" data-original-title="{{ trans('campaign.tooltip.show') }}">
                                     <i class="material-icons">forward</i>
