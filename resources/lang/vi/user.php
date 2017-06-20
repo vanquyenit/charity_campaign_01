@@ -128,6 +128,7 @@ return [
         'success' => 'Xóa thành công',
         'delete' => 'Xóa',
         'edit' => 'Sửa',
+        'view' => 'Xem',
     ],
     'edit-profile' => [
         'image-avatar' => 'Ảnh đại diện',

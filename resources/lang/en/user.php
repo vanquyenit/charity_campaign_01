@@ -128,6 +128,7 @@ return [
         'success' => 'Delete success',
         'delete' => 'Delete',
         'edit' => 'Edit',
+        'view' => 'View',
     ],
     'edit-profile' => [
         'image-avatar' => 'Image avatar',

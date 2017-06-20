@@ -12,4 +12,8 @@ interface EventRepositoryInterface
     public function getDetail($id);
 
     public function createEvent($params = []);
+
+    public function listEventOfUser($userId);
+
+    public function deleteEvent($eventId);
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\Action\ActionRepositoryInterface;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
+use App\Repositories\Event\EventRepositoryInterface;
 use App\Repositories\Follow\FollowRepositoryInterface;
 use App\Repositories\Rating\RatingRepositoryInterface;
 use App\Repositories\Timeline\TimelineRepositoryInterface;
@@ -22,6 +23,7 @@ class UserController extends BaseController
     protected $ratingRepository;
     protected $followRepository;
     protected $actionRepository;
+    protected $eventRepository;
 
     public function __construct(
         User $user,
@@ -31,9 +33,11 @@ class UserController extends BaseController
         ContributionRepositoryInterface $contributionRepository,
         RatingRepositoryInterface $ratingRepository,
         FollowRepositoryInterface $followRepository,
-        ActionRepositoryInterface $actionRepository
+        ActionRepositoryInterface $actionRepository,
+        EventRepositoryInterface $eventRepository
     ) {
         $this->user = $user;
+        $this->eventRepository = $eventRepository;
         $this->userRepository = $userRepository;
         $this->timelineRepository = $timelineRepository;
         $this->campaignRepository = $campaignRepository;
@@ -63,7 +67,7 @@ class UserController extends BaseController
         $this->dataView['actions'] = $this->actionRepository->getActionByUser($id);
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
-        $this->dataView['UserList'] = $this->userRepository->getListUserFollow($id);
+        $this->dataView['userList'] = $this->userRepository->getListUserFollow($id);
 
         return view('user.detail', $this->dataView);
     }
@@ -158,7 +162,7 @@ class UserController extends BaseController
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
         $this->dataView['following'] = $this->followRepository->following($id);
         $this->dataView['followers'] = $this->followRepository->followers($id);
-        $this->dataView['UserList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
+        $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.campaigns', $this->dataView);
     }
@@ -211,5 +215,19 @@ class UserController extends BaseController
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
 
         return view('user.following', $this->dataView);
+    }
+
+    public function listUserEvent($id)
+    {
+        try {
+            $this->dataView['user'] = $this->user->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+
+        $this->dataView['listEvent'] = $this->eventRepository->listEventOfUser($id);
+        $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
+
+        return view('user.event', $this->dataView);
     }
 }

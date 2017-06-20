@@ -10,6 +10,7 @@ class Blog extends Model
         'title',
         'content',
         'type',
+        'user_id',
     ];
 
     public function timelines()

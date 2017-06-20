@@ -10,7 +10,7 @@
                                 <a class="js-view-all-link" href="{{ action('UserController@following', $user->id) }}" rel="noopener">{{ trans('user.view-all') }}</a>
                             </div>
                             <div class="WhoToFollow-users">
-                                @foreach ($UserList as $element)
+                                @foreach ($userList as $element)
                                     <div class="UserSmallListItem account-summary">
                                         <div class="dismiss js-action-dismiss">
                                             <span class="fa fa-times close-user-follow"></span>

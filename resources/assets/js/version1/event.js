@@ -33,7 +33,10 @@ Event.prototype = {
     uploadPreview: function () {
         $.uploadPreview({
             input_field: "#image-upload",
-            preview_box: "#image-preview"
+            preview_box: "#image-preview",
+            success_callback: function() {
+                $('img').hide();
+            }
         });
     },
 

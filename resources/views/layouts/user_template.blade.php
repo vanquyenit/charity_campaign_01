@@ -29,6 +29,7 @@
 page-template-page-templates page-template-homepage page-template-page-templateshomepage-php page page-id-4967
 siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_style thim_header_style2 thim_fixedmenu ">
 @include('layouts.header')
+<div class="hide" data-token="{{ csrf_token() }}"></div>
 <div dir="ltr" data-fouc-class-names="swift-loading" class="three-col logged-in user-style-BarackObama enhanced-mini-profile ProfilePage ProfilePage--withWarning supports-drag-and-drop">
     <div id="doc" class="route-profile">
         <div id="page-outer">
