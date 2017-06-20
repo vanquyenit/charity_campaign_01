@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\Blog\BlogRepositoryInterface;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
@@ -24,6 +25,7 @@ class UserController extends BaseController
     protected $followRepository;
     protected $actionRepository;
     protected $eventRepository;
+    protected $blogRepository;
 
     public function __construct(
         User $user,
@@ -34,7 +36,8 @@ class UserController extends BaseController
         RatingRepositoryInterface $ratingRepository,
         FollowRepositoryInterface $followRepository,
         ActionRepositoryInterface $actionRepository,
-        EventRepositoryInterface $eventRepository
+        EventRepositoryInterface $eventRepository,
+        BlogRepositoryInterface $blogRepository
     ) {
         $this->user = $user;
         $this->eventRepository = $eventRepository;
@@ -45,6 +48,7 @@ class UserController extends BaseController
         $this->ratingRepository = $ratingRepository;
         $this->followRepository = $followRepository;
         $this->actionRepository = $actionRepository;
+        $this->blogRepository = $blogRepository;
     }
 
     /**
@@ -225,9 +229,24 @@ class UserController extends BaseController
             return abort(404);
         }
 
+        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['listEvent'] = $this->eventRepository->listEventOfUser($id);
         $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.event', $this->dataView);
+    }
+
+    public function listUserBlog($id)
+    {
+        try {
+            $this->dataView['user'] = $this->user->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+        $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
+        $this->dataView['listBlog'] = $this->blogRepository->listBlogOfUser($id);
+        $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
+
+        return view('user.blog', $this->dataView);
     }
 }

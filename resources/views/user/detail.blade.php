@@ -203,6 +203,7 @@
                                 </div>
                             </li>
                         @elseif ($timeline->data_type == config('settings.blog'))
+                            @php($images = json_decode($timeline->blog->content))
                             <li class="js-stream-item stream-item stream-item">
                                 <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet has-cards has-content">
                                     <div class="content">
@@ -227,22 +228,111 @@
                                             @else
                                                 <p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text">{{ trans('user.add-image') }}</p>
                                             @endif
+                                            <strong>{{ $timeline->blog->title }}</strong>
+                                            @if (count($images) > 5)
+                                                <strong class="hover_count_image">
+                                                    + {{ count($images) - 4 }}
+                                                </strong>
+                                            @endif
                                         </div>
-                                        <div class="AdaptiveMediaOuterContainer">
-                                            <div class="AdaptiveMedia is-square">
-                                                <div class="AdaptiveMedia-container">
-                                                    <div class="AdaptiveMedia-singlePhoto">
-                                                        <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
-                                                            @if ($timeline->blog->type == config('settings.video'))
+                                        @if ($timeline->blog->type == config('settings.video'))
+                                            <div class="AdaptiveMediaOuterContainer">
+                                                <div class="AdaptiveMedia is-square">
+                                                    <div class="AdaptiveMedia-container">
+                                                        <div class="AdaptiveMedia-singlePhoto">
+                                                            <div class="AdaptiveMedia-photoContainer js-adaptive-photo" data-element-context="platform_photo_card">
                                                                 <iframe class="max-width-height" src="{{ str_replace('watch?v=', 'embed/', $timeline->blog->content) }}"></iframe>
-                                                            @else
-                                                                <img src="{{ $timeline->blog->contentPath() }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="AdaptiveMediaOuterContainer">
+                                                <div class="AdaptiveMedia">
+                                                    <div class="AdaptiveMedia-container">
+                                                        <div class="AdaptiveMedia-quadPhoto">
+                                                            @if (count($images) == 1)
+                                                                @foreach ($images as $element)
+                                                                    <div class="AdaptiveMedia-threeQuartersWidthPhoto max-width-height">
+                                                                        <div class="AdaptiveMedia-photoContainer js-adaptive-photo "  data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
+                                                                            <img src="{{ config('path.images') . $element }}" class="max-width-height">
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @elseif(count($images) == 2)
+                                                                    @foreach ($images as $element)
+                                                                        <div class="col-xs-6 no-padding max-height height-379">
+                                                                            <div class="AdaptiveMedia-photoContainer"  data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
+                                                                                <img src="{{ config('path.images') . $element }}" class="max-width-height">
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                            @elseif(count($images) == 3)
+                                                                @php($getFirst = $images[0])
+                                                                    <div class="col-xs-6 no-padding max-height height-379">
+                                                                        <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjtyUMAEasfW.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
+                                                                            <img data-aria-label-part="" src="{{ config('path.images') . $getFirst }}" alt="" class="max-width-height">
+                                                                        </div>
+                                                                    </div>
+                                                                @php
+                                                                    unset($images[0]);
+                                                                @endphp
+                                                                <div class="col-xs-6 no-padding max-height height-379">
+                                                                    @foreach ($images as $element)
+                                                                        <div class="AdaptiveMedia-thirdHeightPhoto height-50">
+                                                                            <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjt8UMAAeyax.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(61,43,36,1.0)" data-preloading="true" data-preloaded="true" loaded="true">
+                                                                                <img data-aria-label-part="" src="{{ config('path.images') . $element }}" alt="" class="max-width-height">
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            @elseif(count($images) < 5)
+                                                                @php($getFirst = $images[0])
+                                                                <div class="AdaptiveMedia-threeQuartersWidthPhoto">
+                                                                    <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjtyUMAEasfW.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
+                                                                        <img data-aria-label-part="" src="{{ config('path.images') . $getFirst }}" alt="" class="max-width-height">
+                                                                    </div>
+                                                                </div>
+                                                                @php
+                                                                    unset($images[0]);
+                                                                @endphp
+                                                                <div class="AdaptiveMedia-thirdHeightPhotoContainer">
+                                                                    @foreach ($images as $element)
+                                                                        <div class="AdaptiveMedia-thirdHeightPhoto">
+                                                                            <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjt8UMAAeyax.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(61,43,36,1.0)" data-preloading="true" data-preloaded="true" loaded="true">
+                                                                                <img data-aria-label-part="" src="{{ config('path.images') . $element }}" alt="" class="max-width-height">
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            @elseif(count($images) > 5)
+                                                                @php($getFirst = $images[0])
+                                                                <div class="AdaptiveMedia-threeQuartersWidthPhoto">
+                                                                    <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjtyUMAEasfW.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(64,35,10,1.0)" style="background-color:rgba(64,35,10,1.0);" loaded="true" data-preloading="true" data-preloaded="true">
+                                                                        <img data-aria-label-part="" src="{{ config('path.images') . $getFirst }}" alt="" class="max-width-height">
+                                                                    </div>
+                                                                </div>
+                                                                @php
+                                                                    unset($images[0]);
+                                                                @endphp
+                                                                @foreach ($images as $element)
+                                                                    <div class="AdaptiveMedia-thirdHeightPhotoContainer">
+                                                                        @foreach ($images as $element)
+                                                                            <div class="AdaptiveMedia-thirdHeightPhoto">
+                                                                                <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/DCktjt8UMAAeyax.jpg" data-element-context="platform_photo_card" data-dominant-color="rgba(61,43,36,1.0)" data-preloading="true" data-preloaded="true" loaded="true">
+                                                                                    <img src="{{ config('path.images') . $element }}" alt="" class="max-width-height">
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                @endforeach
                                                             @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </li>
@@ -314,7 +404,6 @@
                                                 <img class="avatar js-action-profile-avatar" src="{{ $userTimeline->avatar }}" alt="{{ $userTimeline->fullname }}">
                                                 <span class="FullNameGroup">
                                                     <strong class="fullname show-popup-with-id">{{ $userTimeline->fullname }}</strong>
-                                                    <span>‏</span>
                                                     <span class="UserNameBreak">&nbsp;</span>
                                                 </span>
                                                 <span class="username u-dir">@<b>{{ trans('user.unfollow-user') }}</b></span>

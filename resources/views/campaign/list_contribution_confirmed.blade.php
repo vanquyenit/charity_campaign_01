@@ -1,6 +1,6 @@
 @section('css')
     @parent
-    {{ Html::style('bower_components/datatables/media/css/dataTables.material.min.css') }}
+    {{ Html::style('bower_components/datatables/media/css/jquery.dataTables.min.css') }}
 @show
 
 @section('javascript')

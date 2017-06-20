@@ -453,7 +453,7 @@ select, select:focus {
     }
 }
 .max-width-height {
-    width: 100%;
+    width: 100% !important;
     height: 100%;
 }
 #tp_event-4934 {
@@ -521,4 +521,21 @@ select, select:focus {
     background-color: #fff !important;
     width: 100% !important;
     font-size: 13px;
+}
+.hover_count_image {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    z-index: 5;
+    color: #fff;
+    font-size: 25px;
+    padding: 45px;
+    background-color: #cfc7c780;
+}
+
+.height-379 {
+    height: 379px;
+}
+.height-50 {
+    height: 50% !important;
 }

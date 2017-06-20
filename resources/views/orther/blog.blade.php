@@ -43,36 +43,58 @@
                         <div class="portfolio_column">
                             <div class="content_portfolio" data-style="same_width" data-columns="4" data-gutter="0">
                                 @foreach ($arBlog as $element)
-                                <div class="element-item {{ $element->type }}  four-col item_portfolio">
-                                    <div class="portfolio-image">
-                                        @if ($element->type == 'video')
-                                            @php($img = getImageYoutube($element->content))
-                                            @php($url = $element->content)
-                                            @php($class = $element->type . '-popup')
-                                        @else
-                                            @php($url = asset('uploads/images/' . $element->content))
-                                            @php($img = $url)
-                                            @php($class = $element->type . '-popup-01')
-                                        @endif
-                                        <img src="{{ $img }}" alt="{{ $element->title }}" title="{{ $element->title }}" height="219" />
-                                        <div class="portfolio-hover">
-                                            <div class="thumb-bg">
-                                                <div class="mask-content">
-                                                    <span class="p_line"></span>
-                                                    <div class="portfolio_zoom">
-                                                        <a href="{{ $url }}" title="{{ $element->title }}" class="btn_zoom {{ $class }}"><i class="fa fa-search"></i></a>
-                                                    </div>
-                                                    <div class="portfolio_title">
-                                                        <h3>
-                                                            <a href="" title="{{ $element->title }}">{{ $element->title }}</a>
-                                                        </h3>
+                                    @if ($element->type == 'video')
+                                        @php
+                                            $arrayBlog[] = [
+                                                'title' => $element->title,
+                                                'type' => $element->type,
+                                                'content' => $element->content,
+                                            ];
+                                        @endphp
+                                    @else
+                                        @foreach (json_decode($element->content) as $value)
+                                            @php
+                                                $arrayBlog[] = [
+                                                    'title' => $element->title,
+                                                    'type' => $element->type,
+                                                    'content' => $value,
+                                                ];
+                                            @endphp
+                                        @endforeach
+                                    @endif
+                                @endforeach
+
+                                @foreach ($arrayBlog as $value)
+                                    <div class="element-item {{ $value['type'] }}  four-col item_portfolio">
+                                        <div class="portfolio-image">
+                                            @if ($value['type'] == 'video')
+                                                @php($img = getImageYoutube($value['content']))
+                                                @php($url = $value['content'])
+                                                @php($class = $value['type'] . '-popup')
+                                            @else
+                                                @php($url = asset('uploads/images/' . $value['content']))
+                                                @php($img = $url)
+                                                @php($class = $value['type'] . '-popup-01')
+                                            @endif
+                                            <img src="{{ $img }}" alt="{{ $value['title'] }}" title="{{ $value['title'] }}" height="219" />
+                                            <div class="portfolio-hover">
+                                                <div class="thumb-bg">
+                                                    <div class="mask-content">
+                                                        <span class="p_line"></span>
+                                                        <div class="portfolio_zoom">
+                                                            <a href="{{ $url }}" title="{{ $value['title'] }}" class="btn_zoom {{ $class }}"><i class="fa fa-search"></i></a>
+                                                        </div>
+                                                        <div class="portfolio_title">
+                                                            <h3>
+                                                                <a href="" title="{{ $value['title'] }}">{{ $value['title'] }}</a>
+                                                            </h3>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>

@@ -142,7 +142,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role = config('settings.role.admin');
+        return $this->role == config('settings.role.admin');
     }
 
     public function showRole()

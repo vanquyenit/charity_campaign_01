@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
+use App\Repositories\Blog\BlogRepositoryInterface;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
@@ -18,19 +19,22 @@ class CategoryComposer
     protected $eventRepository;
     protected $userRepository;
     protected $followRepository;
+    protected $blogRepository;
 
     public function __construct(
         CampaignRepositoryInterface $campaignRepository,
         ContributionRepositoryInterface $contributionRepository,
         EventRepositoryInterface $eventRepository,
         UserRepositoryInterface $userRepository,
-        FollowRepositoryInterface $followRepository
+        FollowRepositoryInterface $followRepository,
+        BlogRepositoryInterface $blogRepository
     ) {
         $this->campaignRepository = $campaignRepository;
         $this->contributionRepository = $contributionRepository;
         $this->eventRepository = $eventRepository;
         $this->userRepository = $userRepository;
         $this->followRepository = $followRepository;
+        $this->blogRepository = $blogRepository;
     }
 
     public function compose(View $view)
@@ -57,6 +61,7 @@ class CategoryComposer
             $this->dataView['userTimeline'] = $this->userRepository->getTimeline($id);
             $this->dataView['following'] = $this->followRepository->following($id);
             $this->dataView['followers'] = $this->followRepository->followers($id);
+            $this->dataView['listImage'] = $this->blogRepository->listImageOfUser($id);
         }
 
         $this->dataView['campaign'] = $this->campaignRepository->lastCampaign();

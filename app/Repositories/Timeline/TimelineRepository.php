@@ -58,4 +58,22 @@ class TimelineRepository extends BaseRepository implements TimelineRepositoryInt
 
         return $this->model->create($params);
     }
+
+    public function deleteTimeline($userId, $type, $params)
+    {
+        if (empty($userId) || empty($params)) {
+            return false;
+        }
+
+        if (auth()->id() == $userId) {
+            $timeline = $this->model->where('user_id', $userId)
+                ->where($type, $params)->first();
+
+            if ($timeline) {
+                return $timeline->delete();
+            }
+        }
+
+        return false;
+    }
 }

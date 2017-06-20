@@ -15,6 +15,7 @@
         {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}
         {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
         {{ Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
+        {{ Html::style('bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css') }}
         {{ Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') }}
         {{ Html::style('bower_components/datatables/media/css/dataTables.bootstrap.min.css') }}
         {{ Html::style('css/style.css') }}
@@ -82,21 +83,31 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
     @section('js')
         {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
         {{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('bower_components/jquery-migrate/jquery-migrate.min.js') }}
         {{ Html::script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
+        {{ Html::script('bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js') }}
         {{ Html::script('js/version1/styling.min.js') }}
-        {{ Html::script('js/version1/share_social.js') }}
         {{ Html::script('js/version1/main.min.js') }}
         {{ Html::script('js/version1/custom-script.js') }}
         {{ Html::script('js/version1/custom-scroll.min.js') }}
         {{ Html::script('js/multiple_language.js') }}
-        {{ Html::script('bower_components/datatables/media/js/dataTables.material.min.js') }}
+        {{ Html::script('bower_components/datatables/media/js/jquery.dataTables.min.js') }}
+        {{ Html::script('bower_components/bootstrap-star-rating/js/star-rating.js') }}
         {{ Html::script('js/version1/search.js') }}
         {{ Html::script('js/custom.js') }}
         {{ Html::script('js/follow_user.js') }}
+        {{ Html::script('js/user_profile.js') }}
+        {{ Html::script('js/version1/user-right-bar.js') }}
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
@@ -114,6 +125,16 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
                     '{{ trans('user.unfollow') }}'
                 );
                 follow.init();
+                var userProfile = new UserProfile(
+                    '{{ action('RatingController@ratingUser') }}',
+                    '{{ $averageRankingUser['average'] }}',
+                    '{{ trans('user.rating_your_self') }}',
+                    '{{ trans('campaign.close') }}',
+                    '{{ action('FollowController@followOrUnFollowUser') }}',
+                    '{{ trans('user.follow') }}',
+                    '{{ trans('user.un_follow') }}'
+                );
+                userProfile.init();
             });
         </script>
     @show
