@@ -47,7 +47,7 @@
         <div class="stream-container">
             <div class="stream-item js-new-items-bar-container"></div>
             <div class="stream">
-                <ol class="stream-items js-navigable-stream" id="stream-items-id">
+                <ol class="stream-items js-navigable-stream scroll-load" id="stream-items-id">
                     @if ($listBlog->count())
                         @foreach ($listBlog as $key => $blog)
                             @php($images = json_decode($blog->content))
@@ -221,6 +221,7 @@
                         @endforeach
                     @endif
                 </ol>
+                {{ $listBlog->links() }}
                 <div class="stream-footer">
                     <div class="timeline-end has-items has-more-items">
                         <div class="stream-loading">

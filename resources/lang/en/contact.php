@@ -30,4 +30,6 @@ return [
     'all' => 'All',
     'delete-error' => 'delete error',
     'delete-success' => 'delete success',
+    'create-error' => 'create error',
+    'create-success' => 'create success',
 ];

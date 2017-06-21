@@ -123,7 +123,7 @@
                                                     <div class="thimpress_donate_button">
                                                         <div class="hide_language" data-route="{{ url('language') }}" data-token="{{ csrf_token() }}"></div>
                                                         <select name="lang" id="countries" class="btn-multiple-language form-control">
-                                                            <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} ">
+                                                            <option value='{{ config('settings.en') }}' {{ Session::get('locale') == config('settings.en') ? 'selected' : '' }} >
                                                                 {{ config('settings.language.en') }}
                                                             </option>
                                                             <option value='{{ config('settings.vi') }}' {{ Session::get('locale') == config('settings.vi') ? 'selected' : '' }} >

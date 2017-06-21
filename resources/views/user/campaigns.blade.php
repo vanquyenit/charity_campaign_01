@@ -52,7 +52,7 @@
         <div class="stream-container">
             <div class="stream-item js-new-items-bar-container"></div>
             <div class="stream">
-                <ol class="stream-items js-navigable-stream" id="stream-items-id">
+                <ol class="stream-items js-navigable-stream scroll-load" id="stream-items-id">
                     @if ($campaigns->count())
                         @foreach ($campaigns as $key => $campaign)
                             @if (auth()->id() == $userTimeline->id)
@@ -229,6 +229,7 @@
                         @endforeach
                     @endif
                 </ol>
+                {{ $campaigns->links() }}
                 <div class="stream-footer">
                     <div class="timeline-end has-items has-more-items">
                         <div class="stream-loading">

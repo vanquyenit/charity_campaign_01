@@ -128,7 +128,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
             return false;
         }
 
-        return $this->model->where('user_id', $userId)->get();
+        return $this->model->where('user_id', $userId);
     }
 
     public function deleteEvent($eventId)

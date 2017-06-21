@@ -60,7 +60,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
             return false;
         }
 
-        return $this->model->where('user_id', $userId)->orderBy('id', 'desc')->get();
+        return $this->model->where('user_id', $userId)->orderBy('id', 'desc');
     }
 
     public function listImageOfUser($userId)
