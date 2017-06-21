@@ -23,7 +23,7 @@ Approve.prototype = {
 
     approveOrRemove: function () {
         var _self = this;
-        $(".approve").click(function(e) {
+        $(document).on('click', '.approve', function(e) {
             e.preventDefault();
             var thisButton = this;
             var thisStatus = $(this).closest('tr').find('.badge');
@@ -31,6 +31,7 @@ Approve.prototype = {
             var userId = divChangeAmount.data('userId');
             var campaignId = divChangeAmount.data('campaignId');
             var token = $('.hide').data('token');
+            var icon = '<i class="fa fa-user-plus"></i> ';
 
             BootstrapDialog.confirm(_self.messageConfirm, function (result) {
                 if (result) {
@@ -44,31 +45,33 @@ Approve.prototype = {
                         },
                         success: function (data) {
                             if (data.status) {
-                                $(thisButton).attr('value', _self.btnRemove);
-                                $(thisStatus).html(_self.joined);
-                                $(thisStatus).attr('class', 'badge label-primary');
+                                var html = ''
+                                html += '<button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text approve">' + _self.joined +  '</button>'
+                                html += '<button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text approve">' + _self.btnRemove + '</button>'
+                                $(thisButton).parent().html(html);
+                                $(thisButton).hide();
                             } else {
-                                $(thisButton).attr('value', _self.btnApprove);
-                                $(thisStatus).html(_self.waiting);
-                                $(thisStatus).attr('class', 'badge label-warning-custom');
+                                $(thisButton).text(_self.btnApprove).prepend(icon);
+                                $(thisButton).parent().find('.following-text').hide()
+                                $(thisButton).attr('class', 'EdgeButton EdgeButton--secondary EdgeButton--small follow-text approve');
                             }
                         }
                     });
                 }
             });
-        });
+        })
     },
 
     confirmContribution: function () {
         var _self = this;
-
-        $(".confirm").click(function(e) {
+        $(document).on('click', '.confirm', function(e) {
             e.preventDefault();
             var thisButton = this;
             var thisStatus = $(this).closest('tr').find('.badge');
             var divChangeAmount = $(this).parent();
             var contributionId = divChangeAmount.data('contributionId');
             var token = $('.hide').data('token');
+            var icon = '<i class="fa fa-user-plus"></i> ';
 
             BootstrapDialog.confirm(_self.messageConfirm, function (result) {
                 if (result) {
@@ -82,18 +85,20 @@ Approve.prototype = {
                         success: function(data)
                         {
                             if (data.status) {
-                                $(thisButton).attr('value', _self.btnRemove);
-                                $(thisStatus).html(_self.contributeConfirmed);
-                                $(thisStatus).attr('class', 'badge label-primary');
+                                var html = ''
+                                html += '<button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text confirm">' + _self.joined +  '</button>'
+                                html += '<button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text confirm">' + _self.btnRemove + '</button>'
+                                $(thisButton).parent().html(html);
+                                $(thisButton).hide();
                             } else {
-                                $(thisButton).attr('value', _self.btnConfirm);
-                                $(thisStatus).html(_self.contributeWaiting);
-                                $(thisStatus).attr('class', 'badge label-warning-custom');
+                                $(thisButton).text(_self.btnApprove).prepend(icon);
+                                $(thisButton).parent().find('.following-text').hide()
+                                $(thisButton).attr('class', 'EdgeButton EdgeButton--secondary EdgeButton--small follow-text confirm');
                             }
                         }
                     });
                 }
             });
-        });
+        })
     }
 };
