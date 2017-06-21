@@ -8,7 +8,7 @@
                 data-url="{{ action('CampaignController@review') }}"
                 data-campaign-id="{{ $detailCampaign->id }}">{{ trans('index.join-now') }}</button>
                 @if (auth()->check())
-                    @if (auth()->id() == $userCampaign->id)
+                    @if (auth()->id() == $userCampaign->user_id)
                         <a href="{{ action('EventController@eventCreate', $detailCampaign->id) }}" type="button" class="btn btn-default">{{ trans('event.create') }}</a>
                     @endif
                 @endif

@@ -30,7 +30,7 @@ Contribute.prototype = {
                             $('#donate_result').modal('hide');
                             $('#close-modal').click();
                             $('.notify').html('');
-                            $('input').val('');
+                            $('#donate_modal input').val('');
                         }, 2500);
                     }
                 },

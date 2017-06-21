@@ -53,7 +53,7 @@
                     <li class="js-stream-item stream-item stream-item">
                         <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet">
                             <div class="col-xs-3">
-                                <img src="{{ $campaignInfo->image->image }}" class="max-width-height" alt="{{ $campaignInfo->name }}">
+                                <img src="{{ $campaignInfo->image->image }}" class="max-width-height height-200" alt="{{ $campaignInfo->name }}">
                             </div>
                             <div class="col-xs-9">
                                 <a href="{{ action('CampaignController@show', ['id' => $campaignInfo->id]) }}">
@@ -79,15 +79,15 @@
                         </div>
                     </li>
                     @if ($contributions->count())
-                        @foreach ($contributions as $key => $contribution)
-                            <li class="AdaptiveStreamUserGallery AdaptiveSearchTimeline-separationModule">
-                                <div class="AdaptiveSearchPage-moduleHeader">
-                                    <h3 class="AdaptiveSearchPage-moduleTitle">
-                                        {{ trans('campaign.contribute') }}
-                                        <a href="" class="AdaptiveSearchPage-moduleLink u-textUserColor">{{ trans('user.view-all') }}</a>
-                                    </h3>
-                                </div>
-                                <div class="Grid Grid--withGutter">
+                        <li class="AdaptiveStreamUserGallery AdaptiveSearchTimeline-separationModule">
+                            <div class="AdaptiveSearchPage-moduleHeader">
+                                <h3 class="AdaptiveSearchPage-moduleTitle">
+                                    {{ trans('campaign.contribute') }}
+                                    <a href="" class="AdaptiveSearchPage-moduleLink u-textUserColor">{{ trans('user.view-all') }}</a>
+                                </h3>
+                            </div>
+                            <div class="Grid Grid--withGutter">
+                                @foreach ($contributions as $key => $contribution)
                                     <div class="Grid-cell u-size1of2">
                                         <div class="AdaptiveStreamUserGallery-user js-stream-item">
                                             <div class="ProfileCard js-actionable-user">
@@ -144,9 +144,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
+                                @endforeach
+                            </div>
+                        </li>
                     @endif
                 </ol>
             </div>

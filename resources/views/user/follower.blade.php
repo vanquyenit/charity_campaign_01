@@ -27,17 +27,18 @@
                                     <div class="ProfileCard-actions">
                                         <div class="ProfileCard-userActions with-rightCaret js-userActions">
                                             <div class="UserActions UserActions--small u-textLeft">
-                                                <div class="user-actions not-following not-muting " >
-                                                    <span class="user-actions-follow-button js-follow-btn">
+                                                <div class="user-actions btn-group not-muting including following">
+                                                    <span class="user-actions-follow-button js-follow-btn follow-button">
                                                         @if (auth()->id() != $element->user_id)
                                                             @if (auth()->guest())
                                                                 <a class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text" href="{{ url('/login') }}"><i class="fa fa-user-plus"></i> {{ trans('user.follow') }}</a>
                                                             @else
-                                                                <div data-user-id="{{ $element->user_id }}" data-size="small">
-                                                                    @if (auth()->user()->checkFollow($element->user_id))
-                                                                        <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text follow"> <span>{{ trans('user.unfollow') }}</span> </button>
+                                                                <div data-user-id="{{ $element->target_id }}" data-size="small">
+                                                                    @if (auth()->user()->checkFollow($element->target_id))
+                                                                        <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text follow">{{ trans('user.following') }}</button>
+                                                                        <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text follow"> <span>{{ trans('user.unfollow') }}</span></button>
                                                                     @else
-                                                                        <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text follow">
+                                                                        <button type="button" name="" class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text follow">
                                                                             <i class="fa fa-user-plus"></i> <span>{{ trans('user.follow') }}</span>
                                                                         </button>
                                                                     @endif

@@ -40,7 +40,7 @@
                     <div class="ProfileHeaderCard-joinDate">
                         @if (Auth::user()->id != $user->id)
                             {!! Form::hidden('target_id', $user->id, ['id' => 'target_id']) !!}
-                            {!! Form::hidden('input-1', '', ['id' => 'allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => '5']) !!}
+                            {!! Form::hidden('input-1', '', ['id' => 'allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
                         @else
                             {!! Form::hidden('input-1', '', ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
                         @endif
@@ -71,7 +71,7 @@
                         <div class="ProfileUserList-title">
                             <span class="fa fa-group"></span>
                             <span class="ProfileUserList-listName">
-                                <a href="#" class="ProfileUserList-permalink u-textUserColor js-nav">{{ count($followers) . ' ' . trans('user.followers-that-you-know') }}</a>
+                                <a href="{{ action('UserController@follower', $user->id) }}" class="ProfileUserList-permalink u-textUserColor js-nav">{{ count($followers) . ' ' . trans('user.followers-that-you-know') }}</a>
                             </span>
                         </div>
                     </div>

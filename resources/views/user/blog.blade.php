@@ -103,7 +103,7 @@
                                                 <p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text">{{ trans('user.add-image') }}</p>
                                             @endif
                                             <strong>{{ $blog->title }}</strong>
-                                            @if (count($images) > 5)
+                                            @if (count($images) >= 5)
                                                 <strong class="hover_count_image">
                                                     + {{ count($images) - 4 }}
                                                 </strong>
@@ -166,7 +166,7 @@
                                                                     @endforeach
                                                                 </div>
                                                             </div>
-                                                        @elseif(count($images) < 5)
+                                                        @elseif(count($images) == 4)
                                                             <div class="AdaptiveMedia-quadPhoto find_id" id="preview_{{ $blog->id }}">
                                                                 @php($getFirst = $images[0])
                                                                     <div class="AdaptiveMedia-threeQuartersWidthPhoto quick_view" data-count="{{ count($images) }}" >
@@ -187,7 +187,7 @@
                                                                     @endforeach
                                                                 </div>
                                                             </div>
-                                                        @elseif(count($images) > 5)
+                                                        @elseif(count($images) >= 5)
                                                             <div class="AdaptiveMedia-quadPhoto find_id" id="preview_{{ $blog->id }}">
                                                                 @php($getFirst = $images[0])
                                                                     <div class="AdaptiveMedia-threeQuartersWidthPhoto quick_view">
