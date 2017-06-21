@@ -30,4 +30,6 @@ return [
     'all' => 'Tất cả',
     'delete-error' => 'Có lỗi khi xóa',
     'delete-success' => 'Xóa thành công',
+    'create-error' => 'Có lỗi khi gửi',
+    'create-success' => 'Gửi thành công',
 ];

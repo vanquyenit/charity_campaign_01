@@ -70,9 +70,13 @@ class ContactController extends Controller
             ], function ($message) use ($inputs) {
                 $message->to($inputs['email'])->subject($inputs['subject']);
             });
+
+            return redirect(action('Admin\ContactController@index'))
+                ->with(['alert-success' => trans('contact.create-success')]);
         }
 
-        return redirect()->action('Admin\ContactController@index');
+        return redirect(action('Admin\ContactController@index'))
+            ->with(['alert-danger' => trans('contact.create-error')]);
     }
 
     public function delAll(Request $request)

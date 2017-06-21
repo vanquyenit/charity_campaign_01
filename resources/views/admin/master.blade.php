@@ -173,6 +173,9 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-10 col-lg-offset-1">
+                    @include('layouts.alert')
+                    @include('layouts.message')
+
                     @yield('content')
                 </div>
             </div>

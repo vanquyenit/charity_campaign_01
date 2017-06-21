@@ -96,8 +96,6 @@ class UserController extends BaseController
 
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
-        $this->dataView['following'] = $this->followRepository->following($id);
-        $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
 
         return view('user.detail', $this->dataView);
@@ -164,8 +162,6 @@ class UserController extends BaseController
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)
             ->paginate(config('constants.PAGINATE_CAMPAIGN'));
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
-        $this->dataView['following'] = $this->followRepository->following($id);
-        $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.campaigns', $this->dataView);
@@ -186,8 +182,6 @@ class UserController extends BaseController
         $this->dataView['contributions'] = $this->contributionRepository->getAllCampaignContributions($campaignId)
             ->paginate(config('constants.PAGINATE'));
         $this->dataView['countCampaign'] = $this->campaignRepository->countCampaign($id);
-        $this->dataView['following'] = $this->followRepository->following($id);
-        $this->dataView['followers'] = $this->followRepository->followers($id);
         $this->dataView['campaigns'] = $this->campaignRepository->listCampaignOfUser($id)->get();
 
         return view('user.campaign_detail', $this->dataView);
@@ -230,7 +224,7 @@ class UserController extends BaseController
         }
 
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
-        $this->dataView['listEvent'] = $this->eventRepository->listEventOfUser($id);
+        $this->dataView['listEvent'] = $this->eventRepository->listEventOfUser($id)->paginate(config('constants.PAGINATE'));
         $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.event', $this->dataView);
@@ -244,7 +238,7 @@ class UserController extends BaseController
             return abort(404);
         }
         $this->dataView['averageRankingUser'] = $this->ratingRepository->averageRatingUser($this->dataView['user']->id);
-        $this->dataView['listBlog'] = $this->blogRepository->listBlogOfUser($id);
+        $this->dataView['listBlog'] = $this->blogRepository->listBlogOfUser($id)->paginate(config('constants.PAGINATE'));
         $this->dataView['userList'] = $this->userRepository->getListUser($id)->take(config('constants.ALL_USER_LIMIT'));
 
         return view('user.blog', $this->dataView);

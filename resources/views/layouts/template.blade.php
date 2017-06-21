@@ -37,6 +37,8 @@ page-template-page-templates page-template-homepage page-template-page-templates
 siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_style thim_header_style2 thim_fixedmenu ">
 
 @include('layouts.header')
+@include('layouts.alert')
+@include('layouts.message')
 
 @yield('content')
 

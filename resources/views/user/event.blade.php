@@ -52,7 +52,7 @@
         <div class="stream-container">
             <div class="stream-item js-new-items-bar-container"></div>
             <div class="stream">
-                <ol class="stream-items js-navigable-stream" id="stream-items-id">
+                <ol class="stream-items js-navigable-stream scroll-load" id="upcomings">
                     @foreach ($listEvent as $event)
                         <li class="stream-item">
                             <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content original-tweet js-original-tweet">
@@ -146,6 +146,7 @@
                         </li>
                     @endforeach
                 </ol>
+                {{ $listEvent->links() }}
                 <div class="stream-footer">
                     <div class="timeline-end has-items has-more-items">
                         <div class="stream-loading">

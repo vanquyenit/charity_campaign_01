@@ -59,8 +59,7 @@ class FollowRepository extends BaseRepository implements FollowRepositoryInterfa
         return $this->model->where('user_id', $userId)
             ->where('target_type', config('constants.FOLLOW_USER'))
             ->where('status', config('constants.ACTIVATED'))
-            ->with('following')
-            ->get();
+            ->with('following');
     }
 
     public function followers($userId)
@@ -72,7 +71,6 @@ class FollowRepository extends BaseRepository implements FollowRepositoryInterfa
         return $this->model->where('target_id', $userId)
             ->where('target_type', config('constants.FOLLOW_USER'))
             ->where('status', config('constants.ACTIVATED'))
-            ->with('follower')
-            ->get();
+            ->with('follower');
     }
 }

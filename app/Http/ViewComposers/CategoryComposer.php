@@ -59,8 +59,8 @@ class CategoryComposer
             || config('settings.user') == $url
         ) {
             $this->dataView['userTimeline'] = $this->userRepository->getTimeline($id);
-            $this->dataView['following'] = $this->followRepository->following($id);
-            $this->dataView['followers'] = $this->followRepository->followers($id);
+            $this->dataView['following'] = $this->followRepository->following($id)->get();
+            $this->dataView['followers'] = $this->followRepository->followers($id)->get();
             $this->dataView['listImage'] = $this->blogRepository->listImageOfUser($id);
         }
 
