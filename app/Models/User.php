@@ -176,4 +176,14 @@ class User extends Authenticatable
 
         return config('path.images') . $value;
     }
+
+    public function getBirthdayAttribute($birthday)
+    {
+        return date(' d/m/Y', strtotime($this->$birthday));
+    }
+
+    public function getCreatedAtAttribute($create_at)
+    {
+        return date(' d-m-Y', strtotime($this->$create_at));
+    }
 }

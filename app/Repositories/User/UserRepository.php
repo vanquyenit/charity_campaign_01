@@ -205,6 +205,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getListUserFollow($id)
     {
         return $this->model->whereNotIn('id', Relationship::where('user_id', '=', $id)
-                ->select('target_id')->get())->where('id', '<>', $id)->inRandomOrder()->get();
+                ->select('target_id')->get())
+            ->where('id', '<>', $id)
+            ->where('id', '<>', auth()->id())
+            ->inRandomOrder()->get();
     }
 }
