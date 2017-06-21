@@ -32,13 +32,13 @@
             <main id="main" class="site-main col-sm-9 alignleft ">
                 <div class="thim-event-tabs">
                     <ul class="nav nav-tabs">
-                        <li class="tab upcoming active" data-tab="upcoming">
+                        <li class="tab upcoming active" data-scroll="upcoming">
                             <a href="#upcoming" aria-controls="upcoming" data-toggle="tab">{{ trans('event.upcoming') }} </a>
                         </li>
-                        <li class="tab happening" data-tab="happening">
+                        <li class="tab happening" data-scroll="happening">
                             <a href="#happening" aria-controls="happening" data-toggle="tab">{{ trans('event.happening') }} </a>
                         </li>
-                        <li class="tab expired " data-tab="expired">
+                        <li class="tab expired " data-scroll="expired">
                             <a href="#expired" aria-controls="expired" data-toggle="tab">{{ trans('event.expired') }} </a>
                         </li>
                     </ul>
@@ -183,4 +183,10 @@
         </div>
     </div>
 </section>
+
+@section('js')
+    @parent
+    {{ Html::script('bower_components/jscroll/jquery.jscroll.js') }}
+    {{ Html::script('js/version1/scroll-event.js') }}
+@stop
 @stop

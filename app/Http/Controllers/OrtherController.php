@@ -82,6 +82,7 @@ class OrtherController extends BaseController
             'email',
             'subject',
             'message',
+            'role',
         ]);
         $contact = $this->contactRepository->createContact($inputs);
 
