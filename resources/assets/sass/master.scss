@@ -17,56 +17,60 @@ select, select:focus {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-#main {
-    .hidenOverflow {
-        overflow: hidden;
-    }
-    #post-13 {
-        #pg-13-0 {
-            #pgc-13-0-0 {
-                width: 50%;
-                #panel-13-0-0-2 {
-                    p {
-                        text-align: center;
-                        margin-bottom: 40px
-                    }
-                    i {
-                        color: #F8B864
-                    }
-                    .color-99 {
-                        color: #999999;
-                    }
-                }
-            }
-            #pgc-13-0-1 {
-                width: 50%;
-                #panel-13-0-1-1 {
-                    .panel-widget-style {
-                        max-width: 480px;
-                        margin: auto;
-                        color: #999999;
-                    }
-                }
-            }
+#main-content {
+    background-color: #fff !important;
+    #main {
+        .hidenOverflow {
+            overflow: hidden;
         }
-        #pg-13-1 {
-            .panel-row-style {
-                background-color: #f8b864;
-                .max-600 {
-                    max-width: 600px;
-                    margin: auto;
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: #ffffff;
+        #post-13 {
+            #pg-13-0 {
+                #pgc-13-0-0 {
+                    width: 50%;
+                    #panel-13-0-0-2 {
+                        p {
+                            text-align: center;
+                            margin-bottom: 40px
+                        }
+                        i {
+                            color: #F8B864
+                        }
+                        .color-99 {
+                            color: #999999;
+                        }
+                    }
                 }
-                .max-300 {
-                    max-width: 360px;
-                    margin: auto;
+                #pgc-13-0-1 {
+                    width: 50%;
+                    #panel-13-0-1-1 {
+                        .panel-widget-style {
+                            max-width: 480px;
+                            margin: auto;
+                            color: #999999;
+                        }
+                    }
+                }
+            }
+            #pg-13-1 {
+                .panel-row-style {
+                    background-color: #f8b864;
+                    .max-600 {
+                        max-width: 600px;
+                        margin: auto;
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #ffffff;
+                    }
+                    .max-300 {
+                        max-width: 360px;
+                        margin: auto;
+                    }
                 }
             }
         }
     }
 }
+
 #colophon {
     .bg_image {
         background-image: url(../img/footer.jpg);
@@ -447,9 +451,10 @@ select, select:focus {
     }
 }
 .post-formats-wrapper {
-    min-height: 500px;
+    min-height: 350px;
+    margin-bottom: 20px !important;
     img {
-        min-height: 500px;
+        height: 400px;
     }
 }
 .max-width-height {
@@ -465,6 +470,25 @@ select, select:focus {
         }
         .text-white {
             height: 40px;
+        }
+    }
+    .entry-content {
+        #pg-4934-0 {
+            height: 450px;
+            overflow: hidden;
+            .infomation {
+                border: 1px solid #f8b864;
+                padding: 15px;
+                background-color: #fff;
+                .rating {
+                    font-size : 20px;
+                }
+            }
+        }
+        #pg-4934-1 {
+            #id_58ef60515ddf6 {
+                background: #fff;
+            }
         }
     }
 }
@@ -584,7 +608,37 @@ select, select:focus {
     -webkit-box-orient: vertical;
 }
 .trim-title {
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#note {
+    margin-top:10px;
+}
+.btn-color {
+    background-color: #f8b864 !important;
+    color: #fff !important;
+    &:hover {
+        background-color : #f6a233 !important;
+    }
+}
+.single.single-dn_campaign,
+.single.single-tp_event {
+    .thim-event-info {
+        border: 0;
+        border-left: 1px solid #f8b864;
+        padding: 0 20px;
+        margin: 0;
+    }
+}
+.boder-left {
+    border-left: 1px solid #f8b864;
+}
+.btn-group {
+    .donate_load_form {
+        border-right: 2px solid;
+    }
+}
+.nav-tabs li {
+    border-left: 2px solid #fff;
 }

@@ -42,10 +42,11 @@ siteorigin-panels siteorigin-panels-home group-blog loading thim_header_custom_s
                     <div class="AppContent-main content-main u-cf" role="main" aria-labelledby="content-main-heading">
                         <div class="Grid Grid--withGutter">
                             @include('layouts.user_left')
-                            @include('layouts.alert')
-                            @include('layouts.message')
+
                             <div class="Grid-cell u-size2of3 u-lg-size3of4">
                                 <div class="Grid Grid--withGutter">
+                                    @include('layouts.alert')
+                                    @include('layouts.message')
                                     @yield('content')
                                 </div>
                             </div>

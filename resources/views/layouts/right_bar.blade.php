@@ -2,14 +2,14 @@
     <div class="sidebar theiaStickySidebar">
         @if (isset($detailCampaign))
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-info donate_load_form"
+                <button type="button" class="btn btn-color donate_load_form"
                 data-toggle="modal" href='.donate_modal'
                 data-hiden="{{ csrf_token() }}"
                 data-url="{{ action('CampaignController@review') }}"
                 data-campaign-id="{{ $detailCampaign->id }}">{{ trans('index.join-now') }}</button>
                 @if (auth()->check())
-                    @if (auth()->id() == $userCampaign->user_id)
-                        <a href="{{ action('EventController@eventCreate', $detailCampaign->id) }}" type="button" class="btn btn-default">{{ trans('event.create') }}</a>
+                    @if (isset($userCampaign))
+                        <a href="{{ action('EventController@eventCreate', $detailCampaign->id) }}" type="button" class="btn btn-color">{{ trans('event.create') }}</a>
                     @endif
                 @endif
             </div>
