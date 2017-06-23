@@ -79,8 +79,13 @@
                                             <div class="col-md-3">
                                                 {!! Form::number('goal[]', null, ['class' => 'form-control category-goal', 'placeholder' => trans('campaign.validate.goal.goal'), 'min' => 1]) !!}
                                             </div>
-                                            <div class="col-md-3 no-padding-right">
-                                                {!! Form::text('unit[]', null, ['class' => 'form-control category-unit', 'placeholder' => trans('campaign.validate.unit.unit')]) !!}
+                                            <div class="col-md-3 no-padding-right" id="form-control">
+                                                <select name="unit[]" class="form-control">
+                                                    <option value="">{{ trans('campaign.validate.unit.unit') }}</option>
+                                                    @foreach ($categoryUnit as $key =>  $element)
+                                                        <option value="{{ $element->name }}">{{ $element->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div>

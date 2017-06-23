@@ -173,4 +173,5 @@ return [
         'end_time' => 'Ngày kết thúc',
     ],
     'list-contribution' => 'Danh sách đóng góp',
+    'campaign-creator' => 'Người tạo chiến dịch',
 ];

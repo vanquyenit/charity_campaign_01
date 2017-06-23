@@ -174,4 +174,5 @@ return [
         'end_time' => 'End time',
     ],
     'list-contribution' => 'List contribution',
+    'campaign-creator' => 'Campaign creator',
 ];

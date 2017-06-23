@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CampaignRequest;
 use App\Models\Campaign;
+use App\Models\CategoryUnit;
 use App\Models\Event;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
@@ -80,9 +81,10 @@ class CampaignController extends BaseController
      */
     public function create()
     {
-        $this->dataJson['validateMessage'] = json_encode(trans('campaign.validate'));
+        $this->dataView['validateMessage'] = json_encode(trans('campaign.validate'));
+        $this->dataView['categoryUnit'] = CategoryUnit::all();
 
-        return view('campaign.create', $this->dataJson);
+        return view('campaign.create', $this->dataView);
     }
 
     /**
