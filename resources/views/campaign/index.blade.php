@@ -401,58 +401,56 @@
             </div>
         </div>
         <div class="panel-grid" id="pg-4967-2">
-            <div class="siteorigin-panels-stretch panel-row-style" >
-                <div class="panel-grid-cell" id="pgc-4967-2-0">
-                    <div class="so-panel widget widget_heading panel-first-child" id="panel-4967-2-0-0">
-                        <div class="thim-widget-heading thim-widget-heading-base">
-                            <div class="thim-heading text-center ">
-                                <div class="sc-heading article_heading " >
-                                    <h3 class="heading__primary wrapper-line-heading">
-                                        <span></span>
-                                        <span>{{ trans('index.top-member') }}</span>
-                                        <span></span>
-                                    </h3>
-                                    <span class="line-heading"></span>
-                                </div>
+            <div class="panel-grid-cell" id="pgc-4967-2-0">
+                <div class="so-panel widget widget_heading panel-first-child" id="panel-4967-2-0-0">
+                    <div class="thim-widget-heading thim-widget-heading-base">
+                        <div class="thim-heading text-center ">
+                            <div class="sc-heading article_heading " >
+                                <h3 class="heading__primary wrapper-line-heading">
+                                    <span></span>
+                                    <span>{{ trans('index.top-member') }}</span>
+                                    <span></span>
+                                </h3>
+                                <span class="line-heading"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="so-panel widget widget_list-post" id="panel-4967-2-0-1" data-index="5">
-                        <div class="thim-our-team">
-                            <div class="row members">
-                                @foreach ($topUser as $element)
-                                    <div class="member col-xs-6 col-md-3">
-                                        <div class="inner">
-                                            <div class="avatar-wrapper">
-                                                <div class="avatar-inner">
-                                                    <img src="{{ $element->avatar }}" class="attachment-full size-full wp-post-image" alt="" width="570" height="570">
-                                                </div>
-                                                <div class="social">
-                                                    <ul>
-                                                        <li>
-                                                            {!! Form::hidden('input-1', $element->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                </div>
+                <div class="so-panel widget widget_list-post" id="panel-4967-2-0-1" data-index="5">
+                    <div class="thim-our-team">
+                        <div class="row members">
+                            @foreach ($topUser as $element)
+                                <div class="member col-xs-6 col-md-3">
+                                    <div class="inner">
+                                        <div class="avatar-wrapper">
+                                            <div class="avatar-inner">
+                                                <img src="{{ $element->avatar }}" class="attachment-full size-full wp-post-image" alt="" width="570" height="570">
                                             </div>
-                                            <div class="info">
-                                                <div class="name">
-                                                    <a href="{{ action('UserController@show', ['id' => $element->id]) }}">{{ $element->name }}</a>
-                                                </div>
-                                                <div class="regency"></div>
+                                            <div class="social">
+                                                <ul>
+                                                    <li>
+                                                        {!! Form::hidden('input-1', $element->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
+                                        <div class="info">
+                                            <div class="name">
+                                                <a href="{{ action('UserController@show', ['id' => $element->id]) }}">{{ $element->name }}</a>
+                                            </div>
+                                            <div class="regency"></div>
+                                        </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="so-panel widget widget_button panel-last-child" id="panel-4967-2-0-2" data-index="6">
-                        <div class="panel-widget-style">
-                            <div class="thim-widget-button thim-widget-button-base">
-                                <div id="button_58f2300d1f540" class="text-center">
-                                    <a href="{{ action('OrtherController@member') }}" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
-                                </div>
+                </div>
+                <div class="so-panel widget widget_button panel-last-child" id="panel-4967-2-0-2" data-index="6">
+                    <div class="panel-widget-style">
+                        <div class="thim-widget-button thim-widget-button-base">
+                            <div id="button_58f2300d1f540" class="text-center">
+                                <a href="{{ action('OrtherController@member') }}" class="thim-button default inner size-default">{{ trans('index.view-all') }}</a>
                             </div>
                         </div>
                     </div>

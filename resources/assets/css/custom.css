@@ -4,7 +4,7 @@
 .comments-container {
     max-height: 350px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 #submit-comment:hover {
     background: #f8b864;
@@ -18,7 +18,7 @@
     height:400px;
 }
 .nav-tabs {
-    border-bottom: 2px solid #DDD;
+    background: #f8b864;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
@@ -32,7 +32,7 @@
 .nav-tabs > li.active > a,
 .nav-tabs > li > a:hover {
     border: none;
-    color: #f6a233 !important;
+    color: #fff !important;
     background: transparent;
 }
 .nav-tabs > li > a::after {
@@ -57,8 +57,11 @@
 .tab-pane {
     padding: 15px 0;
 }
-.tab-content {
-    padding: 20px
+.tab__comment .tab-content {
+    padding: 20px;
+}
+.nav-tabs a {
+    text-transform: uppercase;
 }
 .card {
     background: #FFF none repeat scroll 0% 0%;

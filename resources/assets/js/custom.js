@@ -23,7 +23,4 @@ $(document).ready(function() {
     } else {
         $('.ProfileNav-item--tweets').addClass('is-active');
     }
-
-    $('#contribution-confirmed').DataTable();
-    $('#contribution-unconfirmed').DataTable();
 });
