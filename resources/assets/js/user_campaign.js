@@ -70,6 +70,7 @@ Approve.prototype = {
             var thisStatus = $(this).closest('tr').find('.badge');
             var divChangeAmount = $(this).parent();
             var contributionId = divChangeAmount.data('contributionId');
+            var email = divChangeAmount.data('email');
             var token = $('.hide').data('token');
             var icon = '<i class="fa fa-user-plus"></i> ';
 
@@ -80,6 +81,7 @@ Approve.prototype = {
                         url: _self.urlConfirmContribution,
                         data: {
                             'contribution_id': contributionId,
+                            'email': email,
                             '_token': token
                         },
                         success: function(data)

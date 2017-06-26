@@ -33,7 +33,7 @@
     flex: 0 1 45px;
     position: relative;
     z-index: 2;
-    background: #f8b864;
+    background: #00b0ff;
     color: #fff;
     text-transform: uppercase;
     text-align: left;
@@ -212,7 +212,7 @@
         right: 10px;
         color: #fff;
         border: none;
-        background: #F8B864;
+        background: #00b0ff;
         font-size: 10px;
         text-transform: uppercase;
         line-height: 1;
@@ -221,7 +221,7 @@
         outline: none!important;
         transition: background .2s ease;
         &:hover {
-            background: #F8B864;
+            background: #00b0ff;
         }
     }
 }

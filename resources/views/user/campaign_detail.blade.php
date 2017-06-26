@@ -102,14 +102,14 @@
                                                         <div class="ProfileCard-userActions with-rightCaret js-userActions">
                                                             <div class="UserActions UserActions--small u-textLeft">
                                                                 <div class="user-actions btn-group not-muting including following">
-                                                                    <span class="user-actions-follow-button js-follow-btn follow-button" data-contribution-id="{{ $contribution->id }}" data-size="small">
+                                                                    <span class="user-actions-follow-button js-follow-btn follow-button" data-email="{{ $contribution->user->email }}" data-contribution-id="{{ $contribution->id }}" data-size="small">
                                                                         @if (!$contribution->status)
                                                                             <button type="button" name="" class="EdgeButton EdgeButton--secondary EdgeButton--small follow-text confirm">
                                                                                 <i class="fa fa-user-plus"></i>  <span>{{ trans('campaign.approve') }}</span>
                                                                             </button>
                                                                         @else
-                                                                            <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text follow confirm">{{ trans('campaign.request_join') }}</button>
-                                                                            <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text follow confirm">
+                                                                            <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text following-text confirm">{{ trans('campaign.request_join') }}</button>
+                                                                            <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--small button-text unfollow-text confirm">
                                                                                 <span class="fa fa-user-times"></span>
                                                                                 <span>{{ trans('campaign.remove') }}</span>
                                                                             </button>

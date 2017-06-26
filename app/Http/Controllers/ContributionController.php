@@ -7,6 +7,7 @@ use App\Models\Contribution;
 use App\Repositories\Contribution\ContributionRepositoryInterface;
 use Illuminate\Http\Request;
 use LRedis;
+use Mail;
 
 class ContributionController extends Controller
 {
@@ -56,6 +57,14 @@ class ContributionController extends Controller
 
             $result = $this->contributionRepository->createContribution($input);
 
+            if ($result) {
+                Mail::queue('email.unconfirm', [
+                    'unconfirm' => $result,
+                ], function ($message) use ($input) {
+                    $message->to($input['email'])->subject(trans('campaign.subject-unconfirm'));
+                });
+            }
+
             $contributionUnConfirmed = $this->contributionRepository->getUserContributionUnConfirmed($input['campaign_id']);
 
             $dataContributions = [
@@ -89,8 +98,17 @@ class ContributionController extends Controller
     {
         if ($request->ajax()) {
             $contributionId = $request->get('contribution_id');
+            $email = $request->get('email');
 
             $result = $this->contributionRepository->confirmContribution($contributionId);
+
+            if ($result) {
+                Mail::queue('email.confirm', [
+                    'confirm' => $result,
+                ], function ($message) use ($email) {
+                    $message->to($email)->subject(trans('campaign.subject-confirm'));
+                });
+            }
 
             return response()->json($result);
         }

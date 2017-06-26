@@ -7,8 +7,8 @@
     overflow-y: auto;
 }
 #submit-comment:hover {
-    background: #f8b864;
-    border-color: #f8b864;
+    background: #00b0ff;
+    border-color: #00b0ff;
 }
 #comment {
     max-width: 830px;
@@ -27,13 +27,13 @@
 }
 .nav-tabs > li > a {
     border: none;
-    color: #f8b864 !important;
+    color: #00b0ff !important;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li > a:hover {
     border: none;
     color: #fff !important;
-    background: #f8b864 !important;
+    background: #00b0ff !important;
 }
 .nav-tabs > li > a::after {
     content: "";
@@ -165,7 +165,7 @@ h3.title {
     transition: color 0.3s ease;
 }
 .comment-box .comment-head i:hover {
-    color: #f8b864;
+    color: #00b0ff;
 }
 .comment-box .comment-name a {
     color: #283035;
@@ -195,11 +195,11 @@ h3.title {
 }
 .comment-box .comment-name.by-author,
 .comment-box .comment-name.by-author a {
-    color: #f8b864;
+    color: #00b0ff;
 }
 .comment-box .comment-name.by-author:after {
     content: 'autor';
-    background: #f8b864;
+    background: #00b0ff;
     color: #FFF;
     font-size: 12px;
     padding: 3px 5px;
