@@ -22,7 +22,7 @@ class ParticipantRepository extends BaseRepository implements ParticipantReposit
             $thread[] = $value->thread_id;
         }
 
-        return $this->model->with('users')
+        return $this->model->with('user')
             ->whereIn('thread_id', $thread)
             ->groupBy('user_id')
             ->where('user_id', '<>', auth()->id())

@@ -33,9 +33,41 @@ equalheight = function(container){
 }
 $('.left .person').mousedown(function() {
 
-    if ($(this).hasClass('.active')) {
+    if ($(this).hasClass('active')) {
+
         return false;
-    } else {
+    } else if($(this).hasClass('new-chat')){
+
+        var userId = $(this).attr('data-user-id'),
+            url = $(this).data('url'),
+            _self = $(this),
+            personName = $(this).find('.name').text();
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                user_id: userId,
+            },
+            success: function(data) {
+                if (data.success) {
+                    _self.addClass('active');
+                    _self.removeClass('new-chat');
+                    _self.attr('data-url', data.url);
+                    _self.attr('data-thread', data.thread_id);
+                    _self.attr('data-chat', 'person_' + data.thread_id);
+                    $('.right .top .name').html(personName)
+                    $('.chat').addClass('active-chat');
+                    $('.chat').attr('data-chat-id', 'person_' + data.thread_id);
+                    $('.text-body').focus();
+                }
+            },
+            error: function (errors) {
+                alert(error)
+            }
+        })
+    }
+    else {
         var personName = $(this).find('.name').text(),
             chatId = $(this).data('chat'),
             url = $(this).data('url'),
@@ -64,6 +96,7 @@ $(window).on('keydown', function(e) {
 })
 $(document).on('click', '.send', function() {
     var userId = $('ul.people').find('.active').data('user-id'),
+        meId = $('.hide').data('user-id'),
         thread = $('ul.people').find('.active').data('thread'),
         chatId = $('.chat').data('chat-id'),
         url = $('.hide').data('url'),
@@ -73,7 +106,8 @@ $(document).on('click', '.send', function() {
         type: "POST",
         url: url,
         data: {
-            user_id: userId,
+            user_id: meId,
+            target_id: userId,
             body: $(".text-body").val(),
             thread_id: thread,
             chat_id: chatId,
@@ -94,9 +128,10 @@ $(document).on('click', '.send', function() {
 
 var host = $('.hide').data('host'),
     port = $('.hide').data('port'),
-    currentUserId = $('.hide').data('user-id');
-var link = (port == '') ? host : host + ":" + port;
-var socket = io.connect(link);
+    meId = $('.hide').data('user-id'),
+    currentUserId = $('.hide').data('user-id'),
+    link = (port == '') ? host : host + ":" + port,
+    socket = io.connect(link);
 
 socket.on('chat', function (data) {
     var data = jQuery.parseJSON(data);
@@ -109,8 +144,11 @@ socket.on('chat', function (data) {
                 $('.active-chat').append(data.html);
                 updateScrollbar();
             } else {
-                console.log(data.preview);
-                $('.people').find('.'+data.chatId).find('.preview-message').html(data.preview)
+                if ($('.people').find('.'+data.chatId)) {
+                    $('.people').find('.'+data.chatId).find('.preview-message').html(data.preview)
+                } else if (meId == data.target_id) {
+                    $('.people').append(data.new_user_preview)
+                }
             }
         }
     }

@@ -103,6 +103,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('follow/user', 'FollowController@followOrUnFollowUser');
 
     Route::resource('messages', 'MessagesController');
+
+    Route::resource('participant', 'ParticipantController');
 });
 
 Route::get('campaigns', 'CampaignController@showCampaigns');
