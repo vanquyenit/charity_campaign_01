@@ -3,6 +3,7 @@
 @section('css')
     @parent
     {{ Html::style('bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}
+    {{ Html::style('bower_components/jquery-hashtag-highlighter/css/jquery.hashtags.css') }}
 @endsection
 
 @section('js')
@@ -14,8 +15,11 @@
     {{ Html::script('bower_components/jquery-validation/dist/jquery.validate.min.js') }}
     {{ Html::script('bower_components/ckeditor/ckeditor.js') }}
     {{ Html::script('js/version1/event.js') }}
+    {{ Html::script('bower_components/jquery-hashtag-highlighter/js/autosize.min.js') }}
+    {{ Html::script('bower_components/jquery-hashtag-highlighter/js/jquery.hashtags.js') }}
     <script type="text/javascript">
         $(document).ready(function () {
+            $("textarea").hashtags();
             var event = new Event(
                 "{!! action('CampaignController@uploadImage') . '?_token=' . csrf_token() !!}",
                 '{!! $validateMessage !!}'

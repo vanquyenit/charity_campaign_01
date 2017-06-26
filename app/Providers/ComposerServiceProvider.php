@@ -19,6 +19,7 @@ class ComposerServiceProvider extends ServiceProvider
                 'campaign.campaigns',
                 'event.index',
                 'event.detail',
+                'event.search',
                 'campaign.detail',
                 'campaign.list_contribution_confirmed',
                 'campaign.list_contribution_unconfirmed',

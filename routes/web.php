@@ -138,6 +138,8 @@ Route::get('campaign/search', 'CampaignController@searchCampaign');
 
 Route::get('event', 'EventController@index');
 
+Route::get('event-search', 'EventController@search');
+
 Route::get('event/{eventId}', 'EventController@show');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
