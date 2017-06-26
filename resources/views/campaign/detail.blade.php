@@ -86,33 +86,31 @@
                         <li role="presentation">
                             <a href="#unconfirm" aria-controls="tab" role="tab" data-toggle="tab">{{ trans('campaign.unconfirmed') }}</a>
                         </li>
+                        <li role="presentation" class="pull-right">
+                            @if ($detailCampaign->status)
+                                @if (auth()->check())
+                                    {!! Form::open(['method' => 'POST', 'id' => 'formRequest']) !!}
+                                    {!! Form::hidden('campaign_id', $detailCampaign->id) !!}
+                                @if (empty($userCampaign))
+                                    {!! Form::submit(trans('campaign.request_join'), ['class' => ' joinOrLeave']) !!}
+                                @elseif (empty($userCampaign->status) && empty($userCampaign->is_owner))
+                                    {!! Form::submit(trans('campaign.request_sent'), ['class' => ' joinOrLeave']) !!}
+                                @elseif ($userCampaign->status && empty($userCampaign->is_owner))
+                                    {!! Form::submit(trans('campaign.leave_campaign'), ['class' => ' joinOrLeave']) !!}
+                                @endif
+                                    {!! Form::close() !!}
+                                @else
+                                    <a href="{{ action('Auth\UserLoginController@getLogin') }}"
+                                    class="btn btn-color text-white">{{ trans('campaign.request_join') }}</a>
+                                @endif
+                            @endif
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="detailCampaign">
                             <article id="tp_event-4934" class="tp_single_event post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
                                 <div class="entry-header">
-                                    <h1 class="blog_title col-xs-8">{{ $detailCampaign->name }}</h1>
-                                    <div class="col-xs-4 no-padding-right">
-                                        <div class="pull-right">
-                                            @if ($detailCampaign->status)
-                                                @if (auth()->check())
-                                                    {!! Form::open(['method' => 'POST', 'id' => 'formRequest']) !!}
-                                                    {!! Form::hidden('campaign_id', $detailCampaign->id) !!}
-                                                @if (empty($userCampaign))
-                                                    {!! Form::submit(trans('campaign.request_join'), ['class' => ' joinOrLeave']) !!}
-                                                @elseif (empty($userCampaign->status) && empty($userCampaign->is_owner))
-                                                    {!! Form::submit(trans('campaign.request_sent'), ['class' => ' joinOrLeave']) !!}
-                                                @elseif ($userCampaign->status && empty($userCampaign->is_owner))
-                                                    {!! Form::submit(trans('campaign.leave_campaign'), ['class' => ' joinOrLeave']) !!}
-                                                @endif
-                                                    {!! Form::close() !!}
-                                                @else
-                                                    <a href="{{ action('Auth\UserLoginController@getLogin') }}"
-                                                    class="btn btn-color text-white">{{ trans('campaign.request_join') }}</a>
-                                                @endif
-                                            @endif
-                                        </div>
-                                    </div>
+                                    <h1 class="blog_title">{{ $detailCampaign->name }}</h1>
                                 </div>
                                 <div class="summary entry-summary">
                                     <div class='post-formats-wrapper max-width-height'>
@@ -127,90 +125,51 @@
                                 <div class="entry-content">
                                     <div id="pl-4934">
                                         <div class="panel-grid" id="pg-4934-0">
-                                            <div class="col-xs-12 infomation">
-                                                <div class="panel-grid-cell col-xs-12 col-sm-7">
-                                                    <div class="col-xs-4">
-                                                        <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
-                                                            <img src="{{ $detailCampaign->owner->user->avatar }}" class="img-circle" alt="">
-                                                        </a>
-                                                        {!! Form::hidden('input-1', $detailCampaign->owner->user->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
-                                                    </div>
-                                                    <div class="col-xs-8 boder-left so-panel">
-                                                        <p>
-                                                            <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
-                                                                <i class="fa fa-address-book"></i>
-                                                                <span>{{ $detailCampaign->owner->user->fullname }}</span>
-                                                            </a>
-                                                        </p>
-                                                        <p>
-                                                            <i class="fa fa-envelope-o"></i>
-                                                            <span>{{ $detailCampaign->owner->user->email }}</span>
-                                                        </p>
-                                                        <p>
-                                                            <i class="fa fa-calendar"></i>
-                                                            <span>{{ $detailCampaign->owner->user->birthday }}</span>
-                                                        </p>
-                                                        <p>
-                                                            <i class="fa fa-map-marker"></i>
-                                                            <span>{{ $detailCampaign->owner->user->address }}</span>
-                                                        </p>
-
-                                                        <p>
-                                                            <i class="fa fa-suitcase"></i>
-                                                            <span>{{ $detailCampaign->owner->user->company }}</span>
-                                                        </p>
-                                                        <p>
-                                                            <i class="fa fa-map-marker"></i>
-                                                            <span>{{ $detailCampaign->owner->user->address_company }}</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-grid-cell col-xs-12 col-sm-5">
-                                                    <div class="so-panel widget widget_event-info panel-first-child panel-last-child" id="panel-4934-0-1-0" data-index="1">
-                                                        <div  class="panel-widget-style">
-                                                            <div class="thim-widget-event-info thim-widget-event-info-base">
-                                                                <div class="thim-event-info">
-                                                                    <div class="inner-box">
-                                                                        <div class="box start">
-                                                                            <div class="icon"><i class="fa fa-clock-o"></i></div>
-                                                                            <div class="info-detail">
-                                                                                <div class="title"><strong>{{ trans('campaign.label_for.start_time') }}</strong></div>
-                                                                                <div class="info-content">
-                                                                                    <div class="time">{{ $detailCampaign->timeHours('start_time') }}</div>
-                                                                                    <div class="date">{{ $detailCampaign->timeDay('start_time') }}</div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="box finish">
-                                                                            <div class="icon"><i class="fa fa-flag"></i></div>
-                                                                            <div class="info-detail">
-                                                                                <div class="title"><strong>{{ trans('campaign.label_for.end_time') }}</strong></div>
-                                                                                <div class="info-content">
-                                                                                    <div class="time">{{ $detailCampaign->timeHours('end_time') }}</div>
-                                                                                    <div class="date">{{ $detailCampaign->timeDay('end_time') }}</div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="box address">
-                                                                            <div class="icon"><i class="fa fa-map-marker"></i></div>
-                                                                            <div class="info-detail">
-                                                                                <div class="title"><strong>{{ trans('campaign.address') }}</strong> </div>
-                                                                                <div class="info-content">{{ $detailCampaign->address }}</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h5 class="margin-top">{{ trans('campaign.description') }}</h5>
                                             <div class="panel-grid-cell col-xs-12 col-sm-7">
                                                 <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" id="panel-4934-0-0-0" data-index="0">
                                                     <div class="so-widget-sow-editor so-widget-sow-editor-base">
                                                         <div class="siteorigin-widget-tinymce textwidget">
-                                                            <h5>{{ trans('campaign.description') }}</h5>
                                                             <p>{!! $detailCampaign->description !!}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-grid-cell col-xs-12 col-sm-5">
+                                                <div class="so-panel widget widget_event-info panel-first-child panel-last-child" id="panel-4934-0-1-0" data-index="1">
+                                                    <div  class="panel-widget-style">
+                                                        <div class="thim-widget-event-info thim-widget-event-info-base">
+                                                            <div class="thim-event-info infomation">
+                                                                <div class="inner-box">
+                                                                    <div class="box start">
+                                                                        <div class="icon"><i class="fa fa-clock-o"></i></div>
+                                                                        <div class="info-detail">
+                                                                            <div class="title"><strong>{{ trans('campaign.label_for.start_time') }}</strong></div>
+                                                                            <div class="info-content">
+                                                                                <div class="time">{{ $detailCampaign->timeHours('start_time') }}</div>
+                                                                                <div class="date">{{ $detailCampaign->timeDay('start_time') }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="box finish">
+                                                                        <div class="icon"><i class="fa fa-flag"></i></div>
+                                                                        <div class="info-detail">
+                                                                            <div class="title"><strong>{{ trans('campaign.label_for.end_time') }}</strong></div>
+                                                                            <div class="info-content">
+                                                                                <div class="time">{{ $detailCampaign->timeHours('end_time') }}</div>
+                                                                                <div class="date">{{ $detailCampaign->timeDay('end_time') }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="box address">
+                                                                        <div class="icon"><i class="fa fa-map-marker"></i></div>
+                                                                        <div class="info-detail">
+                                                                            <div class="title"><strong>{{ trans('campaign.address') }}</strong> </div>
+                                                                            <div class="info-content">{{ $detailCampaign->address }}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -371,6 +330,44 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <h3 class="widget-title"><span>{{ trans('listcampaign.upcoming-campaign') }}</span></h3>
+                <div id="donate_main_content" class="gird">
+                    <div class="archive-content row">
+                        @foreach ($campaign as $element)
+                        <article id="campaign-314" class="col-xs-6 col-md-4 post-314 dn_campaign type-dn_campaign status-publish has-post-thumbnail hentry dn_campaign_cat-community-charities dn_campaign_cat-environmental-charities dn_campaign_cat-health-charities dn_campaign_cat-international-charities dn_campaign_tag-events dn_campaign_tag-winter">
+                            <div class="content-inner">
+                                <div class="entry-thumbnail">
+                                    <img class="fix-img-cp" src="{{ $element->image->image }}" class="attachment-full size-full wp-post-image" alt="{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}" srcset="{{ $element->image->image }} 870w, {{ $element->image->image }} 300w, {{ $element->image->image }} 768w" sizes="(max-width: 870px) 100vw, 870px" />
+                                    <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
+                                </div>
+                                <div class="event-content">
+                                    <div class="dn-content-inner">
+                                        <div class="entry-header">
+                                            <h2 class="blog_title trim-title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! $element->name !!}</a></h2>
+                                        </div>
+                                        <div class="entry-content trim-description">
+                                            {!! $element->description !!}
+                                        </div>
+                                    </div>
+                                    <div class="dn-content-countdown-box">
+                                        <div class="entry-meta">
+                                            <div class="date">
+                                                <div class="day">{{ date('d', strtotime($element->start_time)) }}</div>
+                                                <div class="month">{{ date('M', strtotime($element->start_time)) }}</div>
+                                            </div>
+                                            <div class="metas">
+                                                <div class="time"><i class="fa fa-clock-o"></i> {{ date('H:i', strtotime($element->start_time)) }} - {{ date('H:i', strtotime($element->end_time)) }} </div>
+                                                <div class="location"><i class="fa fa-map-marker"></i> {{ $element->address }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="donate_load_form thim-button style3" data-toggle="modal" href='.donate_modal' data-hiden="{{ csrf_token() }}" data-url="{{ action('CampaignController@review') }}" data-campaign-id="{{ $element->id }}">{{ trans('index.join-now') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        @endforeach
                     </div>
                 </div>
             </main>

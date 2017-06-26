@@ -13,8 +13,55 @@
                     @endif
                 @endif
             </div>
-        @endif
+            <div class="block">
+                <div class="block-title themed-background-dark">
+                    <h4 class="block-title-light campaign-title">
+                        <strong>{{ trans('campaign.campaign-creator') }}</strong>
+                    </h4>
+                </div>
+                <div class="panel-grid-cell">
+                    <div class="">
+                        <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
+                            <img src="{{ $detailCampaign->owner->user->avatar }}">
+                        </a>
+                        {!! Form::hidden('input-1', $detailCampaign->owner->user->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
+                    </div>
+                    <div class="so-panel">
+                        <p>
+                            <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
+                                <i class="fa fa-address-book"></i>
+                                <span>{{ $detailCampaign->owner->user->fullname }}</span>
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope-o"></i>
+                            <span>{{ $detailCampaign->owner->user->email }}</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-calendar"></i>
+                            <span>{{ $detailCampaign->owner->user->birthday }}</span>
+                        </p>
+                        <p>
+                            <i class="glyphicon glyphicon-qrcode"></i>
+                            <span>{{ $detailCampaign->owner->user->identity_card }}</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-map-marker"></i>
+                            <span>{{ $detailCampaign->owner->user->address }}</span>
+                        </p>
 
+                        <p>
+                            <i class="fa fa-suitcase"></i>
+                            <span>{{ $detailCampaign->owner->user->company }}</span>
+                        </p>
+                        <p>
+                            <i class="glyphicon glyphicon-credit-card"></i>
+                            <span>{{ $detailCampaign->owner->user->credit }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if (count($results))
             <div class="block">
                 <div class="block-title themed-background-dark">
@@ -61,37 +108,38 @@
                     </div>
                 </div>
             </div>
-        @endif
-        <div class="clear"></div>
-        <aside id="events-1" class="widget widget_events">
-            <div class="thim-widget-events thim-widget-events-base">
-                <div class="thim-events style3">
-                    <div class="events archive-content">
-                        <h3 class="widget-title"><span>{{ trans('listcampaign.upcoming-campaign') }}</span></h3>
-                        @foreach ($campaign as $element)
-                            <article class="post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
-                                <div class="content-inner">
-                                    <div class="event-content">
-                                        <div class="entry-meta">
-                                            <div class="date pull-left col-xs-6">
-                                                <span class="day">{{ date('d', strtotime($element->start_time)) }}</span>
-                                                <span class="month">{{ date('M', strtotime($element->start_time)) }}</span>
-                                            </div>
-                                            <div class="metas col-xs-6">
-                                                <div class="entry-header">
-                                                    <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a></h2>
+        @else
+            <div class="clear"></div>
+            <aside id="events-1" class="widget widget_events">
+                <div class="thim-widget-events thim-widget-events-base">
+                    <div class="thim-events style3">
+                        <div class="events archive-content">
+                            <h3 class="widget-title"><span>{{ trans('listcampaign.upcoming-campaign') }}</span></h3>
+                            @foreach ($campaign as $element)
+                                <article class="post-4934 tp_event type-tp_event status-tp-event-upcoming has-post-thumbnail hentry">
+                                    <div class="content-inner">
+                                        <div class="event-content">
+                                            <div class="entry-meta">
+                                                <div class="date pull-left col-xs-6">
+                                                    <span class="day">{{ date('d', strtotime($element->start_time)) }}</span>
+                                                    <span class="month">{{ date('M', strtotime($element->start_time)) }}</span>
                                                 </div>
-                                                <span class="location"><i class="fa fa-map-marker"></i> {{ $element->address }}</span>
+                                                <div class="metas col-xs-6">
+                                                    <div class="entry-header">
+                                                        <h2 class="blog_title"><a href="{{ action('CampaignController@show', $element->id) }}">{!! str_limit($element->name, config('constants.LIMIT_TITLE_CHARACTERS')) !!}</a></h2>
+                                                    </div>
+                                                    <span class="location"><i class="fa fa-map-marker"></i> {{ $element->address }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        @endforeach
+                                </article>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
-        </aside>
+            </aside>
+        @endif
         @if (count($events))
             <aside id="list-post-4" class="widget widget_list-post">
                 <div class="thim-widget-list-post thim-widget-list-post-base">

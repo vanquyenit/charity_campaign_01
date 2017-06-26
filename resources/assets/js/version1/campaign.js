@@ -51,7 +51,7 @@ Campaign.prototype = {
         var count = 1;
         $(document).on('change', '.category-name', function(e) {
             var value = $(this).val();
-
+            var el = document.getElementById('form-control');
             count ++;
             $(this).attr('class', 'form-control');
             e.preventDefault();
@@ -66,9 +66,8 @@ Campaign.prototype = {
             html += '<div class="col-md-3">';
             html += '<input class="form-control category-goal" placeholder="' + message.goal.goal + '" min="1" name="goal[]" type="number" value="">';
             html += '</div>';
-            html += '<div class="col-md-3 no-padding-right">';
-            html += '<input class="form-control category-unit" placeholder="' + message.unit.unit + '" name="unit[]" type="text">';
-            html += '</div></div></div></div>';
+            html += el.outerHTML;
+            html += '</div></div></div>';
 
             $('.contribution').append(html);
         });
@@ -96,8 +95,7 @@ Campaign.prototype = {
                     number : true
                 },
                 'unit[]': {
-                    required: true,
-                    minlength: 2
+                    required: true
                 },
                 start_date: {
                     required: true
@@ -129,8 +127,7 @@ Campaign.prototype = {
                     number : message.goal.number
                 },
                 'unit[]': {
-                    required: message.unit.required,
-                    minlength: message.unit.minlength
+                    required: message.unit.required
                 },
                 start_date: {
                     required: message.start_date.required

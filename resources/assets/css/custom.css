@@ -18,7 +18,7 @@
     height:400px;
 }
 .nav-tabs {
-    background: #f8b864;
+    background: none;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
@@ -27,13 +27,13 @@
 }
 .nav-tabs > li > a {
     border: none;
-    color: #666;
+    color: #f8b864 !important;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li > a:hover {
     border: none;
     color: #fff !important;
-    background: transparent;
+    background: #f8b864 !important;
 }
 .nav-tabs > li > a::after {
     content: "";
