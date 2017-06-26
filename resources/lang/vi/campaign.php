@@ -174,4 +174,8 @@ return [
     ],
     'list-contribution' => 'Danh sách đóng góp',
     'campaign-creator' => 'Người tạo chiến dịch',
+    'subject-unconfirm' => 'Thông báo: Bạn đã ủng hộ tại Charity Campaign!',
+    'subject-confirm' => 'Thông báo: Bạn đã ủng hộ thành công tại Charity Campaign!',
+    'confirmed-success' => 'Xác nhận ủng hộ thành công !',
+    'unconfirmed-success' => 'Bạn đã ủng hộ chờ xác nhận, chúng tôi sẽ trả lời trong thời gian nhanh nhất cho bạn !',
 ];

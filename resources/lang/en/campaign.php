@@ -175,4 +175,8 @@ return [
     ],
     'list-contribution' => 'List contribution',
     'campaign-creator' => 'Campaign creator',
+    'subject-unconfirm' => 'Announcement: You have supported the charity campaign!',
+    'subject-confirm' => 'Announcement: You have successfully supported the charity campaign!',
+    'confirmed-success' => 'Confirmed supportive success!',
+    'unconfirmed-success' => 'You have support waiting for confirmation, we will reply in the quickest time for you!',
 ];

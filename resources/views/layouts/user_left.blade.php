@@ -22,6 +22,14 @@
                         </a>
                     </div>
                     <div class="ProfileHeaderCard-joinDate">
+                        <span class="glyphicon glyphicon-qrcode"></span>
+                        <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ $user->identity_card }}">{{ $user->identity_card }}</span>
+                    </div>
+                    <div class="ProfileHeaderCard-joinDate">
+                        <span class="fa fa-suitcase"></span>
+                        <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ $user->company }}">{{ $user->company }}</span>
+                    </div>
+                    <div class="ProfileHeaderCard-joinDate">
                         <span class="fa fa-phone"></span>
                         <a href="" title="">
                             <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ $user->phone_number }}">{{ $user->phone_number }}</span>
@@ -32,6 +40,10 @@
                         <a href="" title="">
                             <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ $user->email }}">{{ $user->email }}</span>
                         </a>
+                    </div>
+                    <div class="ProfileHeaderCard-joinDate">
+                        <span class="glyphicon glyphicon-credit-card"></span>
+                        <span class="ProfileHeaderCard-joinDateText js-tooltip u-dir" dir="ltr" title="{{ $user->credit }}">{{ $user->credit }}</span>
                     </div>
                     <div class="ProfileHeaderCard-joinDate">
                         <i class="fa fa-handshake-o"></i>

@@ -95,6 +95,7 @@ class ContributionRepository extends BaseRepository implements ContributionRepos
 
         foreach ($categoryContributions as $categoryContribution) {
             $data[] = [
+                'id' => $categoryContribution->category->id,
                 'name' => $categoryContribution->category->name,
                 'value' => $categoryContribution->amount,
                 'progress' => round(
