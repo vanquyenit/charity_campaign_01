@@ -55,12 +55,13 @@
                         <div class="ProfileMessagingActions">
                             <div class="ProfileMessagingActions-actionsContainer">
                                 <div class="ProfileMessagingActions-buttonWrapper u-sizeFull">
-                                    <button data-toggle="modal" href='#modal-id' class="NewTweetButton u-sizeFull js-tooltip EdgeButton EdgeButton--primary  u-textTruncate" type="button" title="{{ $user->name }}">
-                                        <span class="NewTweetButton-content button-text tweeting-text">
-                                            <span class="NewTweetButton-text" aria-hidden="true">{{ trans('user.update-user') }}</span>
-                                            <span class="u-hiddenVisually">{{ trans('user.update-user') }}</span>
-                                        </span>
-                                    </button>
+                                    <a href="{{ action('MessagesController@index') }}" title="">
+                                        <button  class="NewTweetButton u-sizeFull js-tooltip EdgeButton EdgeButton--primary  u-textTruncate" type="button" title="{{ $user->name }}">
+                                            <span class="NewTweetButton-content button-text tweeting-text">
+                                            <span class="NewTweetButton-text" aria-hidden="true">{{ trans('user.chat') }}</span>
+                                            </span>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

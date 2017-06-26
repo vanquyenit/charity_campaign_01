@@ -75,20 +75,23 @@
                                             <div class="user-actions btn-group following not-muting including">
                                                 <span class="user-actions-follow-button js-follow-btn follow-button">
                                                     @if (auth()->id() != $user->id)
-                                                        @if (auth()->guest())
-                                                            <a class="EdgeButton EdgeButton--secondary EdgeButton--medium button-text follow-text" href="{{ action('Auth\UserLoginController@getLogin') }}"><i class="fa fa-user-plus"></i> {{ trans('user.follow') }}</a>
-                                                        @else
-                                                            <div data-user-id="{{ $user->id }}" data-size="medium">
-                                                                @if (auth()->user()->checkFollow($user->id))
-                                                                    <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--medium button-text following-text follow">{{ trans('user.following') }}</button>
-                                                                    <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--medium button-text unfollow-text follow">{{ trans('user.unfollow') }}</button>
-                                                                @else
-                                                                    <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--medium follow-text follow">
-                                                                        <i class="fa fa-user-plus"></i> <span>{{ trans('user.follow') }}</span>
-                                                                    </button>
-                                                                @endif
-                                                            </div>
-                                                        @endif
+                                                        <div data-user-id="{{ $user->id }}" data-size="medium">
+                                                            @if (auth()->user()->checkFollow($user->id))
+                                                                <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--medium button-text following-text follow">{{ trans('user.following') }}</button>
+                                                                <button type="button" class="EdgeButton EdgeButton--danger EdgeButton--medium button-text unfollow-text follow">{{ trans('user.unfollow') }}</button>
+                                                            @else
+                                                                <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--medium follow-text follow">
+                                                                    <i class="fa fa-user-plus"></i> <span>{{ trans('user.follow') }}</span>
+                                                                </button>
+                                                            @endif
+                                                        </div>
+                                                    @else
+                                                        <button type="button" data-toggle="modal" href='#modal-id' title="{{ $user->name }}" class="EdgeButton EdgeButton--primary EdgeButton--medium follow-text follow">
+                                                            <span class="NewTweetButton-content tweeting-text">
+                                                                <span class="NewTweetButton-text" aria-hidden="true">{{ trans('user.update-user') }}</span>
+                                                                <span class="u-hiddenVisually">{{ trans('user.update-user') }}</span>
+                                                            </span>
+                                                        </button>
                                                     @endif
                                                 </span>
                                             </div>
