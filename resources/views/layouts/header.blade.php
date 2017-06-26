@@ -135,7 +135,7 @@
                                                 <div class="so-panel widget widget_donate_widget panel-first-child" id="panel-w581a9b3585a4f-0-0-0" data-index="0">
                                                     <div class="thimpress_donate_button">
                                                         <div class="donate_button_title thim-button style3">
-                                                            <a href="{{ action('CampaignController@create') }}">{{ trans('campaign.create') }}</a>
+                                                            <a class="color" href="{{ action('CampaignController@create') }}">{{ trans('campaign.create') }}</a>
                                                         </div>
                                                     </div>
                                                 </div>

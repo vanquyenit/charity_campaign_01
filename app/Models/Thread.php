@@ -25,4 +25,9 @@ class Thread extends Model
     {
         return $this->belongsToMany(User::class, 'thread_id', 'user_id');
     }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

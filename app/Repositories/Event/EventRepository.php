@@ -53,7 +53,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
             return false;
         }
 
-        return Event::where('campaign_id', $id)->get();
+        return Event::where('campaign_id', $id)->orderBy('id', 'DESC')->get();
     }
 
     public function createEvent($params = [])

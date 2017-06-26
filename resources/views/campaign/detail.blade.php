@@ -180,9 +180,6 @@
                                                 data-address="{{ $detailCampaign->address }}">
                                             </div>
                                         </div>
-                                        <div class="read-more text-center">
-                                            <a href="" title="">{{ trans('index.read-more') }} <i class="fa fa-sort-down"></i> </a>
-                                        </div>
                                         @if (count($members))
                                             <div class="panel-grid" id="pg-4934-1">
                                                 <div class="panel-grid-cell" id="pgc-4934-1-0">

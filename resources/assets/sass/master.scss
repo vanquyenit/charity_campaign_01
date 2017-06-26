@@ -474,8 +474,6 @@ select, select:focus {
     }
     .entry-content {
         #pg-4934-0 {
-            height: 450px;
-            overflow: hidden;
             .infomation {
                 border: 1px solid #00b0ff;
                 padding: 15px;
@@ -644,4 +642,7 @@ select, select:focus {
 }
 #note {
     margin-top: 10px;
+}
+.color {
+    color: #fff !important;
 }

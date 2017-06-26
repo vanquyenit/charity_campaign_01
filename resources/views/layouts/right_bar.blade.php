@@ -27,37 +27,50 @@
                         {!! Form::hidden('input-1', $detailCampaign->owner->user->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
                     </div>
                     <div class="so-panel">
-                        <p>
-                            <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
-                                <i class="fa fa-address-book"></i>
-                                <span>{{ $detailCampaign->owner->user->fullname }}</span>
-                            </a>
-                        </p>
+                        @if (isset($detailCampaign->owner->user->fullname))
+                            <p>
+                                <a href="{{ action('UserController@show', $detailCampaign->owner->user->id) }}" title="{{ $detailCampaign->owner->user->fullname }}">
+                                    <i class="fa fa-address-book"></i>
+                                    <span>{{ $detailCampaign->owner->user->fullname }}</span>
+                                </a>
+                            </p>
+                        @endif
+                        @if (isset($detailCampaign->owner->user->email))
                         <p>
                             <i class="fa fa-envelope-o"></i>
                             <span>{{ $detailCampaign->owner->user->email }}</span>
                         </p>
+                        @endif
+                        @if (isset($detailCampaign->owner->user->birthday))
                         <p>
                             <i class="fa fa-calendar"></i>
                             <span>{{ $detailCampaign->owner->user->birthday }}</span>
                         </p>
+                        @endif
+                        @if (isset($detailCampaign->owner->user->identity_card))
                         <p>
                             <i class="glyphicon glyphicon-qrcode"></i>
                             <span>{{ $detailCampaign->owner->user->identity_card }}</span>
                         </p>
+                        @endif
+                        @if (isset($detailCampaign->owner->user->address))
                         <p>
                             <i class="fa fa-map-marker"></i>
                             <span>{{ $detailCampaign->owner->user->address }}</span>
                         </p>
-
+                        @endif
+                        @if (isset($detailCampaign->owner->user->company))
                         <p>
                             <i class="fa fa-suitcase"></i>
                             <span>{{ $detailCampaign->owner->user->company }}</span>
                         </p>
+                        @endif
+                        @if (isset($detailCampaign->owner->user->credit))
                         <p>
                             <i class="glyphicon glyphicon-credit-card"></i>
                             <span>{{ $detailCampaign->owner->user->credit }}</span>
                         </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -150,7 +163,7 @@
                                 <div class="item-post post-596 post type-post status-publish format-standard has-post-thumbnail hentry category-all category-blog category-health category-lifesaving category-seniors tag-course tag-learn tag-photography tag-social tag-study">
                                     @foreach ($events as $element)
                                         <div class="article-title-wrapper">
-                                            <div class="article-inner">
+                                            <div class="row article-inner">
                                                 <div class="col-xs-6">
                                                     <a href="{{ action('EventController@show', $element->id) }}">
                                                         <img src="{{ asset('uploads/images/' . $element->img) }}" alt="{{ $element->title }}" title="{{ $element->title }}">
@@ -161,7 +174,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="clearfix"></div>
+                                        <div class="clearfix margin-bottom"></div>
                                     @endforeach
                                 </div>
                             </div>

@@ -12,12 +12,12 @@ class Participant extends Model
         'last_read',
     ];
 
-    public function threads()
+    public function thread()
     {
-        return $this->hasMany(Thread::class, 'thread_id');
+        return $this->belongsTo(Thread::class);
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

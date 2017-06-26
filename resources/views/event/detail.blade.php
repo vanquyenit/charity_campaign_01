@@ -100,7 +100,7 @@
                                     <div class="so-panel widget widget_event-info panel-first-child panel-last-child" id="panel-4934-0-1-0" data-index="1">
                                         <div  class="panel-widget-style">
                                             <div class="thim-widget-event-info thim-widget-event-info-base">
-                                                <div class="thim-event-info">
+                                                <div class="thim-event-info infomation">
                                                     <div class="inner-box">
                                                         <div class="box start">
                                                             <div class="icon"><i class="fa fa-clock-o"></i> </div>

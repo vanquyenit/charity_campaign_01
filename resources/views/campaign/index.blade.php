@@ -43,7 +43,7 @@
                                             <img src="{{ asset('img/dummy.png') }}" alt="" title="Home 3" data-lazyload="{{ $element->image->image }}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                                             <div class="tp-caption tp-layer-selectable title "  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','-89','0','0']" data-fontsize="['18','16','15','14']" data-width="['none','none','474','276']" data-height="['none','none','53','none']" data-whitespace="['nowrap','nowrap','normal','normal']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:2000;e:easeInOutBack;" data-transform_out="x:50px;opacity:0;s:300;" data-start="500" data-splitin="none" data-splitout="none" data-responsive_offset="off" data-responsive="off" >{!! str_limit($element->description ,config('constants.LIMIT_DESCRIPTION_CHARACTERS') ,'....') !!}</div>
                                             <h3 class="tp-caption tp-layer-selectable trim-title"  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-57','-135','-50','-63']" data-fontsize="['60','40','30','20']" data-lineheight="['102','70','60','40']" data-width="['none','596','none','383']" data-height="none" data-whitespace="['nowrap','normal','nowrap','normal']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:2000;e:easeInOutBack;" data-transform_out="x:-50px;opacity:0;s:300;" data-start="500" data-splitin="none" data-splitout="none" data-responsive_offset="off" data-responsive="off">{!! $element->name !!}</h3>
-                                            <div class="tp-caption thim-slider-button rev-btn tp-layer-selectable learn-more" id="slide-1-layer-3" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['60','-42','61','67']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Linear.easeNone;" data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(248, 184, 100, 1.00);" data-transform_in="y:50px;opacity:0;s:1000;e:easeInOutBack;" data-transform_out="opacity:0;s:300;" data-start="1500" data-splitin="none" data-splitout="none" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"{{ action('CampaignController@show', $element->id) }}","delay":""}]' data-responsive_offset="off" data-responsive="off" >{{ trans('index.learn-more') }}</div>
+                                            <div class="tp-caption thim-slider-button rev-btn tp-layer-selectable learn-more" id="slide-1-layer-3" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['60','-42','61','67']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Linear.easeNone;" data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgb(46, 119, 230);" data-transform_in="y:50px;opacity:0;s:1000;e:easeInOutBack;" data-transform_out="opacity:0;s:300;" data-start="1500" data-splitin="none" data-splitout="none" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"{{ action('CampaignController@show', $element->id) }}","delay":""}]' data-responsive_offset="off" data-responsive="off" >{{ trans('index.learn-more') }}</div>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -426,19 +426,12 @@
                                             <div class="avatar-inner">
                                                 <img src="{{ $element->avatar }}" class="attachment-full size-full wp-post-image" alt="" width="570" height="570">
                                             </div>
-                                            <div class="social">
-                                                <ul>
-                                                    <li>
-                                                        {!! Form::hidden('input-1', $element->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}
-                                                    </li>
-                                                </ul>
-                                            </div>
                                         </div>
                                         <div class="info">
                                             <div class="name">
                                                 <a href="{{ action('UserController@show', ['id' => $element->id]) }}">{{ $element->name }}</a>
                                             </div>
-                                            <div class="regency"></div>
+                                            <div class="regency">{!! Form::hidden('input-1', $element->star, ['id' => 'not-allow-rating-user', 'class' => 'rating rating-loading', 'data-min' => '0', 'data-step' => '1', 'data-size' => 'xs']) !!}</div>
                                         </div>
                                     </div>
                                 </div>
