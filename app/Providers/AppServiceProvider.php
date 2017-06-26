@@ -25,6 +25,8 @@ use App\Repositories\Follow\FollowRepository;
 use App\Repositories\Follow\FollowRepositoryInterface;
 use App\Repositories\Group\GroupRepository;
 use App\Repositories\Group\GroupRepositoryInterface;
+use App\Repositories\Hashtag\HashtagRepository;
+use App\Repositories\Hashtag\HashtagRepositoryInterface;
 use App\Repositories\Message\MessageRepository;
 use App\Repositories\Message\MessageRepositoryInterface;
 use App\Repositories\Participant\ParticipantRepository;
@@ -77,5 +79,6 @@ class AppServiceProvider extends ServiceProvider
         App::bind(TimelineRepositoryInterface::class, TimelineRepository::class);
         App::bind(ParticipantRepositoryInterface::class, ParticipantRepository::class);
         App::bind(ChatRepositoryInterface::class, ChatRepository::class);
+        App::bind(HashtagRepositoryInterface::class, HashtagRepository::class);
     }
 }

@@ -26,6 +26,11 @@ class Event extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    public function hashtags()
+    {
+        return $this->hasMany(Hashtag::class);
+    }
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');

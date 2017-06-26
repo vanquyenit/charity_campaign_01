@@ -16,6 +16,7 @@
     {{ Html::script('http://maps.googleapis.com/maps/api/js?key=AIzaSyDluWcImjhXgQDLQcDvGi3Glu1TOYG6oew&callback=initMap', ['async', 'defer']) }}
     <script type="text/javascript">
         $(document).ready(function () {
+            $('document').hashtagger();
             var comment = new Comment('{{ action('CommentController@store') }}',
                 '{{ config('path.to_avatar_default') }}',
                 '{{ action('CampaignController@joinOrLeaveCampaign') }}',
@@ -28,7 +29,12 @@
 @stop
 
 @section('content')
-
+@php
+    foreach ($arSearch as $value) {
+        $arHashtagName[] = $value->name;
+        $arHashtagUrl[] = "<a href=" . action('EventController@search', ['name' => $value->name]) . ">" . $value->name . "</a>";
+    }
+@endphp
 <section class="content-area">
     <div class="hide-comment" data-campaign-id="{{ $event->id }}"
         data-host="{{ config('app.key_program.socket_host') }}"
@@ -83,9 +89,9 @@
                                         <div class="so-widget-sow-editor so-widget-sow-editor-base">
                                             <div class="siteorigin-widget-tinymce textwidget">
                                                 <h5>{{ trans('event.event-description') }}</h5>
-                                                <p>{!! $event->description !!}</p>
+                                                {!! str_replace($arHashtagName, $arHashtagUrl, $event->description) !!}
                                                 <h5>{{ trans('event.event-content') }}</h5>
-                                                {!! $event->content !!}
+                                                {!! str_replace($arHashtagName, $arHashtagUrl, $event->content) !!}
                                             </div>
                                         </div>
                                     </div>

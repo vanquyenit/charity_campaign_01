@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Filter\HashtagsFilter;
 use App\Http\Requests\EventRequest;
+use App\Models\Hashtag;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Event\EventRepositoryInterface;
+use App\Repositories\Hashtag\HashtagRepositoryInterface;
 use App\Repositories\Timeline\TimelineRepositoryInterface;
 use App\Services\Purifier;
 use Gate;
@@ -16,15 +19,21 @@ class EventController extends BaseController
     protected $eventRepository;
     protected $campaignRepository;
     protected $timelineRepository;
+    protected $hashtagRepository;
+    protected $hashtag;
 
     public function __construct(
         EventRepositoryInterface $eventRepository,
         CampaignRepositoryInterface $campaignRepository,
-        TimelineRepositoryInterface $timelineRepository
+        TimelineRepositoryInterface $timelineRepository,
+        HashtagRepositoryInterface $hashtagRepository,
+        Hashtag $hashtag
     ) {
         $this->eventRepository = $eventRepository;
         $this->campaignRepository = $campaignRepository;
         $this->timelineRepository = $timelineRepository;
+        $this->hashtagRepository = $hashtagRepository;
+        $this->hashtag = $hashtag;
     }
 
     /**
@@ -61,6 +70,19 @@ class EventController extends BaseController
         return view('event.create', $this->data);
     }
 
+    public function search(HashtagsFilter $filters)
+    {
+        $arHashtagId = [];
+        foreach ($this->hashtag->filter($filters)->get() as $value) {
+            $arHashtagId[] = $value->event_id;
+        }
+
+        $this->dataView['arEvent'] = $this->eventRepository->whereIn('id', $arHashtagId)
+            ->paginate(config('constants.LIMIT_EVENT'));
+
+        return view('event.search', $this->dataView);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -81,8 +103,26 @@ class EventController extends BaseController
             'description',
             'content',
         ]);
+
         $inputs['content'] = Purifier::clean($inputs['content']);
         $event = $this->eventRepository->createEvent($inputs);
+
+        $hashtag = [];
+        foreach (explode(' ', $inputs['description']) as $key => $value) {
+            if (stripos($value, '#') !== false) {
+                $hashtag[]['name'] = $value;
+            }
+        }
+
+        foreach (explode(' ', $inputs['content']) as $key => $value) {
+            if (stripos($value, '#') !== false) {
+                $hashtag[]['name'] = $value;
+            }
+        }
+
+        if (!$hashtag) {
+            $hashtags = $event->hashtags()->createMany($hashtag);
+        }
 
         if (!$event) {
             return redirect(action('EventController@create'))
@@ -108,6 +148,7 @@ class EventController extends BaseController
     {
         try {
             $this->dataView['event'] = $this->eventRepository->getDetail($id);
+            $this->dataView['arSearch'] = $this->hashtagRepository->findBy('event_id', $id);
 
             return view('event.detail', $this->dataView);
         } catch (\Exception $e) {

@@ -68,6 +68,13 @@ abstract class BaseRepository
         return $data;
     }
 
+    public function whereIn($column, $array)
+    {
+        $data = $this->model->whereIn($column, $array);
+
+        return $data;
+    }
+
     public function paginate($limit)
     {
         return $this->model->paginate($limit);
