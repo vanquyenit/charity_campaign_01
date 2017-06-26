@@ -13,6 +13,9 @@ elixir(function (mix) {
     mix.sass([
         'resources/assets/sass/chat.scss',
     ], 'public/css/chatbox.css');
+    mix.sass([
+        'resources/assets/sass/messenger.scss',
+    ], 'public/css/messenger.css');
     mix.copy('resources/assets/css', 'public/css');
     mix.copy('resources/assets/img', 'public/img');
     mix.copy('resources/assets/js', 'public/js');

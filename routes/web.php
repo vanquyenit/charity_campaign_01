@@ -101,6 +101,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('campaign/uploadImage', 'CampaignController@uploadImage');
 
     Route::post('follow/user', 'FollowController@followOrUnFollowUser');
+
+    Route::resource('messages', 'MessagesController');
 });
 
 Route::get('campaigns', 'CampaignController@showCampaigns');

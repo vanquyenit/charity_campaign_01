@@ -11,6 +11,8 @@ use App\Repositories\Campaign\CampaignRepository;
 use App\Repositories\Campaign\CampaignRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Chat\ChatRepository;
+use App\Repositories\Chat\ChatRepositoryInterface;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Comment\CommentRepositoryInterface;
 use App\Repositories\Contact\ContactRepository;
@@ -25,6 +27,8 @@ use App\Repositories\Group\GroupRepository;
 use App\Repositories\Group\GroupRepositoryInterface;
 use App\Repositories\Message\MessageRepository;
 use App\Repositories\Message\MessageRepositoryInterface;
+use App\Repositories\Participant\ParticipantRepository;
+use App\Repositories\Participant\ParticipantRepositoryInterface;
 use App\Repositories\Rating\RatingRepository;
 use App\Repositories\Rating\RatingRepositoryInterface;
 use App\Repositories\Timeline\TimelineRepository;
@@ -71,5 +75,7 @@ class AppServiceProvider extends ServiceProvider
         App::bind(ContactRepositoryInterface::class, ContactRepository::class);
         App::bind(BlogRepositoryInterface::class, BlogRepository::class);
         App::bind(TimelineRepositoryInterface::class, TimelineRepository::class);
+        App::bind(ParticipantRepositoryInterface::class, ParticipantRepository::class);
+        App::bind(ChatRepositoryInterface::class, ChatRepository::class);
     }
 }
